@@ -11,7 +11,7 @@
     <section>
       <div class="container" id="container">
         <div class="form-container sign-up-container">
-          <form action="#">
+          <form action="/php/login.php" method="post">
             <h1>Sign Up</h1>
             <div class="social-container">
               <a style="text-decoration: none;" href="https://www.facebook.com/lamphandsome/" class="text-white me-4">
@@ -21,16 +21,16 @@
               <a href="https://twitter.com/?lang=vi"><i class="fa-brands fa-square-x-twitter" style="color: #000000;"></i></a>
             </div>
             <span>Sign up with Email</span>
-            <label>
-              <input type="text" placeholder="Name" />
-            </label>
-            <label>
-              <input type="email" placeholder="Email" />
-            </label>
-            <label>
-              <input type="password" placeholder="Password" />
-            </label>
-            <button style="margin-top: 9px">Sign Up</button>
+              <label>
+                  <input type="text" placeholder="Name" id="name" name="name" />
+              </label>
+              <label>
+                  <input type="email" placeholder="Email" id="email" name="email" />
+              </label>
+              <label>
+                  <input type="password" placeholder="Password" id="password" name="password" />
+              </label>
+              <button value="submit" type="submit" style="margin-top: 9px">Sign Up</button>
           </form>
         </div>
         <div class="form-container sign-in-container">
