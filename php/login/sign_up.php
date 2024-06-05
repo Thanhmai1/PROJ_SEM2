@@ -63,11 +63,12 @@
         $password = $_POST["password"];
         $hash_password = password_hash($password, PASSWORD_DEFAULT);
 
-        $ps = $conn->prepare("INSERT INTO users (UserName, Email, Password) VALUES ( ?, ?, ?)");
+        $ps = $conn->prepare("INSERT INTO users (UserName, Email, `Password`) VALUES ( ?, ?, ?)");
         $ps->bind_param("sss", $name, $email, $hash_password);
         if ($ps->execute()) {
-            echo"<h4 style = 'color:red; text-align:center;'>Please return to sign in</h4>";
-        }            
+          echo '<script>alert("SIGN UP SUCCESSFULL!"); window.location.href = "http://localhost:3000/html/login.html";</script>';
+          exit;
+        }             
         $ps->close();    
         $conn->close();
     } catch (Exception $e) {
