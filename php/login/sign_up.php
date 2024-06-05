@@ -61,7 +61,7 @@
         $name = $_POST["name"];
         $email = $_POST["email"];
         $password = $_POST["password"];
-        $hash_password = password_hash($password, PASSWORD_DEFAULT);
+        $hash_password = md5($password);
 
         $ps = $conn->prepare("INSERT INTO users (UserName, Email, `Password`) VALUES ( ?, ?, ?)");
         $ps->bind_param("sss", $name, $email, $hash_password);
