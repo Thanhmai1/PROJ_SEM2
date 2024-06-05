@@ -66,7 +66,7 @@
         $ps = $conn->prepare("INSERT INTO users (UserName, Email, Password) VALUES ( ?, ?, ?)");
         $ps->bind_param("sss", $name, $email, $hash_password);
         if ($ps->execute()) {
-            echo"<h1>Please return to sign in</h1>";
+            echo"<h4 style = 'color:red; text-align:center;'>Please return to sign in</h4>";
         }            
         $ps->close();    
         $conn->close();
