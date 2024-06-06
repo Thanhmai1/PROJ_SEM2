@@ -26,13 +26,13 @@
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="/css/css/assets/owl.carousel.min.css">
   <link rel="stylesheet" href="/css/css/assets/owl.carousel.css">
+  <link rel="stylesheet" href="search.css">
 </head>
 <body>
     <div class="sticky">
         <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #00aaa3">
           <a style="color: #fff;" class="navbar-brand" href="/index.html"><i style="font-family: 'Dancing Script', cursive;">Quick Snack</i></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">      
             <span class="navbar-toggler-icon"></span>
       </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -48,15 +48,13 @@
               </li>
               <li class="nav-item">
                 <a style="color: #fff;" class="nav-link" href="./html/about.html">About Us</a>
-              </li>
-              <li class="nav-item">
-                <a style="color: #fff;" class="nav-link" href="./html/login.html">Login</a>
-              </li>
+              </li>                         
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+            <form id="search-box">              
+              <input type="text" id="search-text" placeholder="Search Food..." required>
+              <button id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
+            <a style="color: #fff;" class="nav-link" id="link-login" href="./html/login.html"><i class="fa-solid fa-user"></i></a>
           </div>
           </nav>
         </div>
