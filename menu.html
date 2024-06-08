@@ -18,6 +18,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./css/css/style.css">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="search.css">
   </head>
   <div class="sticky">
     <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #00aaa3">
@@ -39,14 +40,12 @@
             <li class="nav-item">
             <a style="color: #fff;" class="nav-link" href="./html/about.html">About Us</a>
             </li>
-            <li class="nav-item">
-            <a style="color: #fff;" class="nav-link" href="./html/login.html">Login</a>
-            </li>
           </ul>
-            <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-            </form>
+          <form id="search-box">              
+            <input type="text" id="search-text" placeholder="Search Food..." required>
+            <button id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+          </form>
+          <a style="color: #fff;" class="nav-link" id="link-login" href="./html/login.html"><i class="fa-solid fa-user"></i></a>
           </div>
     </nav>
   </div>

@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="/css/css/assets/owl.carousel.min.css">
   <link rel="stylesheet" href="/css/css/assets/owl.carousel.css">
+  <link rel="stylesheet" href="search.css">
 </head>
 
 <body>
@@ -52,15 +53,13 @@
         </li>
         <li class="nav-item">
           <a style="color: #fff;" class="nav-link" href="./html/about.html">About Us</a>
-        </li>
-        <li class="nav-item">
-          <a style="color: #fff;" class="nav-link" href="./html/login.html">Login</a>
-        </li>
+        </li>        
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+      <form id="search-box">              
+        <input type="text" id="search-text" placeholder="Search Food..." required>
+        <button id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
       </form>
+      <a style="color: #fff;" class="nav-link" id="link-login" href="../html/login.html"><i class="fa-solid fa-user"></i></a>
     </div>
     </nav>
   </div>
