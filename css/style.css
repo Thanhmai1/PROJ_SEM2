@@ -186,7 +186,7 @@ input {
 }
 
 
-
+/* 
 .dropdown {
   position: relative;
   display: inline-block;
@@ -214,7 +214,7 @@ input {
 
 .dropdown:hover .dropdown-item {
   display: block;
-}
+} */
 
 .xem-them:hover {
   color: #f00;
@@ -674,4 +674,25 @@ color: orange;
 }
 .nav{
   background-color: #00aaa3;
+}
+.dropdown-menu {
+  left: 50%;
+  transform: translateX(-50%);
+  
+  
+}
+
+.pic_user{
+  cursor: pointer;;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 35px;
+}
+
+.search-container{
+  margin-right: 35px;
+}
+.btn:focus{
+  box-shadow: none;
 }
