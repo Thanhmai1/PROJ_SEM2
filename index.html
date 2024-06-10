@@ -29,12 +29,13 @@
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="/css/css/assets/owl.carousel.min.css">
   <link rel="stylesheet" href="/css/css/assets/owl.carousel.css">
+  <link rel="stylesheet" href="search.css">
 </head>
 
 <body>
 <div class="sticky">
   <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #00aaa3">
-    <a style="color: #fff;" class="navbar-brand" href="/index.html"><i style="font-family: 'Dancing Script', cursive;">Quick Snack</i></a>
+    <a style="color: #fff;" class="navbar-brand" href="./index.html"><i style="font-family: 'Dancing Script', cursive;">Quick Snack</i></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 
       <span class="navbar-toggler-icon"></span>
@@ -52,15 +53,13 @@
         </li>
         <li class="nav-item">
           <a style="color: #fff;" class="nav-link" href="./html/about.html">About Us</a>
-        </li>
-        <li class="nav-item">
-          <a style="color: #fff;" class="nav-link" href="./html/login.html">Login</a>
-        </li>
+        </li>        
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+      <form id="search-box">              
+        <input type="text" id="search-text" placeholder="Search Food..." required>
+        <button id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
       </form>
+      <a style="color: #fff;" class="nav-link" id="link-login" href="../html/login.html"><i class="fa-solid fa-user"></i></a>
     </div>
     </nav>
   </div>
@@ -272,7 +271,7 @@
               <p class="p-menu">
                 Banana Chia Seed Pudding is said to have been around since the early 2000s, when chia seeds began to be favored by people pursuing a healthy lifestyle. This dish quickly became popular on social networking sites and food blogs because of its simplicity, ease of making and high nutritional value.
               </p>
-              <a href="/recipe/Banana-Chia-Seed-Pudding.html"><button style="border-radius: 10px; border: 0;">See More</button></a>
+              <a href="./recipe/Banana-Chia-Seed-Pudding.html"><button style="border-radius: 10px; border: 0;">See More</button></a>
             </div>
           </div>
         </div>
@@ -289,7 +288,7 @@
               <p class="p-menu">
                 Green salad is a delicious, nutritious and easy-to-make dish. This dish provides many vitamins, minerals and fiber, which are good for health.
               </p>
-              <a href="/recipe/Salad.html"><button style="border-radius: 10px; border: 0;">See More</button></a>
+              <a href="./recipe/Salad.html"><button style="border-radius: 10px; border: 0;">See More</button></a>
             </div>
           </div>
         </div>
@@ -306,7 +305,7 @@
               <p class="p-menu">
                 Covered with a thick ruffled crust, dotted with beautiful dark brown spots. Inside the crust is ivory-white chicken, soft, juicy, exuding a nasal fragrance. And transformed into countless attractive dishes such as chicken salad, chicken soup, chicken porridge, fried chicken, grilled chicken ... In particular, Fried Chicken is a very popular dish, especially for young children.
               </p>
-              <a href="/recipe/Fried-Chicken.html"><button style="border-radius: 10px; border: 0;">See More</button></a>
+              <a href="./recipe/Fried-Chicken.html"><button style="border-radius: 10px; border: 0;">See More</button></a>
             </div>
           </div>
         </div>
@@ -323,7 +322,7 @@
               <p class="p-menu">
                 Tteokbokki is a Korean street food made from Korean rice cake (Tteok) and spicy sauce. The dish has a spicy taste from Korean chili paste, a sweet taste from sugar, and a chewy texture from rice cake. Tteokbokki is a popular dish loved by many people for its delicious taste and affordable price.
               </p>
-              <a href="/recipe/Tokbokki.html"><button style="border-radius: 10px; border: 0;">See More</button></a>
+              <a href="./recipe/Tokbokki.html"><button style="border-radius: 10px; border: 0;">See More</button></a>
             </div>
           </div>
         </div>
@@ -342,16 +341,16 @@
           <div class="col-lg-3 col-md-6">
               <div class="team-item">
                   <div class="team-img">
-                    <img style="height: 360px;" src="images/IMG_9706.jpeg" alt="Image">
+                    <img style="height: 360px;" src="https://scontent.fhan15-1.fna.fbcdn.net/v/t39.30808-6/440940438_3699357710381887_788808893563441260_n.jpg?stp=cp6_dst-jpg&_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeGOI5jVP4uGDy6fm23pM5b9sYQpPF_b1uSxhCk8X9vW5G5WEoS19g48dCJNvetqm5E2S7Xnrk8_V_E5HRdtgZSQ&_nc_ohc=c17dCeyNBPgQ7kNvgEd7Rfv&_nc_ht=scontent.fhan15-1.fna&oh=00_AYBh4OjSzB16MqipiHZp6uLbk624Nu3cdQNlpHizJtYt4w&oe=6669C7FC" alt="Image">
                       <div class="team-social">
                           <a href=""><i class="fab fa-twitter"></i></a>
-                          <a href="https://www.facebook.com/xuan.x.xa"><i class="fab fa-facebook-f"></i></a>
+                          <a href="https://www.facebook.com/PhDuxng"><i class="fab fa-facebook-f"></i></a>
                           <a href="https://github.com/xUankip"><i class="fab fa-github"></i></a>
                           <a href=""><i class="fab fa-instagram"></i></a>
                       </div>
                   </div>
                   <div class="team-text">
-                      <h2>Ngo Xuan</h2>
+                      <h2>Pham Dung</h2>
                       <p>Team Member</p>
                   </div>
               </div>
