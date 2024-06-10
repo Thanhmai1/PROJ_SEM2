@@ -16,27 +16,33 @@
 
         $ps = $conn->prepare("INSERT INTO users (UserName, Email, `Password`) VALUES ( ?, ?, ?)");
         $ps->bind_param("sss", $name, $email, $hash_password);
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {                    
-            $sql = "SELECT * FROM users WHERE UserName = ? OR Email = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("ss", $name,$email);
-            $stmt->execute();
-            $result = $stmt->get_result();        
-            if ($result->num_rows > 0) {
-                if($row["UserName"] == $name){
-                    echo '<script>alert("Name not available, please enter again!"); window.location.href = "http://localhost:3000/html/login.html";</script>';                 
+        if ( empty($name)||empty($email)||empty($password) ) {
+            echo '<script>alert("Musnt empty!"); window.location.href = "http://localhost:3000/html/login.html";</script>';                 
+            exit();
+        }
+        else{
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {                    
+                $sql = "SELECT * FROM users WHERE UserName = ? OR Email = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("ss", $name,$email);
+                $stmt->execute();
+                $result = $stmt->get_result();        
+                if ($result->num_rows > 0) {
+                    if($row["UserName"] == $name){
+                        echo '<script>alert("Name not available, please enter again!"); window.location.href = "http://localhost:3000/html/login.html";</script>';                 
+                    }
+                    elseif($row["Email"] == $email){
+                        echo '<script>alert("Enail not available, please enter again!"); window.location.href = "http://localhost:3000/html/login.html";</script>';                 
+                    }
+                } else{
+                    echo $result->num_rows;
                 }
-                elseif($row["Email"] == $email){
-                    echo '<script>alert("Enail not available, please enter again!"); window.location.href = "http://localhost:3000/html/login.html";</script>';                 
-                }
-            } else{
-                echo $result->num_rows;
-            }
-        }else {
-            $ps->execute();
-            echo '<script>alert("SIGN UP SUCCESSFULL!"); window.location.href = "http://localhost:3000/html/login.html";</script>';
-            exit;
-        }             
+            }else {
+                $ps->execute();
+                echo '<script>alert("SIGN UP SUCCESSFULL!"); window.location.href = "http://localhost:3000/html/login.html";</script>';
+                exit;
+            }     
+        }        
         $ps->close();    
         $conn->close();
     } catch (Exception $e) {
