@@ -28,20 +28,14 @@
                 $stmt->execute();
                 $result = $stmt->get_result();        
                 if ($result->num_rows > 0) {
-                    if($row["UserName"] == $name){
-                        echo '<script>alert("Name not available, please enter again!"); window.location.href = "http://localhost:3000/html/login.html";</script>';                 
-                    }
-                    elseif($row["Email"] == $email){
-                        echo '<script>alert("Enail not available, please enter again!"); window.location.href = "http://localhost:3000/html/login.html";</script>';                 
-                    }
+                    echo '<script>alert("Email or UserName dont feasible!"); window.location.href = "http://localhost:3000/html/login.html";</script>';
+                    exit;
                 } else{
-                    echo $result->num_rows;
+                    $ps->execute();
+                    echo '<script>alert("SIGN UP SUCCESSFULL!"); window.location.href = "http://localhost:3000/html/login.html";</script>';
+                    exit;
                 }
-            }else {
-                $ps->execute();
-                echo '<script>alert("SIGN UP SUCCESSFULL!"); window.location.href = "http://localhost:3000/html/login.html";</script>';
-                exit;
-            }     
+            }
         }        
         $ps->close();    
         $conn->close();
