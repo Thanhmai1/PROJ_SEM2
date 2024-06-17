@@ -24,20 +24,20 @@
                   <span>Sign up with Email</span>
                   
                   <label class="form-group"> 
-                      <input type="text" placeholder="Name" id="name" name="name" class="form-control" required
+                      <input type="text" placeholder="Name" id="name" name="name" autocomplete="off" class="form-control" required
                           oninvalid="this.setCustomValidity('Name is required')" 
                           oninput="setCustomValidity('')" 
                           title="Name: enter a valid name. Example: Mary" />                
                   </label>
                   <label>
-                      <input type="email" class="form-control" name="email" id="email"
+                      <input type="email" class="form-control" autocomplete="off" name="email" id="email"
                           placeholder="Email" required
                           oninvalid="this.setCustomValidity('Enter a valid email')" 
                           oninput="setCustomValidity('')" 
                           title="Email: the email contains '@'. Example: info@ros-bv.nl" />
                   </label>
                   <label>
-                      <input type="password" placeholder="Password" id="password" name="password" class="form-control" required
+                      <input type="password" placeholder="Password" id="password" autocomplete="off" name="password" class="form-control" required
                           oninvalid="this.setCustomValidity('Password is required')" 
                           oninput="setCustomValidity('')" 
                           title="Password: enter a valid password" />           

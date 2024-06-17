@@ -35,9 +35,8 @@
             if ($hash_password== $row['Password']) {
                 $_SESSION['name'] = $row['UserName'];
                 $_SESSION['hash_password'] = $row['Password'];
-                
-                echo '<script>alert("SIGN IN SUCCESSFULLY!")</script>';
-                header ("location:http://localhost:3000/index.html");
+                                
+                header ("Location:http://localhost:3000/php/login/welcome.php");
                 exit;
             }
             else{
