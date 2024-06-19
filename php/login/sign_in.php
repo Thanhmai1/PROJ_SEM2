@@ -36,7 +36,7 @@
                 $_SESSION['name'] = $row['UserName'];
                 $_SESSION['hash_password'] = $row['Password'];
                                 
-                header ("Location:http://localhost:3000/php/login/welcome.php");
+                header ("Location:http://localhost:3000/index.html");
                 exit;
             }
             else{
