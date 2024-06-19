@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="./css/css/style.css">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="search.css">
+    <link rel="stylesheet" href="filter.css">
   </head>
   <div class="sticky">
     <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #00aaa3">
@@ -71,6 +72,7 @@
               Our Recipe
             </h2>
           </div>
+          
     
           <ul class="filters_menu">
             <li class="active" data-filter="*">All</li>
@@ -79,6 +81,46 @@
             <li data-filter=".smoothy">Smoothy</li>
             <li data-filter=".filling">Quick Filling</li>
           </ul>
+
+
+          <!-- Bộ lọc chiều cao cân nặng -->
+          <div class="filter-panel">
+            <h2>Recipe Filter</h2>
+            <div class="filter-section">
+                <h3>By Weight</h3>
+                <label><input type="checkbox" name="weight"> 40kg - 50kg </label>
+                <label><input type="checkbox" name="weight"> 50kg - 60kg </label>
+                <label><input type="checkbox" name="weight"> 60kg - 70kg </label>
+                <label><input type="checkbox" name="weight"> 70kg - 80kg </label>
+                <label><input type="checkbox" name="weight"> 80kg - 90kg </label>
+                <label><input type="checkbox" name="weight"> 90kg - 100kg </label>
+            </div>
+            
+            <div class="filter-section">
+                <h3>By Height</h3>
+                <label><input type="checkbox" name="height"> 1m4 - 1m5</label>
+                <label><input type="checkbox" name="height"> 1m5 - 1m6</label>
+                <label><input type="checkbox" name="height"> 1m6 - 1m7</label>
+                <label><input type="checkbox" name="height"> 1m7 - 1m8</label>
+                <label><input type="checkbox" name="height"> 1m8 - 1m9</label>
+                <label><input type="checkbox" name="height"> 1m9 - 2m</label>
+            </div>
+            
+            <div class="filter-section">
+                <h3>...</h3>
+                <label><input type="checkbox" name="shipping" value="Hỏa Tốc">...</label>
+                <label><input type="checkbox" name="shipping" value="Nhanh"> ...</label>
+                <label><input type="checkbox" name="shipping" value="Tiết Kiệm"> ...</label>
+            </div>
+            
+            <div class="filter-section">
+                <h3>...</h3>
+                <label><input type="checkbox" name="brand" value="MiSoul"> ...</label>
+                <label><input type="checkbox" name="brand" value="KARANTS"> ...</label>
+                <label><input type="checkbox" name="brand" value="Miucho"> ...</label>
+            </div>
+
+          </div>
           
           <div class="filters-content">
             <div class="row grid">
