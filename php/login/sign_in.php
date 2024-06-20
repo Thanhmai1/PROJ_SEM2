@@ -23,7 +23,7 @@
         $name = $_POST["name"];        
         $password = $_POST["password"];
         $hash_password = md5($password);
-        $ps = $conn->prepare("SELECT `UserName`,`Password` FROM `users` WHERE `UserName` = ? AND `Password` = ?");        
+        $ps = $conn->prepare("SELECT `username`,`password` FROM `user` WHERE `username` = ? AND `password` = ?");        
         
         $ps->bind_param("ss", $name, $hash_password);        
         
@@ -32,8 +32,8 @@
         if($result->num_rows > 0){
             
             $row = $result->fetch_assoc();            
-            if ($hash_password== $row['Password']) {
-                $_SESSION['name'] = $row['UserName'];
+            if ($hash_password== $row['password']) {
+                $_SESSION['name'] = $row['username'];
                 $_SESSION['hash_password'] = $row['Password'];
                                 
                 header ("Location:http://localhost:3000/index.html");

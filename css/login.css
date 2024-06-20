@@ -230,3 +230,7 @@ button.ghost {
 .container.right-panel-active .overlay-right {
     transform: translateY(20%);
 }
+
+#login {
+    display: none;
+}
