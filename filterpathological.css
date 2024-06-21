@@ -1,0 +1,24 @@
+.filter-section {
+    /* margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: block;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
+    margin-left: -350px;
+    margin-top: px; */
+}
+.filter-section h3 {
+    margin: 0;
+    padding-bottom: 10px;
+}
+.filter-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+.filter-section li {
+    margin-bottom: 5px;
+}
+.filter-section .more {
+    color: blue;
+    cursor: pointer;
+}

@@ -4,14 +4,12 @@
     border: 1px solid #ddd;
     border-radius: 5px;
     margin-left: -350px;
-    margin-bottom: -872px;
-    position: fixed;
     top: 200px;
-    /* z-index: 100000px; */
     display: block;
     box-shadow: 0px 2px 2px rgba(0,0,0,0.5);
     bottom: 100px;
-
+    margin-bottom: -427px;
+    text-align: center;
 }
 
 .filter-panel h2 {
@@ -39,4 +37,39 @@ label {
     border: 1px solid #ccc;
     border-radius: 3px;
     cursor: pointer;
+}
+
+.btn-submit{
+    text-align: center;
+}
+
+
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+.form-group button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.form-group button:hover {
+    background-color: #0056b3;
+}
+
+.dis-bmi{
+    font-weight: bold;
+    margin-top: 15px;
 }
