@@ -3,83 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tính tổng hai số</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .container {
-            max-width: 300px;
-            margin: auto;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-        }
-        .form-group button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .form-group button:hover {
-            background-color: #0056b3;
-        }
-        .result {
-            margin-top: 15px;
-            font-weight: bold;
-        }
-    </style>
+    <title>Document</title>
+    <link rel="stylesheet" href="/php/BMI/test.php">
 </head>
 <body>
-    <div class="container">
-        <h2>BMI</h2>
-        <div class="form-group">
-            <label for="number1">Weight:</label>
-            <input type="number" id="weight">
+    <style>
+        /* Styles here */
+    </style>
+
+    <div class="filter-panel">
+        <div class="sticky">
+            <nav>
+                <h3>Calculate BMI</h3>
+            </nav>
         </div>
-        <div class="form-group">
-            <label for="number2">Height:</label>
-            <input type="number" id="height">
+        <div class="container mt-5">
+            <div class="card">
+                <div class="card-body">
+                    <form id="bmi-form" action="save_bmi.php" method="POST">
+                        <div class="filter-section">
+                            <label for="weight" class="form-label">Weight</label>
+                            <input type="number" class="form-control" name="weight" id="weight" placeholder="Enter your weight">
+                        </div>
+                        <div class="filter-section">
+                            <label for="height" class="form-label">Height</label>
+                            <input type="number" step="0.01" class="form-control" name="height" id="height" placeholder="Enter your height">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Calculate BMI</button>
+                    </form>
+                    <div id="bmi-result" class="dis-bmi"></div>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <button onclick="calculateSum()">Calculate BMI</button>
-        </div>
-        <div class="result" id="result"></div>
     </div>
 
     <script>
-        function calculateSum() {
-            // Lấy giá trị từ các ô nhập liệu
-            var number1 = document.getElementById('weight').value;
-            var number2 = document.getElementById('height').value;
-
-            // Chuyển đổi giá trị sang kiểu số
-            var num1 = parseFloat(number1);
-            var num2 = parseFloat(number2);
-
-            // Tính tổng
-            var sum = num1 / (num2 * num2);
-
-            // Hiển thị kết quả
-            document.getElementById('result').innerText = 'BMI: ' + sum;
-        }
+        document.getElementById('bmi-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value);
+            if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+                document.getElementById('bmi-result').innerText = 'Please enter valid weight and height values.';
+                return;
+            }
+            const bmi = (weight / (height * height)).toFixed(2);
+            document.getElementById('bmi-result').innerText = `Your BMI is ${bmi}`;
+        });
     </script>
 </body>
 </html>

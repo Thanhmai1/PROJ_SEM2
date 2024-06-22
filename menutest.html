@@ -95,29 +95,31 @@
       <!-- Filter Calculate BMI -->
       <div class="filter-panel">
         <div class="sticky">
-          <nav>
-            <h3>Calculate BMI</h3>
-          </nav>
+            <nav>
+                <h3>Calculate BMI</h3>
+            </nav>
         </div>
         <div class="container mt-5">
-          <div class="card">
-            <div class="card-body">
-              <form id="bmi-form">
-                <div class="filter-section">
-                  <label for="weight" class="form-label">Weight</label>
-                  <input type="number" class="form-control" id="weight" placeholder="Enter your weight">
+            <div class="card">
+                <div class="card-body">
+                    <form id="bmi-form" action="/php/BMI/CalculateBMI.php">
+                        <div class="filter-section">
+                            <label for="weight" class="form-label">Weight</label>
+                            <input type="number" class="form-control" name="weight" id="weight"
+                                placeholder="Enter your weight">
+                        </div>
+                        <div class="filter-section">
+                            <label for="height" class="form-label">Height</label>
+                            <input type="number" step="0.01" class="form-control" name="height" id="height"
+                                placeholder="Enter your height">
+                        </div>
+                        <button type="submit" value="submit" class="btn btn-primary">Calculate BMI</button>
+                    </form>
+                    <div id="bmi-result" name="bmi" class="dis-bmi"></div>
                 </div>
-                <div class="filter-section">
-                  <label for="height" class="form-label">Height</label>
-                  <input type="number" step="0.01" class="form-control" id="height" placeholder="Enter your height">
-                </div>
-                <button type="submit" class="btn btn-primary">Calculate BMI</button>
-              </form>
-              <div id="bmi-result" class="dis-bmi"></div>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
       <!-- JS Calculate BMI -->
       <script>
         document.getElementById('bmi-form').addEventListener('submit', function (event) {
