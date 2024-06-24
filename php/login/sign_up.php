@@ -10,10 +10,10 @@ try {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $name = trim($_POST["name"]);
-    $email = trim($_POST["email"]);
-    $password = $_POST["password"   ];
-    $role_id = 1;
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    $role_id = 2;
     $person_type_id = 1;
     $hash_password = md5($password);
     $create_at = date("Y-m-d H:i:s");

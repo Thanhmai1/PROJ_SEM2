@@ -34,9 +34,9 @@
             $row = $result->fetch_assoc();            
             if ($hash_password== $row['password']) {
                 $_SESSION['name'] = $row['username'];
-                $_SESSION['hash_password'] = $row['Password'];
+                $_SESSION['hash_password'] = $row['password'];
                                 
-                header ("Location:http://localhost:3000/index.html");
+                header ("Location:http://localhost:3000/index_logined.php");
                 exit;
             }
             else{
