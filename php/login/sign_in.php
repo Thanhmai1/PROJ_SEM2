@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
-<?php
-    
+
+    <?php
+    session_start();
+
     try {
         $servername = "localhost";
         $username = "root";
@@ -16,43 +19,45 @@
         $dbname = "project_sem2";
 
         $conn = new mysqli($servername, $username, $password, $dbname);
-        if ($conn->connect_error) {            
+        if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
-        }                        
-    
-        $name = $_POST["name"];        
+        }
+
+        $name = $_POST["name"];
         $password = $_POST["password"];
         $hash_password = md5($password);
-        $ps = $conn->prepare("SELECT `username`,`password` FROM `user` WHERE `username` = ? AND `password` = ?");        
-        
-        $ps->bind_param("ss", $name, $hash_password);        
-        
+        $ps = $conn->prepare("SELECT `username`,`password` FROM `user` WHERE `username` = ? AND `password` = ?");
+
+        $ps->bind_param("ss", $name, $hash_password);
+
         $ps->execute();
-        $result = $ps ->get_result();        
-        if($result->num_rows > 0){
-            
-            $row = $result->fetch_assoc();            
-            if ($hash_password== $row['password']) {
-                $_SESSION['name'] = $row['username'];
-                $_SESSION['hash_password'] = $row['password'];
-                                
-                header ("Location:http://localhost:3000/index_logined.php");
+        $ps->store_result();
+
+        if ($ps->num_rows > 0) {
+            $ps->bind_result($db_username, $db_password); // gẵn tên cột kết quả vào biến
+            $ps->fetch();
+
+            if ($hash_password == $db_password) {
+                $_SESSION['username'] = $db_username;
+                $_SESSION['hash_password'] = $db_password;
+
+                header("Location: http://localhost:3000/index_logined.php");
                 exit;
-            }
-            else{
+            } else {
                 echo "error";
             }
-        } else {      
-            echo '<script>alert("PASSWORD OR USERNAME IS WRONG!"); window.location.href = "http://localhost:3000/html/login.html";</script>';
-            exit;            
-        }     
+        } else {
+            echo '<script>alert("PASSWORD OR USERNAME IS WRONG!"); window.location.href = "http://localhost:3000/html/login.php";</script>';
+            exit;
+        }
 
-        $ps->close();    
+        $ps->close();
         $conn->close();
     } catch (Exception $e) {
         echo "ERROR: " . $e->getMessage();
     }
     ?>
-    
+
 </body>
+
 </html>

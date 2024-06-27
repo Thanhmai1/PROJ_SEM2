@@ -73,10 +73,11 @@
             </svg>
             <?php
             session_start();
-            if (isset($_SESSION['name'])) {
-              echo $_SESSION['name'];
+            if (isset($_SESSION['username'])) {
+              $username = $_SESSION['username'];
+              echo htmlspecialchars($username);
             } else {
-              echo "false";
+              echo "Guest";
             }
             ?>
           </div>
@@ -87,7 +88,8 @@
           </div>
         </div>
       </div>
-    </nav>
+  </div>
+  </nav>
   </div>
   <hr>
 

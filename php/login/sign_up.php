@@ -20,7 +20,7 @@ try {
     $update_at = date("Y-m-d H:i:s");
 
     if (empty($name) || empty($email) || empty($password)) {
-        echo '<script>alert("Fields must not be empty!"); window.location.href = "http://localhost:3000/html/login.html";</script>';
+        echo '<script>alert("Fields must not be empty!"); window.location.href = "http://localhost:3000/html/login.php";</script>';
         exit();
     }
 
@@ -35,7 +35,7 @@ try {
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            echo '<script>alert("Email or Username already exists!"); window.location.href = "http://localhost:3000/html/login.html";</script>';
+            echo '<script>alert("Email or Username already exists!"); window.location.href = "http://localhost:3000/html/login.php";</script>';
             exit();
         } else {
             $ps = $conn->prepare("INSERT INTO user (username, email, `password`, role_id, person_type_id, created_at, update_at) VALUES (?, ?, ?, ?, ?, ?, ?)");
@@ -44,7 +44,7 @@ try {
             }
             $ps->bind_param("sssisss", $name, $email, $hash_password, $role_id, $person_type_id, $create_at, $update_at);
             $ps->execute();
-            echo '<script>alert("SIGN UP SUCCESSFUL!"); window.location.href = "http://localhost:3000/html/login.html";</script>';
+            echo '<script>alert("SIGN UP SUCCESSFUL!"); window.location.href = "http://localhost:3000/html/login.php";</script>';
             exit();
         }
     }    

@@ -27,7 +27,6 @@
                                 style="color: #000000;"></i></a>
                     </div>
                     <span>Sign up with Email</span>
-
                     <label class="form-group">
                         <input type="text" placeholder="Name" id="name" name="name" autocomplete="off"
                             class="form-control" required oninvalid="this.setCustomValidity('Name is required')"
@@ -60,7 +59,6 @@
                                     style="color: #000000;"></i></a>
                         </div>
                         <span>Sign in with E-Mail Address</span>
-
                         <label>
                             <input type="text" placeholder="Name" name="name" id="signin_name" required
                                 oninvalid="this.setCustomValidity('Name is required')"
