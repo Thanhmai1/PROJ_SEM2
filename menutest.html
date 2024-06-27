@@ -122,36 +122,28 @@
     </div>
       <!-- JS Calculate BMI -->
       <script>
+
         document.getElementById('bmi-form').addEventListener('submit', function (event) {
-          event.preventDefault();
-          const weight = parseFloat(document.getElementById('weight').value);
-          const height = parseFloat(document.getElementById('height').value);
-          if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
-            document.getElementById('bmi-result').innerText = 'Please enter valid weight and height values.';
-            return;
-          }
-          const bmi = (weight / (height * height)).toFixed(2);
-          document.getElementById('bmi-result').innerText = `Your BMI is ${bmi}`;
-        });
+  event.preventDefault();
+  const weight = parseFloat(document.getElementById('weight').value);
+  let height = parseFloat(document.getElementById('height').value);
+  
+  if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+    document.getElementById('bmi-result').innerText = 'Please enter valid weight and height values.';
+    return;
+  }
+  
+  // Chuyển đổi chiều cao từ cm sang m nếu cần
+  if (height > 3) { // Giả sử chiều cao > 3 là nhập bằng cm
+    height = height / 100;
+  }
+  
+  const bmi = (weight / (height * height)).toFixed(2);
+  document.getElementById('bmi-result').innerText = `Your BMI is ${bmi}`;
+});
       </script>
 
-      <!-- Filter các bệnh -->
-      <!-- <div class="filter-section">
-        <h3>Bệnh lý</h3>
-        <ul>
-          <li><input type="checkbox" id="treem" /><label for="treem">Máu nhiễm mỡ</label></li>
-          <li><input type="checkbox" id="nam" /><label for="nam">Tiểu đường</label></li>
-          <li><input type="checkbox" id="aothun" /><label for="aothun"> </label></li>
-          <li><input type="checkbox" id="nhacua" /><label for="nhacua"> </label></li>
-        </ul>
-        <h3>...</h3>
-        <ul>
-          <li><input type="checkbox" id="hanoi" /><label for="hanoi"> abc</label></li>
-          <li><input type="checkbox" id="hcm" /><label for="hcm"> abc</label></li>
-          <li><input type="checkbox" id="hadong" /><label for="hadong"> abc</label></li>
-          <li><input type="checkbox" id="hoangmai" /><label for="hoangmai"> abc</label></li>
-        </ul>
-      </div> -->
+      
 
       <div class="filters-content">
         <div class="row grid">
