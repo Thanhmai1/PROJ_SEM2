@@ -1,0 +1,42 @@
+.filter-panel {
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-left: -350px;
+    margin-bottom: -872px;
+    position: fixed;
+    top: 200px;
+    /* z-index: 100000px; */
+    display: block;
+    box-shadow: 0px 2px 2px rgba(0,0,0,0.5);
+    /* bottom: 100px; */
+
+}
+
+.filter-panel h2 {
+    text-align: center;
+}
+
+.filter-section {
+    margin-bottom: 20px;
+}
+
+.filter-section h3 {
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.more-button {
+    display: block;
+    margin-top: 5px;
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    cursor: pointer;
+}
