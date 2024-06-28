@@ -15,7 +15,7 @@
     <section>
         <div class="container" id="container">
             <div class="form-container sign-up-container">
-                <form action="../php/login/sign_up.php" method="post">
+                <form action="../login/sign_in.php" method="post">
                     <h1>Sign Up</h1>
                     <div class="social-container">
                         <a style="text-decoration: none;" href="https://www.facebook.com/" class="text-white me-4">
@@ -47,7 +47,7 @@
                 </form>
             </div>
             <div class="form-container sign-in-container">
-                <form action="/php/login/sign_in.php" method="post">
+                <form action="/login/sign_in.php" method="post">
                     <form action="/index_logined.php">
                         <h1>Sign in</h1>
                         <div class="social-container">

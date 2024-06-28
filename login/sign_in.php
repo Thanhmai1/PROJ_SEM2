@@ -41,7 +41,7 @@
                 $_SESSION['username'] = $db_username;
                 $_SESSION['hash_password'] = $db_password;
 
-                header("Location: http://localhost:3000/index_logined.php");
+                header("Location: http://localhost:3000/index.php");
                 exit;
             } else {
                 echo "error";
