@@ -43,6 +43,11 @@
                             class="form-control" required oninvalid="this.setCustomValidity('Password is required')"
                             oninput="setCustomValidity('')" title="Password: enter a valid password" />
                     </label>
+                    <label>
+                        <input type="password" placeholder="Confirm Password" id="password" autocomplete="off" name="password"
+                            class="form-control" required oninvalid="this.setCustomValidity('Password is required')"
+                            oninput="setCustomValidity('')" title="Password: enter a valid password" />
+                    </label>
                     <button value="submit" type="submit" style="margin-top: 9px">Sign Up</button>
                 </form>
             </div>
