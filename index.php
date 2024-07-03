@@ -13,7 +13,6 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
     integrity="sha384-MCw98/SFnGE8fJT3GXwEQngsV7Zt27NXF@a@ApmYm81iuXoPkF0JwJ8ERdkLPM0" crossorigin="anonymous">
-  <!-- bootstrap core css -->
   <!-- <link rel="stylesheet" type="text/css" href="./css/css/bootstrap.css" /> -->
   <!--owl slider stylesheet -->
   <link rel="stylesheet" type="text/css"
@@ -30,67 +29,12 @@
   <!-- responsive style -->
   <link href="./css/css/responsive.css" rel="stylesheet" />
   <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="/css/css/assets/owl.carousel.min.css">
-  <link rel="stylesheet" href="/css/css/assets/owl.carousel.css">
-  <link rel="stylesheet" href="search.css">
+  
 </head>
 
 <body>
-  <div class="sticky">
-    <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #00aaa3">
-      <a style="color: #fff;" class="navbar-brand" href="./index.html"><i
-          style="font-family: 'Dancing Script', cursive;">Quick Snack</i></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a style="color: #fff;" class="nav-link" href="./index.html">Home <span class="sr-only"></span></a>
-          </li>
-          <li class="nav-item">
-            <a style="color: #fff;" class="nav-link" href="./menu.html">Recipe</a>
-          </li>
-          <li class="nav-item">
-            <a style="color: #fff;" class="nav-link" href="./html/contact.html">Contact</a>
-          </li>
-          <li class="nav-item">
-            <a style="color: #fff;" class="nav-link" href="./html/about.html">About Us</a>
-          </li>
-        </ul>
-        <form id="search-box">
-          <input type="text" id="search-text" placeholder="Search Food..." required>
-          <button id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
-        </form>
-        <div class="dropdown">
-          <div class="dropdown-button">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-              style="text-align: center;" width="25" height="24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M5.121 17.804A4.992 4.992 0 0112 20a4.992 4.992 0 016.879-2.196M12 14a5 5 0 100-10 5 5 0 000 10z" />
-            </svg>
-            <?php
-            session_start();
-            if (isset($_SESSION['name'])) {
-              echo $_SESSION['name'];
-            } else {
-              echo "false";
-            }
-            ?>
-          </div>
-          <div class="dropdown-content">
-            <a href="#">My account</a>
-            <a href="#">Send feedback</a>
-            <a href="/php/login/logout.php">Logout</a>
-          </div>
-        </div>
-      </div>
-    </nav>
-  </div>
-  <hr>
-
+  
+<?php include './includes/header.php'; ?>
   <div class="container text-center my-3">
     <h2 style="color: #fbc86b;">Delicious Daily Dish</h2>
     <div class="row mx-auto my-auto justify-content-center">
@@ -104,7 +48,7 @@
                     <img src="https://xbeauty.com.vn/upload/news/54/pudding-hat-chia.jpg"
                       style="width: 400px; height: 160px;" class="img-fluid">
                   </div>
-                  <div class="card-img-overlay img-content "><a href="/recipe/Banana-Chia-Seed-Pudding.html">Banana Chia
+                  <div class="cards-img-overlay img-content "><a href="/recipe/Banana-Chia-Seed-Pudding.html">Banana Chia
                       Seed Pudding</a></div>
                 </div>
               </a>
@@ -119,7 +63,7 @@
                       src="https://cdn.tgdd.vn/Files/2017/03/22/963738/cach-lam-goi-cuon-tom-thit-thom-ngon-cho-bua-com-gian-don-202203021427281747.jpg"
                       style="width: 400px; height: 160px;" class="img-fluid">
                   </div>
-                  <div class="card-img-overlay img-content"><a
+                  <div class="cards-img-overlay img-content"><a
                       href="/recipe/Shrimp-and-Pork-Rice-Paper-Rolls.html">Shrimp, Green Apple, And Cbbage Salad</a>
                   </div>
                 </div>
@@ -134,7 +78,7 @@
                     <img src="https://lamsonfood.com/wp-content/uploads/2022/03/khoai-tay-lac-pho-mai.jpg"
                       style="width: 400px; height: 160px;" class="img-fluid">
                   </div>
-                  <div class="card-img-overlay img-content"><a href="/recipe/Seasoned-Fries-with-Cheese.html">Fries With
+                  <div class="cards-img-overlay img-content"><a href="/recipe/Seasoned-Fries-with-Cheese.html">Fries With
                       Shaken Cheese</a></div>
                 </div>
               </a>
@@ -148,7 +92,7 @@
                     <img src="https://beptruong.edu.vn/wp-content/uploads/2013/03/ga-chien-xu.jpg"
                       style="width: 400px; height: 160px;" class="img-fluid">
                   </div>
-                  <div class="card-img-overlay img-content"><a href="/recipe/Fried-Chicken.html">Fried Chicken</a></div>
+                  <div class="cards-img-overlay img-content"><a href="/recipe/Fried-Chicken.html">Fried Chicken</a></div>
                 </div>
               </a>
             </div>
@@ -162,7 +106,7 @@
                       src="https://cdn.shopify.com/s/files/1/0617/2497/files/cach-lam-tokbokki_a2179426-f894-4dda-a709-52fe9f07d6ab.jpg?v=1636019190"
                       style="width: 400px; height: 160px;" class="img-fluid">
                   </div>
-                  <div class="card-img-overlay img-content"><a href="/recipe/Tokbokki.html">Tokbokki</a></div>
+                  <div class="cards-img-overlay img-content"><a href="/recipe/Tokbokki.html">Tokbokki</a></div>
                 </div>
               </a>
             </div>
@@ -175,7 +119,7 @@
                     <img src="https://i.ytimg.com/vi/4TRp9tc_SBM/maxresdefault.jpg" style="width: 400px; height: 160px;"
                       class="img-fluid">
                   </div>
-                  <div class="card-img-overlay img-content"><a href="">Fried Crispy Rice </a></div>
+                  <div class="cards-img-overlay img-content"><a href="">Fried Crispy Rice </a></div>
                 </div>
               </a>
             </div>
@@ -538,66 +482,7 @@
 </body>
 <!-- <div class="container-fluid"> -->
 <!-- Footer -->
-<footer class="text-center text-white" style="background-color: #00aaa3">
-  <div class="container">
-    <section class="mt-5">
-      <div class="row text-center d-flex justify-content-center pt-5">
-        <div class="col-md-2">
-          <h6 class="text-uppercase font-weight-bold">
-            <a href="./html/contact.html" class="text-white">Home</a>
-          </h6>
-        </div>
-        <div class="col-md-2">
-          <h6 class="text-uppercase font-weight-bold">
-            <a href="./html/about.html" class="text-white">About Us</a>
-          </h6>
-        </div>
-        <div class="col-md-2">
-          <h6 class="text-uppercase font-weight-bold">
-            <a href="./menu.html" class="text-white">Recipe</a>
-          </h6>
-        </div>
-      </div>
-    </section>
-
-    <hr class="my-5" />
-
-    <section class="mb-5">
-      <div class="row d-flex justify-content-center">
-        <div class="col-lg-8">
-          <p>
-            Welcome to Quick Snack, your go-to online library for a culinary journey like no other! If you're a
-            passionate home chef or someone eager to explore the art of cooking, this website is your one-stop
-            destination for a plethora of mouthwatering recipes and cooking inspiration.
-          </p>
-        </div>
-      </div>
-    </section>
-    <section class="text-center mb-5">
-      <a style="text-decoration: none;" href="https://www.facebook.com/lamphandsome" class="text-white me-4">
-        <i class="fab fa-facebook-f"></i>
-      </a>
-      <a style="text-decoration: none;" href="https://twitter.com/?lang=vi" class="text-white me-4">
-        <i class="fab fa-twitter"></i>
-      </a>
-      <a style="text-decoration: none;" href="https://www.google.com.vn/?hl=vi" class="text-white me-4">
-        <i class="fab fa-google"></i>
-      </a>
-      <a style="text-decoration: none;" href="https://www.instagram.com/__ph.vmlam/" class="text-white me-4">
-        <i class="fab fa-instagram"></i>
-      </a>
-      <a style="text-decoration: none;" href="https://www.linkedin.com/" class="text-white me-4">
-        <i class="fab fa-linkedin"></i>
-      </a>
-      <a style="text-decoration: none;" href="https://github.com/xUankip/Project" class="text-white me-4">
-        <i class="fab fa-github"></i>
-      </a>
-    </section>
-  </div>
-  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-    © 2024 Copyright: QuickSnack
-  </div>
-</footer>
+<?php include'./includes/footer.php'; ?>
 <!-- </div> -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>

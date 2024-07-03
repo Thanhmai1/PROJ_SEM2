@@ -15,7 +15,7 @@
     <section>
         <div class="container" id="container">
             <div class="form-container sign-up-container">
-                <form action="../php/login/sign_up.php" method="post">
+                <form action="../login/sign_in.php" method="post">
                     <h1>Sign Up</h1>
                     <div class="social-container">
                         <a style="text-decoration: none;" href="https://www.facebook.com/" class="text-white me-4">
@@ -27,7 +27,6 @@
                                 style="color: #000000;"></i></a>
                     </div>
                     <span>Sign up with Email</span>
-
                     <label class="form-group">
                         <input type="text" placeholder="Name" id="name" name="name" autocomplete="off"
                             class="form-control" required oninvalid="this.setCustomValidity('Name is required')"
@@ -44,11 +43,16 @@
                             class="form-control" required oninvalid="this.setCustomValidity('Password is required')"
                             oninput="setCustomValidity('')" title="Password: enter a valid password" />
                     </label>
+                    <label>
+                        <input type="password" placeholder="Confirm Password" id="password" autocomplete="off" name="password"
+                            class="form-control" required oninvalid="this.setCustomValidity('Password is required')"
+                            oninput="setCustomValidity('')" title="Password: enter a valid password" />
+                    </label>
                     <button value="submit" type="submit" style="margin-top: 9px">Sign Up</button>
                 </form>
             </div>
             <div class="form-container sign-in-container">
-                <form action="/php/login/sign_in.php" method="post">
+                <form action="/login/sign_in.php" method="post">
                     <form action="/index_logined.php">
                         <h1>Sign in</h1>
                         <div class="social-container">
@@ -60,7 +64,6 @@
                                     style="color: #000000;"></i></a>
                         </div>
                         <span>Sign in with E-Mail Address</span>
-
                         <label>
                             <input type="text" placeholder="Name" name="name" id="signin_name" required
                                 oninvalid="this.setCustomValidity('Name is required')"
