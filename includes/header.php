@@ -55,7 +55,7 @@ session_start();
                         </svg>
                         <?php
                         if (isset($_SESSION['username'])) {
-                            $username = htmlspecialchars($_SESSION['username']);
+                            $username = $_SESSION['username'];
                             echo $username;
                         } else {
                             echo "Guest";

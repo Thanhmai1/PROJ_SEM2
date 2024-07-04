@@ -24,46 +24,7 @@
     
 
   </head>
-  <div class="sticky">
-    <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #00aaa3">
-        <a style="color: #fff;" class="navbar-brand" href="./index.html"><i style="font-family: 'Dancing Script', cursive;">Quick Snack</i></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-            <a style="color: #fff;" class="nav-link" href="./index.html">Home <span class="sr-only"></span></a>
-            </li>
-            <li class="nav-item">
-            <a style="color: #fff;" class="nav-link" href="../menu.html">Recipe</a>
-            </li>
-            <li class="nav-item">
-            <a style="color: #fff;" class="nav-link" href="./html/contact.html">Contact</a>
-            </li>
-            <li class="nav-item">
-            <a style="color: #fff;" class="nav-link" href="./html/about.html">About Us</a>
-            </li>
-          </ul>
-          <form id="search-box">              
-            <input type="text" id="search-text" placeholder="Search Food..." required>
-            <button id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
-          </form>
-          <div class="dropdown">
-            <div class="dropdown-button">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24" height="24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A4.992 4.992 0 0112 20a4.992 4.992 0 016.879-2.196M12 14a5 5 0 100-10 5 5 0 000 10z" />
-                </svg>
-                Đăng nhập
-            </div>
-            <div class="dropdown-content">
-                <a href="./html/login.html">Đăng nhập</a>
-                <a href="./html/login.html">Đăng ký</a>
-            </div>
-        </div>
-          </div>
-    </nav>
-  </div>
+  <?php include './includes/header.php';?>
   <body>
 
       <!-- food section -->

@@ -10,37 +10,33 @@
 <body>
 
     <?php
-    session_start();
+    session_start();    
 
     try {
         $servername = "localhost";
         $username = "root";
         $password = "";
         $dbname = "project_sem2";
-
         $conn = new mysqli($servername, $username, $password, $dbname);
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
 
         $name = $_POST["name"];
-        $password = $_POST["password"];
-        $hash_password = md5($password);
-        $ps = $conn->prepare("SELECT `username`,`password` FROM `user` WHERE `username` = ? AND `password` = ?");
+        $password = $_POST["password"];        
 
-        $ps->bind_param("ss", $name, $hash_password);
-
+        $ps = $conn->prepare("SELECT `username`, `password` FROM `user` WHERE `username` = ?");
+        $ps->bind_param("s", $name);
         $ps->execute();
-        $ps->store_result();
+        $result = $ps->get_result();
 
-        if ($ps->num_rows > 0) {
-            $ps->bind_result($db_username, $db_password); // gẵn tên cột kết quả vào biến
-            $ps->fetch();
-
-            if ($hash_password == $db_password) {
-                $_SESSION['username'] = $db_username;
-                $_SESSION['hash_password'] = $db_password;
-
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $hash_password_db = $row['password'];
+            if (password_verify($password, $hash_password_db)) {
+                $_SESSION['loggedin'] = true;
+                $_SESSION['username'] = $row['username'];
+                $_SESSION['hash_password'] = $row['password'];
                 header("Location: http://localhost:3000/index.php");
                 exit;
             } else {

@@ -2,6 +2,7 @@
 
 $username = $_SESSION['username'];
 $email = '';
+$update_at = date("Y-m-d H:i:s");
 $updateMessage = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $new_email = $_POST['email'];
@@ -9,15 +10,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $old_password = $_POST['old_password'];
     $confirm_password = $_POST['confirm_password'];
     if ($new_email != $_SESSION['email']) {
-        $update_ps = $conn->prepare("UPDATE `user` SET `email` = ? WHERE `username` = ?");
-        $update_ps->bind_param("ss", $new_email, $username);
+        $update_ps = $conn->prepare("UPDATE `user` SET `email` = ?, `update_at` = ? WHERE `username` = ?");
+        $update_ps->bind_param("sss", $new_email, $username,$update_at);
         $update_ps->execute();
 
         if ($update_ps->affected_rows > 0) {
             $_SESSION['email'] = $new_email;
             $updateMessage .= "Email updated successfully<br>";
         } else{
-            $updateMessage .= "Password fields must not be empty";
+            $updateMessage .= "Fields must not be empty";
         }
     }
     elseif (!empty($new_password) && !empty($old_password) && !empty($confirm_password)) {
@@ -32,8 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if ($new_password === $confirm_password) {
 
                     $hash_password = md5($new_password);
-                    $update_ps = $conn->prepare("UPDATE `user` SET `password` = ? WHERE `username` = ?");
-                    $update_ps->bind_param("ss", $hash_password, $username);
+                    $update_ps = $conn->prepare("UPDATE `user` SET `password` = ?, `update_at` = ? WHERE `username` = ?");
+                    $update_ps->bind_param("sss", $hash_password, $username,$update_at);
                     $update_ps->execute();
 
                     if ($update_ps->affected_rows > 0) {

@@ -16,7 +16,7 @@ try {
     $cornfirm_password = $_POST["cornfirm_password"];
     $role_id = 2;
     $person_type_id = 1;
-    $hash_password = md5($password);
+    $hash_password = password_hash($password, PASSWORD_DEFAULT);
     $create_at = date("Y-m-d H:i:s");
     $update_at = date("Y-m-d H:i:s");
 
@@ -40,7 +40,7 @@ try {
             } elseif ($cornfirm_password == $password) {
                 $ps->bind_param("sssisss", $name, $email, $hash_password, $role_id, $person_type_id, $create_at, $update_at);
                 $ps->execute();
-                header('http://localhost:3000/includes/checkEmail.php');
+                header('http://localhost:3000/index.php');
                 exit();
             } else {
                 echo '<script>alert("Password confirm may incorrect! Please enter again!"); window.location.href = "http://localhost:3000/html/login.php";</script>';

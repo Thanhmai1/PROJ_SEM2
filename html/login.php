@@ -15,8 +15,7 @@
     <section>
         <div class="container" id="container">
             <div class="form-container sign-up-container">
-                <form action="../login/sign_up.php" method="post">
-                    <form action="../includes/checkEmail.php" method="post">
+                <form action="/login/sign_up.php" method="post">                    
                         <h1>Sign Up</h1>
                         <div class="social-container">
                             <a style="text-decoration: none;" href="https://www.facebook.com/" class="text-white me-4">
@@ -50,14 +49,12 @@
                                 autocomplete="off" name="cornfirm_password" class="form-control" required
                                 oninvalid="this.setCustomValidity('Password is required')"
                                 oninput="setCustomValidity('')" title="Password: enter a valid password" />
-                        </label>
+                        </label>    
                         <button value="submit" type="submit" style="margin-top: 9px">Sign Up</button>
-                    </form>
-                </form>
+                    </form>                
             </div>
             <div class="form-container sign-in-container">
-                <form action="/login/sign_in.php" method="post">
-                    <form action="/index_logined.php">
+                <form action="/login/sign_in.php" method="post">                    
                         <h1>Sign in</h1>
                         <div class="social-container">
                             <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"
@@ -69,19 +66,18 @@
                         </div>
                         <span>Sign in with E-Mail Address</span>
                         <label>
-                            <input type="text" placeholder="Name" name="name" id="signin_name" required
+                            <input type="text" placeholder="Name" name="name" id="name" required
                                 oninvalid="this.setCustomValidity('Name is required')"
                                 oninput="setCustomValidity('')" />
                         </label>
                         <label>
-                            <input type="password" placeholder="Password" name="password" id="signin_password" required
+                            <input type="password" placeholder="Password" name="password" id="name" required
                                 oninvalid="this.setCustomValidity('Password is required')"
                                 oninput="setCustomValidity('')" />
                         </label>
                         <a href="#">Forgot your password?</a>
                         <button type="submit" value="submit">Sign In</button>
-                    </form>
-                </form>
+                    </form>                
             </div>
             <div class="overlay-container">
                 <div class="overlay">
@@ -100,7 +96,7 @@
         </div>
     </section>
     <div>
-        <a href="../index.html"><button class="Home">Home</button></a>
+        <a href="../index.php"><button class="Home">Home</button></a>
     </div>
     <script src="../js/login.js"></script>
 </body>
