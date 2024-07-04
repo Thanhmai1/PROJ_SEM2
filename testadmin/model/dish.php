@@ -1,4 +1,4 @@
-// model/dish.php
+
 <?php
 function createDish($category_id, $thumbnail, $title) {
     $conn = connectdb();

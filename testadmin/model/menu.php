@@ -1,4 +1,4 @@
-// model/menu.php
+
 <?php
 function createMenu($category_id, $person_type_id, $dish_id) {
     $conn = connectdb();
