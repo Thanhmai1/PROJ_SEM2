@@ -1,12 +1,12 @@
 body {
-    background-color: #f8f9fa;
+    background-color: #ced1d5;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
 .container {
-    max-width: 90%;
+    max-width: 90%;    
     margin: 50px auto;
     padding: 20px;
     background-color: #ffffff;
@@ -27,6 +27,7 @@ h1 {
     margin-bottom: 1rem;
 }
 .btn-primary {
+    width: 6%;
     float: right;
     background-color:#00aaa3 ;
     border-color: #00aaa3;   

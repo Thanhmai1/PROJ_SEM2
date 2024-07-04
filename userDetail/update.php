@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $updateMessage .= "User not found<br>";
         }
     } else {
-        $updateMessage .= "Password fields must not be empty.";
+        $updateMessage .= "Fields mustn't be empty<br>";
 
     }
 }?>
