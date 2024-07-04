@@ -92,7 +92,7 @@ if ($row = $result->fetch_assoc()) {
                 <input type="password" class="form-control" id="confirm_password" name="confirm_password">
             </div>
             <small><a href="./../index.php">> Back</a></small>
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>
 </body>
