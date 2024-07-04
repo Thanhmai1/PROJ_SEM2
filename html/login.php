@@ -15,40 +15,44 @@
     <section>
         <div class="container" id="container">
             <div class="form-container sign-up-container">
-                <form action="../login/sign_in.php" method="post">
-                    <h1>Sign Up</h1>
-                    <div class="social-container">
-                        <a style="text-decoration: none;" href="https://www.facebook.com/" class="text-white me-4">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="https://www.instagram.com/"><i class="fa-brands fa-square-instagram"
-                                style="color: #000000;"></i></a>
-                        <a href="https://twitter.com/?lang=vi"><i class="fa-brands fa-square-x-twitter"
-                                style="color: #000000;"></i></a>
-                    </div>
-                    <span>Sign up with Email</span>
-                    <label class="form-group">
-                        <input type="text" placeholder="Name" id="name" name="name" autocomplete="off"
-                            class="form-control" required oninvalid="this.setCustomValidity('Name is required')"
-                            oninput="setCustomValidity('')" title="Name: enter a valid name. Example: Mary" />
-                    </label>
-                    <label>
-                        <input type="email" class="form-control" autocomplete="off" name="email" id="email"
-                            placeholder="Email" required oninvalid="this.setCustomValidity('Enter a valid email')"
-                            oninput="setCustomValidity('')"
-                            title="Email: the email contains '@'. Example: info@ros-bv.nl" />
-                    </label>
-                    <label>
-                        <input type="password" placeholder="Password" id="password" autocomplete="off" name="password"
-                            class="form-control" required oninvalid="this.setCustomValidity('Password is required')"
-                            oninput="setCustomValidity('')" title="Password: enter a valid password" />
-                    </label>
-                    <label>
-                        <input type="password" placeholder="Confirm Password" id="password" autocomplete="off" name="password"
-                            class="form-control" required oninvalid="this.setCustomValidity('Password is required')"
-                            oninput="setCustomValidity('')" title="Password: enter a valid password" />
-                    </label>
-                    <button value="submit" type="submit" style="margin-top: 9px">Sign Up</button>
+                <form action="../login/sign_up.php" method="post">
+                    <form action="../includes/checkEmail.php" method="post">
+                        <h1>Sign Up</h1>
+                        <div class="social-container">
+                            <a style="text-decoration: none;" href="https://www.facebook.com/" class="text-white me-4">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="https://www.instagram.com/"><i class="fa-brands fa-square-instagram"
+                                    style="color: #000000;"></i></a>
+                            <a href="https://twitter.com/?lang=vi"><i class="fa-brands fa-square-x-twitter"
+                                    style="color: #000000;"></i></a>
+                        </div>
+                        <span>Sign up with Email</span>
+                        <label class="form-group">
+                            <input type="text" placeholder="Name" id="name" name="name" autocomplete="off"
+                                class="form-control" required oninvalid="this.setCustomValidity('Name is required')"
+                                oninput="setCustomValidity('')" title="Name: enter a valid name. Example: Mary" />
+                        </label>
+                        <label>
+                            <input type="email" class="form-control" autocomplete="off" name="email" id="email"
+                                placeholder="Email" required oninvalid="this.setCustomValidity('Enter a valid email')"
+                                oninput="setCustomValidity('')"
+                                title="Email: the email contains '@'. Example: info@ros-bv.nl" />
+                        </label>
+                        <label>
+                            <input type="password" placeholder="Password" id="password" autocomplete="off"
+                                name="password" class="form-control" required
+                                oninvalid="this.setCustomValidity('Password is required')"
+                                oninput="setCustomValidity('')" title="Password: enter a valid password" />
+                        </label>
+                        <label>
+                            <input type="password" placeholder="Confirm Password" id="cornfirm_password"
+                                autocomplete="off" name="cornfirm_password" class="form-control" required
+                                oninvalid="this.setCustomValidity('Password is required')"
+                                oninput="setCustomValidity('')" title="Password: enter a valid password" />
+                        </label>
+                        <button value="submit" type="submit" style="margin-top: 9px">Sign Up</button>
+                    </form>
                 </form>
             </div>
             <div class="form-container sign-in-container">

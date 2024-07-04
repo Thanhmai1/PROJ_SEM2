@@ -13,7 +13,7 @@ session_start();
     <link href="./css/css/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEQngsV7Zt27NXF@a@ApmYm81iuXoPkF0JwJ8ERdkLPM0" crossorigin="anonymous">
-    <link rel="stylesheet" href="/search.css">
+    <link rel="stylesheet" href="/css/search.css">
 </head>
 
 <body>
@@ -65,7 +65,7 @@ session_start();
                     <div class="dropdown-content">
                         <?php
                         if (isset($_SESSION['username'])) {
-                            echo '<a href="/login/userdetail.php">My Account</a>';
+                            echo '<a href="/userDetail/userdetail.php">My Account</a>';
                             echo '<a href="#">Send feedback</a>';
                             echo '<a href="/login/logout.php">Logout</a>';
                         } else {

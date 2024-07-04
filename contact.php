@@ -14,7 +14,7 @@
 
 <body>
         <?php include './includes/header.php'; ?>
-
+        
         <div class="container">
                 <h2>Contact Us</h2>
                 <form action="contact.php" method="POST">
