@@ -40,7 +40,7 @@ try {
             } elseif ($cornfirm_password == $password) {
                 $ps->bind_param("sssisss", $name, $email, $hash_password, $role_id, $person_type_id, $create_at, $update_at);
                 $ps->execute();
-                header('http://localhost:3000/index.php');
+                header('http://localhost:3000/html/login.php');
                 exit();
             } else {
                 echo '<script>alert("Password confirm may incorrect! Please enter again!"); window.location.href = "http://localhost:3000/html/login.php";</script>';
