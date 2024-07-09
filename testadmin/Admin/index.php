@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="view/style.css">
+</head>
+<body>
 <?php
 session_start();
 ob_start();
@@ -49,19 +58,15 @@ if (isset($_GET["act"])) {
             break;
         case "deletedm":
             if (isset($_GET["id"])) {
-                $id = $_GET['id'];
-                // Check if confirmation form is submitted
+                $id = $_GET['id'];                
                 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_delete'])) {
                     $confirm = $_POST['confirm_delete'];
-                    if ($confirm === 'yes') {
-                        // User confirmed deletion
+                    if ($confirm === 'yes') {                     
                         deletedm($id);
-                    }
-                    // Redirect back to person_types view after deletion
+                    }                    
                     header("Location: index.php?act=person_types");
                     exit();
-                } else {
-                    // Display confirmation form with CSS class
+                } else {                    
                     echo '
                             <div class="confirmation-form">
                                 <p>Are you sure you want to delete this item?</p>
@@ -233,7 +238,9 @@ if (isset($_GET["act"])) {
             deleteMenu($id);
             header("Location: index.php?act=menu");
             break;
-
+        case 'admin_user':
+            header("Location: index.php?act=user_admin");
+            break;
         default:
             include "view/home.php";
             break;
@@ -243,3 +250,5 @@ if (isset($_GET["act"])) {
 }
 include "view/footer.php";
 ?>
+</body>
+</html>
