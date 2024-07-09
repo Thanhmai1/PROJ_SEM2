@@ -20,10 +20,11 @@
             <th>How Do It</th>
             <th>Action</th>
         </tr>
-        <?php
-        if (isset($kq) && (count($kq) > 0)) {
-            foreach ($kq as $dm) {
-                echo '
+        <div class="dish-details">
+            <?php
+            if (isset($kq) && (count($kq) > 0)) {
+                foreach ($kq as $dm) {
+                    echo '
                         <tr>
                             <td>' . $dm['recipe_id'] . '</td>
                             <td>' . $dm['thumbnail'] . '</td>
@@ -43,9 +44,10 @@
                             </td>
                         </tr>
                     ';
+                }
             }
-        }
-        ?>
+            ?>
+        </div>
     </table>
 </section>
 
@@ -94,3 +96,9 @@
         </div> -->
     </form>
 </section>
+
+<script src="https://cdn.ckeditor.com/4.24.0-lts/standard/ckeditor.js"></script>
+
+<script>
+    CKEDITOR.replace('popularity')
+</script>

@@ -1,13 +1,9 @@
 <section>
     <h2>Update Dish Detail</h2>
-    <form action="index.php?act=updatedishdetailform" method="post">
-        <!-- <label for="thumbnail">Thumbnail:</label>
-        <input type="text" name="thumbnail" id="thumbnail" value="<?= htmlspecialchars($kq1['thumbnail']) ?>"
-            required><br> -->
+    <form action="index.php?act=updatedishdetailform" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="thumbnail" class="form-label">Thumbnail</label>
-            <input class="form-control" type="file" name="thumbnail" id="thumbnail"
-                value="<?= htmlspecialchars($kq1['thumbnail']) ?>" multiple>
+            <input class="form-control" type="file" name="thumbnail" id="thumbnail" value="<?= htmlspecialchars($kq1['thumbnail']) ?>" multiple>
         </div>
         <label for="title">Title:</label>
         <input type="text" name="title" id="title" value="<?= htmlspecialchars($kq1['title']) ?>" required><br>
@@ -16,37 +12,21 @@
         <label for="process">Process:</label>
         <input type="text" name="process" id="process" value="<?= htmlspecialchars($kq1['process']) ?>" required><br>
         <label for="intendedFor">Intended For:</label>
-        <input type="text" name="intendedFor" id="intendedFor" value="<?= htmlspecialchars($kq1['intendedFor']) ?>"
-            required><br>
+        <input type="text" name="intendedFor" id="intendedFor" value="<?= htmlspecialchars($kq1['intendedFor']) ?>" required><br>
         <label for="introduction">Introduction:</label>
-        <!-- <input type="text" name="introduction" id="introduction" value="<?= htmlspecialchars($kq1['introduction']) ?>"
-            required><br> -->
-        <textarea class="form-control" name="introduction" id="introduction" rows="12"
-            value="<?= htmlspecialchars($kq1['introduction']) ?>" ></textarea>
+        <textarea class="form-control" name="introduction" id="introduction" rows="12"><?= htmlspecialchars($kq1['introduction']) ?></textarea>
         <label for="popularity">Popularity:</label>
-        <!-- <input type="text" name="popularity" id="popularity" value="<?= htmlspecialchars($kq1['popularity']) ?>"
-            required><br> -->
-        <textarea class="form-control" name="popularity" id="popularity" rows="12"
-            value="<?= htmlspecialchars($kq1['popularity']) ?>"></textarea>
+        <textarea class="form-control" name="popularity" id="popularity" rows="12"><?= htmlspecialchars($kq1['popularity']) ?></textarea>
         <label for="aboutatfood">About at Food:</label>
-        <!-- <input type="text" name="aboutatfood" id="aboutatfood" value="<?= htmlspecialchars($kq1['aboutatfood']) ?>"
-            required><br> -->
-        <textarea class="form-control" name="aboutatfood" id="aboutatfood" rows="12"
-            value="<?= htmlspecialchars($kq1['aboutatfood']) ?>"></textarea>
-        <!-- <label for="thumbnailhtc">Thumbnail HTC:</label>
-        <input type="text" name="thumbnailhtc" id="thumbnailhtc" value="<?= htmlspecialchars($kq1['thumbnailhtc']) ?>"
-            required><br> -->
+        <textarea class="form-control" name="aboutatfood" id="aboutatfood" rows="12"><?= htmlspecialchars($kq1['aboutatfood']) ?></textarea>
         <div class="mb-3">
             <label for="thumbnailhtc" class="form-label">Thumbnail HTC</label>
             <input class="form-control" type="file" name="thumbnailhtc" id="thumbnailhtc" value="<?= htmlspecialchars($kq1['thumbnailhtc']) ?>" multiple>
         </div>
         <label for="ingredient">Ingredient:</label>
-        <!-- <input type="text" name="ingredient" id="ingredient" value="<?= htmlspecialchars($kq1['ingredient']) ?>"
-            required><br> -->
-        <textarea class="form-control" name="ingredient" id="ingredient" rows="12" value="<?= htmlspecialchars($kq1['ingredient']) ?>"></textarea>
+        <textarea class="form-control" name="ingredient" id="ingredient" rows="12"><?= htmlspecialchars($kq1['ingredient']) ?></textarea>
         <label for="howdoit">How Do It:</label>
-        <!-- <input type="text" name="howdoit" id="howdoit" value="<?= htmlspecialchars($kq1['howdoit']) ?>" required><br> -->
-        <textarea class="form-control" name="howdoit" id="howdoit" rows="12" value="<?= htmlspecialchars($kq1['howdoit']) ?>"></textarea>
+        <textarea class="form-control" name="howdoit" id="howdoit" rows="12"><?= htmlspecialchars($kq1['howdoit']) ?></textarea>
         <input type="hidden" name="recipe_id" value="<?= htmlspecialchars($kq1['recipe_id']) ?>">
         <input type="submit" name="update" value="Update">
     </form>

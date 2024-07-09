@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             if (password_verify($old_password, $row['password'])) {
                 if ($new_password === $confirm_password) {
-                    $hash_password = md5($new_password);
+                    $hash_password = password_hash($new_password,PASSWORD_DEFAULT);
                     $update_ps = $conn->prepare("UPDATE `user` SET `password` = ?, `update_at` = ? WHERE `username` = ?");
                     $update_ps->bind_param("sss", $hash_password, $update_at, $username);
                     $update_ps->execute();
