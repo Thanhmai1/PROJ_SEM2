@@ -14,6 +14,7 @@
             alt="Quick Snack Logo"></a>
     <section>
         <div class="container" id="container">
+        <div id="messageDiv"><?php echo $updateMessage; ?></div>
             <div class="form-container sign-up-container">
                 <form action="/login/sign_up.php" method="post">                    
                         <h1>Sign Up</h1>
@@ -100,5 +101,9 @@
     </div>
     <script src="../js/login.js"></script>
 </body>
-
+<script>
+    setTimeout(function () {
+        document.getElementById('messageDiv').style.display = 'none';
+    }, 3000); // Ẩn thông báo sau 3 giây 
+</script>
 </html>

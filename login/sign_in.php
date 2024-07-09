@@ -40,7 +40,7 @@
                 header("Location: http://localhost:3000/index.php");
                 exit;
             } else {
-                echo "error";
+                echo '<script>alert("PASSWORD OR USERNAME IS WRONG!"); window.location.href = "http://localhost:3000/html/login.php";</script>';
             }
         } else {
             echo '<script>alert("PASSWORD OR USERNAME IS WRONG!"); window.location.href = "http://localhost:3000/html/login.php";</script>';

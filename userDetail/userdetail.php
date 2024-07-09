@@ -38,7 +38,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
         <h1>User Detail</h1>
         <div id="messageDiv"><?php echo $updateMessage; ?></div>
 
-        <form method="POST" action="">
+        <form method="POST">
 
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
