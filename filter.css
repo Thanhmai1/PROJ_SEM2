@@ -77,3 +77,40 @@
     font-size: 1.2em;
     margin-left: 20px;
 }
+
+/* css form up món ăn */
+.recipes-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding-top: 30px;
+}
+
+.recipe-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: calc(33% - 20px);
+    /* Adjust based on number of columns */
+    box-sizing: border-box;
+}
+
+.recipe-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px 8px 0 0;
+}
+
+.recipe-card h3 {
+    margin: 10px 0;
+    font-size: 1.2em;
+}
+
+.recipe-card p {
+    margin: 5px 0;
+}
+
+.recipe-card p strong {
+    font-weight: bold;
+}

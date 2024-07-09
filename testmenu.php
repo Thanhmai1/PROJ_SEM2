@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,14 +22,52 @@
     crossorigin="anonymous"></script>
   <link rel="stylesheet" href="./css/css/style.css">
   <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="filter.css">
+  <link rel="stylesheet" href="/filter.css">
+
+  <style>
+    .hidden {
+      display: none;
+    }
+
+    .recipe-card {
+    width: 300px; /* Điều chỉnh kích thước theo nhu cầu */
+    margin: 10px;
+    display: inline-block;
+    vertical-align: top; /* Đảm bảo các thẻ đứng thẳng hàng */
+    box-sizing: border-box;
+    border: 1px solid #ddd; /* Thêm đường viền để dễ thấy */
+    border-radius: 8px; /* Thêm bo tròn góc */
+    padding: 15px; /* Thêm khoảng cách bên trong */
+  }
+
+  .image-container {
+    width: 100%;
+    height: 200px; /* Điều chỉnh chiều cao theo nhu cầu */
+    overflow: hidden;
+    border-bottom: 1px solid #ddd; /* Thêm đường viền dưới để tách biệt hình ảnh */
+    margin-bottom: 10px; /* Khoảng cách giữa hình ảnh và nội dung */
+  }
+
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Đảm bảo hình ảnh không bị méo */
+  }
+
+  .recipe-card h3 {
+    margin: 10px 0; /* Khoảng cách trên dưới cho tiêu đề */
+  }
+
+  .recipe-card p {
+    margin: 5px 0; /* Khoảng cách trên dưới cho đoạn văn */
+  }
+  </style>
+
 </head>
 <?php include './includes/header.php'; ?>
 
 <body>
-
   <!-- food section -->
-
   <section class="food_section layout_padding">
     <div class="container">
       <div class="heading_container heading_center">
@@ -49,11 +84,8 @@
         <li data-filter=".filling">Quick Filling</li>
       </ul>
 
-
-
       <div id="BMI">
         <div class="bmi-calculator">
-
           <h2><?php
           if (isset($_SESSION['username'])) {
             $username = $_SESSION['username'];
@@ -96,252 +128,54 @@
         }
       </script>
 
+      <div class="recipes-container">
+        <?php
+        include './cndbqunganh.php';
 
+        $sql = "SELECT name, description, image_url, category FROM recipes";
+        $result = $conn->query($sql);
 
-      <div class="filters-content">
-        <div class="row grid">
-          <div class="col-sm-6 col-lg-4 all smoothy">
-            <div class="box">
-              <div>
-                <div class="img-box"
-                  style="background-image: url(https://xbeauty.com.vn/upload/news/54/pudding-hat-chia.jpg); background-size:cover ;">
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    Banana Pudding
-                  </h5>
-                  <p class="p-menu">
-                    Banana Chia Seed Pudding is said to have been around since the early 2000s, when chia seeds began to
-                    be favored by people pursuing a healthy lifestyle. This dish quickly became popular on social
-                    networking sites and food blogs because of its simplicity, ease of making and high nutritional
-                    value.
-                  </p>
-                  <a href="./recipe/Banana-Chia-Seed-Pudding.html"><button style="border-radius: 10px; border: 0;">See
-                      More</button></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4 all healthy">
-            <div class="box">
-              <div>
-                <div class="img-box" style="background-image: url(images/Salad.jpg); background-size:cover ;">
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    Salad
-                  </h5>
-                  <p class="p-menu">
-                    Green salad is a delicious, nutritious and easy-to-make dish. This dish provides many vitamins,
-                    minerals and fiber, which are good for health.
-                  </p>
-                  <a href="./recipe/Salad.html"><button style="border-radius: 10px; border: 0;">See More</button></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4 all kid">
-            <div class="box">
-              <div>
-                <a href="#">
-                  <div class="img-box"
-                    style="background-image: url(https://beptruong.edu.vn/wp-content/uploads/2013/03/ga-chien-xu.jpg); background-size:cover ;">
-                  </div>
-                </a>
-                <div class="detail-box">
-                  <h5>
-                    Fried Chicken
-                  </h5>
-                  <p class="p-menu">
-                    Covered with a thick ruffled crust, dotted with beautiful dark brown spots. Inside the crust is
-                    ivory-white chicken, soft, juicy, exuding a nasal fragrance. And transformed into countless
-                    attractive dishes such as chicken salad, chicken soup, chicken porridge, fried chicken, grilled
-                    chicken ... In particular, Fried Chicken is a very popular dish, especially for young children.
-                  </p>
-                  <a href="./recipe/Fried-Chicken.html"><button style="border-radius: 10px; border: 0;">See
-                      More</button></a>
-                </div>
-              </div>
-            </div>
-          </div>
+        if ($result->num_rows > 0) {
+          while ($row = $result->fetch_assoc()) {
+            $imageUrl = $row["image_url"];
+            $imageName = $row["name"];
+            $description = $row["description"];
+            $category = $row["category"];
 
-          <div class="col-sm-6 col-lg-4 all kid">
-            <div class="box">
-              <div>
-                <div class="img-box" style="background: url(images/SuaChuaHyLap.jpg); background-size: cover;">
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    Greek yogurt
-                  </h5>
-                  <p class="p-menu">
-                    Greek yogurt is a type of yogurt made by straining whey from regular yogurt, resulting in a thicker
-                    and creamier product. Greek yogurt has a higher protein content and lower sugar content than regular
-                    yogurt.
-                  </p>
-                  <a href="./recipe/Greek-Yogurt.html"><button style="border-radius: 10px; border: 0;">See
-                      More</button></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4 all smoothy">
-            <div class="box">
-              <div>
-                <div class="img-box" style="background: url(images/SinhToDau.jpg); background-size: cover;">
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    Strawberry smoothie
-                  </h5>
-                  <p class="p-menu">
-                    Strawberry yogurt is a type of yogurt made by straining whey from regular yogurt, resulting in a
-                    thicker and creamier product. Greek yogurt has a higher protein content and lower sugar content than
-                    regular yogurt.
-                  </p>
-                  <a href="#"><button style="border-radius: 10px; border: 0;">See More</button></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4 all filling">
-            <div class="box">
-              <div>
-                <div class="img-box" style="background: url(images/ComChay.jpg); background-size: cover;">
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    Crispy Fried Rice
-                  </h5>
-                  <p class="p-menu">
-                    Crispy Fried Rice is a popular snack loved by many people. The dish has the crispy texture of the
-                    rice cake, the savory and sweet taste of the sauce, the spiciness of the chili, and the fragrance of
-                    the green onions. Crispy Fried Rice is a simple and easy dish that can be made with readily
-                    available ingredients.
-                  </p>
-                  <a href="#"><button style="border-radius: 10px; border: 0;">See More</button></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4 all healthy">
-            <div class="box">
-              <div>
-                <div class="img-box" style="background: url(images/boKho.jpg);background-size: cover;">
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    Dried beef
-                  </h5>
-                  <p class="p-menu">
-                    Dried beef is a popular snack loved by many people. This dish has a delicious, chewy taste and can
-                    be stored for a long time. Dried beef can be eaten directly or used to make other dishes such as
-                    dried beef salad, dried beef
-                  </p>
-                  <a href="#"><button style="border-radius: 10px; border: 0;">See More</button></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4 all kid">
-            <div class="box">
-              <div>
-                <div class="img-box" style="background:url(images/PhoMaiQue.jpg) ;background-size: cover;">
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    Fried mozzarella
-                  </h5>
-                  <p class="p-menu">
-                    Fried mozzarella sticks are a delicious, easy-to-make snack that many people love. This dish has a
-                    crispy outer shell and a gooey, chewy mozzarella cheese center that stretches when you eat it. Fried
-                    mozzarella sticks are often served with ketchup, chili sauce, or mayonnaise.
-                  </p>
-                  <a href="#"><button style="border-radius: 10px; border: 0;">See More</button></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4 all smoothy">
-            <div class="box">
-              <div>
-                <div class="img-box" style="background: url(images/SinhTobo.jpg); background-size: cover;">
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    Avocado smoothie
-                  </h5>
-                  <p class="p-menu">
-                    Avocado smoothie is a delicious, nutritious and easy-to-make drink. This smoothie has the creamy
-                    avocado flavor, the sweetness of honey and the coolness of ice cubes. Avocado smoothie is a rich
-                    source of vitamins, minerals and fiber, which helps to improve health and support weight loss.
-                  </p>
-                  <a href="#"><button style="border-radius: 10px; border: 0;">See More</button></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4 all healthy">
-            <div class="box">
-              <div>
-                <div class="img-box" style="background: url(images/socolaDen.jpg); background-size: cover;">
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    Dark chocolate
-                  </h5>
-                  <p class="p-menu">
-                    Dark chocolate is a food made from cocoa. Dark chocolate has a slightly bitter, sweet taste and a
-                    delicious aroma. Dark chocolate is rich in antioxidants, good for health. Dark chocolate can help
-                    reduce the risk of heart disease, cancer, stroke, and improve memory.
-                  </p>
-                  <a href="#"><button style="border-radius: 10px; border: 0;">See More</button></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4 all filling">
-            <div class="box">
-              <div>
-                <div class="img-box" style="background: url(images/toboki.jpg); background-size: cover;">
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    Tteokbokki
-                  </h5>
-                  <p class="p-menu">
-                    Tteokbokki is a Korean street food made from Korean rice cake (tteok) and spicy sauce. The dish has
-                    a spicy taste from Korean chili paste, a sweet taste from sugar, and a chewy texture from rice cake.
-                    Tteokbokki is a popular dish loved by many people for its delicious taste and affordable price.
-                  </p>
-                  <a href="/recipe/Tokbokki.html"><button style="border-radius: 10px; border: 0;">See More</button></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4 all filling">
-            <div class="box">
-              <div>
-                <div class="img-box" style="background: url(images/KhoaiLangen.jpg); background-size: cover;">
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    Picky sweet potatoes
-                  </h5>
-                  <p class="p-menu">
-                    Picky sweet potatoes is a popular snack loved by many, especially children. The dish has the sweet
-                    and nutty flavor of sweet potatoes, the crispy texture of the batter, and the deliciousness of chili
-                    sauce or tomato sauce.
-                  </p>
-                  <a href="#"><button style="border-radius: 10px; border: 0;">See More</button></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+            // Lấy mô tả và giới hạn độ dài
+            $description = $row["description"];
+            $maxLength = 150; // Độ dài tối đa của mô tả
+        
+            if (strlen($description) > $maxLength) {
+              $shortDescription = substr($description, 0, $maxLength) . "...";
+            } else {
+              $shortDescription = $description;
+            }
+
+            // Kiểm tra nếu URL ảnh không hợp lệ
+            if (filter_var($imageUrl, FILTER_VALIDATE_URL) === FALSE) {
+              $imageUrl = "path/to/default-image.jpg"; // Đặt đường dẫn tới ảnh mặc định nếu URL không hợp lệ
+            }
+        
+            echo "<div class='recipe-card'>";
+            echo "<div class='image-container'>";
+            echo "<img src='" . htmlspecialchars($imageUrl, ENT_QUOTES, 'UTF-8') . "' alt='" . htmlspecialchars($imageName, ENT_QUOTES, 'UTF-8') . "'>";
+            echo "</div>";
+            echo "<h3>" . htmlspecialchars($imageName, ENT_QUOTES, 'UTF-8') . "</h3>";
+            echo "<p><strong>Description: </strong>" . htmlspecialchars($shortDescription, ENT_QUOTES, 'UTF-8') . "</p>";
+            echo "<p><strong>Category:</strong> " . htmlspecialchars($category, ENT_QUOTES, 'UTF-8') . "</p>";
+            echo "</div>";
+          }
+        } else {
+          echo "No recipes found.";
+        }
+
+        $conn->close();
+        ?>
       </div>
+
       <div class="btn-box">
-        <a href="#">
+        <a href="#" id="viewMoreBtn">
           View More
         </a>
       </div>
