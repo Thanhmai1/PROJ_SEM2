@@ -163,7 +163,7 @@ if (isset($_GET["act"])) {
             }
             if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["recipe_id"])) {
                 $recipe_id = $_POST['recipe_id'];
-                $thumbnail = $_POST['thumbnail'];
+                $thumbnail = isset($_POST['thumbnail']) ? $_POST['thumbnail'] : '';
                 $title = $_POST['title'];
                 $prepare = $_POST['prepare'];
                 $process = $_POST['process'];
@@ -171,7 +171,7 @@ if (isset($_GET["act"])) {
                 $introduction = $_POST['introduction'];
                 $popularity = $_POST['popularity'];
                 $aboutatfood = $_POST['aboutatfood'];
-                $thumbnailhtc = $_POST['thumbnailhtc'];
+                $thumbnailhtc = isset($_POST['thumbnailhtc']) ? $_POST['thumbnailhtc'] : '';
                 $ingredient = $_POST['ingredient'];
                 $howdoit = $_POST['howdoit'];
                 updateDishDetail($recipe_id, $thumbnail, $title, $prepare, $process, $intendedFor, $introduction, $popularity, $aboutatfood, $thumbnailhtc, $ingredient, $howdoit);

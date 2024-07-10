@@ -7,14 +7,36 @@
 </head>
 <body>
 <section>
+<?php
+try {
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "project_sem2"; 
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Truy vấn dữ liệu từ bảng Dish_Detail và Dish
+    $stmt = $conn->prepare("SELECT Dish_Detail.*, Dish.title as dish_title
+                            FROM Dish_Detail
+                            JOIN Dish ON Dish_Detail.recipe_id = Dish.id");
+    $stmt->execute();
+    $kq = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Lấy danh sách các món ăn từ bảng Dish
+    $stmt = $conn->prepare("SELECT id, title FROM Dish");
+    $stmt->execute();
+    $dishes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+} catch(PDOException $e) {
+    echo "Kết nối cơ sở dữ liệu thất bại: " . $e->getMessage();
+}
+?>
     <h2>Dish Details</h2>
-    <!-- <form action="index.php?act=createdishdetail" method="post">
-        <input type="submit" name="add" value="Add Dish Detail">
-    </form> -->
     <br>
     <table>
         <tr>
-            <th>Recipe ID</th>
+            <th>Recipe Name</th>
             <th>Thumbnail</th>
             <th>Title</th>
             <th>Prepare</th>
@@ -34,21 +56,21 @@
                 foreach ($kq as $dm) {
                     echo '
                         <tr>
-                            <td>' . $dm['recipe_id'] . '</td>
-                            <td>' . $dm['thumbnail'] . '</td>
-                            <td>' . $dm['title'] . '</td>
-                            <td>' . $dm['prepare'] . '</td>
-                            <td>' . $dm['process'] . '</td>
-                            <td>' . $dm['intendedFor'] . '</td>
-                            <td>' . $dm['introduction'] . '</td>
-                            <td>' . $dm['popularity'] . '</td>
-                            <td>' . $dm['aboutatfood'] . '</td>
-                            <td>' . $dm['thumbnailhtc'] . '</td>
-                            <td>' . $dm['ingredient'] . '</td>
-                            <td>' . $dm['howdoit'] . '</td>
+                            <td>' . htmlspecialchars($dm['dish_title']) . '</td>
+                            <td><img src="' . htmlspecialchars($dm['thumbnail']) . '" alt="Thumbnail" width="50"></td>
+                            <td>' . htmlspecialchars($dm['title']) . '</td>
+                            <td>' . htmlspecialchars($dm['prepare']) . '</td>
+                            <td>' . htmlspecialchars($dm['process']) . '</td>
+                            <td>' . htmlspecialchars($dm['intendedFor']) . '</td>
+                            <td>' . htmlspecialchars($dm['introduction']) . '</td>
+                            <td>' . htmlspecialchars($dm['popularity']) . '</td>
+                            <td>' . htmlspecialchars($dm['aboutatfood']) . '</td>
+                            <td><img src="' . htmlspecialchars($dm['thumbnailhtc']) . '" alt="Thumbnail HTC" width="50"></td>
+                            <td>' . htmlspecialchars($dm['ingredient']) . '</td>
+                            <td>' . htmlspecialchars($dm['howdoit']) . '</td>
                             <td>
-                                <a href="index.php?act=updatedishdetailform&recipe_id=' . $dm['recipe_id'] . '">Update</a> | 
-                                <a href="index.php?act=deletedishdetail&recipe_id=' . $dm['recipe_id'] . '">Delete</a>
+                                <a href="index.php?act=updatedishdetailform&recipe_id=' . htmlspecialchars($dm['recipe_id']) . '">Update</a> | 
+                                <a href="index.php?act=deletedishdetail&recipe_id=' . htmlspecialchars($dm['recipe_id']) . '">Delete</a>
                             </td>
                         </tr>
                     ';
@@ -64,9 +86,13 @@
 
     <form action="index.php?act=createdishdetail" method="post">
         <label for="recipe_id">Recipe ID:</label>
-        <input type="text" name="recipe_id" id="recipe_id" required><br>
-        <!-- <label for="thumbnail">Thumbnail:</label>
-        <input type="text" name="thumbnail" id="thumbnail" required><br> -->
+        <select name="recipe_id" id="recipe_id" class="form-select" required>
+            <?php
+            foreach ($dishes as $dish) {
+                echo '<option value="'.$dish['id'].'">'.$dish['title'].'</option>';
+            }
+            ?>
+        </select><br>
         <div class="mb-3">
             <label for="thumbnail" class="form-label">Thumbnail</label>
             <input class="form-control" type="file" name="thumbnail" id="thumbnail" multiple>
@@ -82,12 +108,9 @@
         <label for="introduction">Introduction:</label>
         <textarea class="form-control" name="introduction" id="introduction" rows="12"></textarea>
         <label for="popularity">Popularity:</label>
-        <!-- <input type="text" name="popularity" id="popularity" required><br> -->
         <textarea class="form-control" name="popularity" id="popularity" rows="12"></textarea>
         <label for="aboutatfood">About at Food:</label>
         <textarea class="form-control" name="aboutatfood" id="aboutatfood" rows="12"></textarea>
-        <!-- <label for="thumbnailhtc">Thumbnail HTC:</label>
-        <input type="text" name="thumbnailhtc" id="thumbnailhtc" required><br> -->
         <div class="mb-3">
             <label for="thumbnailhtc" class="form-label">Thumbnail HTC</label>
             <input class="form-control" type="file" name="thumbnailhtc" id="thumbnailhtc" multiple>
@@ -97,11 +120,6 @@
         <label for="howdoit">How Do It:</label>
         <textarea class="form-control" name="howdoit" id="howdoit" rows="12"></textarea>
         <input type="submit" value="Create">
-        <!-- <div class="form-group">
-            <label for="exampleFormControlTextarea1">Example textarea</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            <textarea class="form-control" name="recipe_id" id="recipe_id" rows="12"></textarea>
-        </div> -->
     </form>
 </section>
 </body>
