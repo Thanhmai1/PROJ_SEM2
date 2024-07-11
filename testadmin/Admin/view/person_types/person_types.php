@@ -1,7 +1,7 @@
 <section>
     <h2>Categories</h2>
     <form action="index.php?act=createform" method="post">
-        <input type="submit" name="add" value="add">
+        <input type="submit" name="add" value="Add">
     </form>
     <br>
     <table>
