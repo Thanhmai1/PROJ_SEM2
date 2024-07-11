@@ -30,37 +30,48 @@
     }
 
     .recipe-card {
-    width: 300px; /* Điều chỉnh kích thước theo nhu cầu */
-    margin: 10px;
-    display: inline-block;
-    vertical-align: top; /* Đảm bảo các thẻ đứng thẳng hàng */
-    box-sizing: border-box;
-    border: 1px solid #ddd; /* Thêm đường viền để dễ thấy */
-    border-radius: 8px; /* Thêm bo tròn góc */
-    padding: 15px; /* Thêm khoảng cách bên trong */
-  }
+      width: 300px;
+      /* Điều chỉnh kích thước theo nhu cầu */
+      margin: 10px;
+      display: inline-block;
+      vertical-align: top;
+      /* Đảm bảo các thẻ đứng thẳng hàng */
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+      /* Thêm đường viền để dễ thấy */
+      border-radius: 8px;
+      /* Thêm bo tròn góc */
+      padding: 15px;
+      /* Thêm khoảng cách bên trong */
+    }
 
-  .image-container {
-    width: 100%;
-    height: 200px; /* Điều chỉnh chiều cao theo nhu cầu */
-    overflow: hidden;
-    border-bottom: 1px solid #ddd; /* Thêm đường viền dưới để tách biệt hình ảnh */
-    margin-bottom: 10px; /* Khoảng cách giữa hình ảnh và nội dung */
-  }
+    .image-container {
+      width: 100%;
+      height: 200px;
+      /* Điều chỉnh chiều cao theo nhu cầu */
+      overflow: hidden;
+      border-bottom: 1px solid #ddd;
+      /* Thêm đường viền dưới để tách biệt hình ảnh */
+      margin-bottom: 10px;
+      /* Khoảng cách giữa hình ảnh và nội dung */
+    }
 
-  .image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Đảm bảo hình ảnh không bị méo */
-  }
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* Đảm bảo hình ảnh không bị méo */
+    }
 
-  .recipe-card h3 {
-    margin: 10px 0; /* Khoảng cách trên dưới cho tiêu đề */
-  }
+    .recipe-card h3 {
+      margin: 10px 0;
+      /* Khoảng cách trên dưới cho tiêu đề */
+    }
 
-  .recipe-card p {
-    margin: 5px 0; /* Khoảng cách trên dưới cho đoạn văn */
-  }
+    .recipe-card p {
+      margin: 5px 0;
+      /* Khoảng cách trên dưới cho đoạn văn */
+    }
   </style>
 
 </head>
@@ -132,42 +143,30 @@
         <?php
         include './cndbqunganh.php';
 
-        $sql = "SELECT name, description, image_url, category FROM recipes";
+        $sql = "SELECT * FROM Dish"; // Truy vấn dữ liệu từ bảng Dish
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
           while ($row = $result->fetch_assoc()) {
-            $imageUrl = $row["image_url"];
-            $imageName = $row["name"];
-            $description = $row["description"];
-            $category = $row["category"];
-
-            // Lấy mô tả và giới hạn độ dài
-            $description = $row["description"];
-            $maxLength = 150; // Độ dài tối đa của mô tả
-        
-            if (strlen($description) > $maxLength) {
-              $shortDescription = substr($description, 0, $maxLength) . "...";
-            } else {
-              $shortDescription = $description;
-            }
+            $imageUrl = $row["thumbnail"];
+            $imageName = $row["title"];
+            $category = $row["category_id"];
 
             // Kiểm tra nếu URL ảnh không hợp lệ
             if (filter_var($imageUrl, FILTER_VALIDATE_URL) === FALSE) {
               $imageUrl = "path/to/default-image.jpg"; // Đặt đường dẫn tới ảnh mặc định nếu URL không hợp lệ
             }
-        
+
             echo "<div class='recipe-card'>";
             echo "<div class='image-container'>";
             echo "<img src='" . htmlspecialchars($imageUrl, ENT_QUOTES, 'UTF-8') . "' alt='" . htmlspecialchars($imageName, ENT_QUOTES, 'UTF-8') . "'>";
             echo "</div>";
             echo "<h3>" . htmlspecialchars($imageName, ENT_QUOTES, 'UTF-8') . "</h3>";
-            echo "<p><strong>Description: </strong>" . htmlspecialchars($shortDescription, ENT_QUOTES, 'UTF-8') . "</p>";
-            echo "<p><strong>Category:</strong> " . htmlspecialchars($category, ENT_QUOTES, 'UTF-8') . "</p>";
+            echo "<p><strong>Category ID:</strong> " . htmlspecialchars($category, ENT_QUOTES, 'UTF-8') . "</p>";
             echo "</div>";
           }
         } else {
-          echo "No recipes found.";
+          echo "No dishes found.";
         }
 
         $conn->close();

@@ -1,5 +1,35 @@
 
 <section>
+    <h2>Create New Menu</h2>
+    <form action="index.php?act=createmenuform" method="post">
+        <label for="category_id">Category:</label>
+        <!-- <input type="text" name="category_id" id="category_id" required><br> -->
+        <select name="category_id" id="category_id" required class="form-select">
+            <?php
+            foreach ($categories as $category) {
+                echo '<option value="'.$category['id'].'">'.$category['namecategories'].'</option>';
+            }
+            ?>
+        </select><br>
+        <label for="person_type_id">Person Type:</label>
+        <!-- <input type="text" name="person_type_id" id="person_type_id" required><br> -->
+        <select name="person_type_id" id="person_type_id" class="form-select" required>
+            <?php foreach ($personTypes as $type): ?>
+                <option value="<?= $type['id'] ?>"><?= $type['person_types'] ?></option>
+            <?php endforeach; ?>
+        </select><br>
+        <label for="dish_id">Dish ID:</label>
+        <!-- <input type="text" name="dish_id" id="dish_id" required><br> -->
+        <select name="dish_id" id="dish_id" class="form-select" required>
+            <?php foreach ($dishes as $dish): ?>
+                <option value="<?= $dish['id'] ?>"><?= $dish['title'] ?></option>
+            <?php endforeach; ?>
+        </select><br>
+        <input type="submit" value="Create">
+    </form>
+</section>
+
+<section>
     <?php
     try {
         $servername = "localhost";
@@ -80,32 +110,4 @@
             echo "Kết nối cơ sở dữ liệu thất bại: " . $e->getMessage();
         }
     ?>
-<section>
-    <h2>Create New Menu</h2>
-    <form action="index.php?act=createmenuform" method="post">
-        <label for="category_id">Category:</label>
-        <!-- <input type="text" name="category_id" id="category_id" required><br> -->
-        <select name="category_id" id="category_id" required class="form-select">
-            <?php
-            foreach ($categories as $category) {
-                echo '<option value="'.$category['id'].'">'.$category['namecategories'].'</option>';
-            }
-            ?>
-        </select><br>
-        <label for="person_type_id">Person Type:</label>
-        <!-- <input type="text" name="person_type_id" id="person_type_id" required><br> -->
-        <select name="person_type_id" id="person_type_id" class="form-select" required>
-            <?php foreach ($personTypes as $type): ?>
-                <option value="<?= $type['id'] ?>"><?= $type['person_types'] ?></option>
-            <?php endforeach; ?>
-        </select><br>
-        <label for="dish_id">Dish ID:</label>
-        <!-- <input type="text" name="dish_id" id="dish_id" required><br> -->
-        <select name="dish_id" id="dish_id" class="form-select" required>
-            <?php foreach ($dishes as $dish): ?>
-                <option value="<?= $dish['id'] ?>"><?= $dish['title'] ?></option>
-            <?php endforeach; ?>
-        </select><br>
-        <input type="submit" value="Create">
-    </form>
-</section>
+

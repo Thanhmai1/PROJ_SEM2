@@ -6,6 +6,49 @@
     <title>Document</title>
 </head>
 <body>
+
+<section>
+    <h2>Create New Dish Detail</h2>
+
+    <form action="index.php?act=createdishdetail" method="post">
+        <label for="recipe_id">Recipe ID:</label>
+        <select name="recipe_id" id="recipe_id" class="form-select" required>
+            <?php
+            foreach ($dishes as $dish) {
+                echo '<option value="'.$dish['id'].'">'.$dish['title'].'</option>';
+            }
+            ?>
+        </select><br>
+        <div class="mb-3">
+            <label for="thumbnail" class="form-label">Thumbnail</label>
+            <input class="form-control" type="file" name="thumbnail" id="thumbnail" multiple>
+        </div>
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="title" required><br>
+        <label for="prepare">Prepare:</label>
+        <input type="text" name="prepare" id="prepare" required><br>
+        <label for="process">Process:</label>
+        <input type="text" name="process" id="process" required><br>
+        <label for="intendedFor">Intended For:</label>
+        <input type="text" name="intendedFor" id="intendedFor" required><br>
+        <label for="introduction">Introduction:</label>
+        <textarea class="form-control" name="introduction" id="introduction" rows="12"></textarea>
+        <label for="popularity">Popularity:</label>
+        <textarea class="form-control" name="popularity" id="popularity" rows="12"></textarea>
+        <label for="aboutatfood">About at Food:</label>
+        <textarea class="form-control" name="aboutatfood" id="aboutatfood" rows="12"></textarea>
+        <div class="mb-3">
+            <label for="thumbnailhtc" class="form-label">Thumbnail HTC</label>
+            <input class="form-control" type="file" name="thumbnailhtc" id="thumbnailhtc" multiple>
+        </div>
+        <label for="ingredient">Ingredient:</label>
+        <textarea class="form-control" name="ingredient" id="ingredient" rows="12"></textarea>
+        <label for="howdoit">How Do It:</label>
+        <textarea class="form-control" name="howdoit" id="howdoit" rows="12"></textarea>
+        <input type="submit" value="Create">
+    </form>
+</section>
+
 <section>
 <?php
 try {
@@ -81,46 +124,6 @@ try {
     </table>
 </section>
 
-<section>
-    <h2>Create New Dish Detail</h2>
 
-    <form action="index.php?act=createdishdetail" method="post">
-        <label for="recipe_id">Recipe ID:</label>
-        <select name="recipe_id" id="recipe_id" class="form-select" required>
-            <?php
-            foreach ($dishes as $dish) {
-                echo '<option value="'.$dish['id'].'">'.$dish['title'].'</option>';
-            }
-            ?>
-        </select><br>
-        <div class="mb-3">
-            <label for="thumbnail" class="form-label">Thumbnail</label>
-            <input class="form-control" type="file" name="thumbnail" id="thumbnail" multiple>
-        </div>
-        <label for="title">Title:</label>
-        <input type="text" name="title" id="title" required><br>
-        <label for="prepare">Prepare:</label>
-        <input type="text" name="prepare" id="prepare" required><br>
-        <label for="process">Process:</label>
-        <input type="text" name="process" id="process" required><br>
-        <label for="intendedFor">Intended For:</label>
-        <input type="text" name="intendedFor" id="intendedFor" required><br>
-        <label for="introduction">Introduction:</label>
-        <textarea class="form-control" name="introduction" id="introduction" rows="12"></textarea>
-        <label for="popularity">Popularity:</label>
-        <textarea class="form-control" name="popularity" id="popularity" rows="12"></textarea>
-        <label for="aboutatfood">About at Food:</label>
-        <textarea class="form-control" name="aboutatfood" id="aboutatfood" rows="12"></textarea>
-        <div class="mb-3">
-            <label for="thumbnailhtc" class="form-label">Thumbnail HTC</label>
-            <input class="form-control" type="file" name="thumbnailhtc" id="thumbnailhtc" multiple>
-        </div>
-        <label for="ingredient">Ingredient:</label>
-        <textarea class="form-control" name="ingredient" id="ingredient" rows="12"></textarea>
-        <label for="howdoit">How Do It:</label>
-        <textarea class="form-control" name="howdoit" id="howdoit" rows="12"></textarea>
-        <input type="submit" value="Create">
-    </form>
-</section>
 </body>
 </html>
