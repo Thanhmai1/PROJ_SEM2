@@ -1,4 +1,32 @@
 
+<?php
+        
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "project_sem2"; 
+
+        try {
+            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            
+            $stmt = $conn->prepare("SELECT id, person_types FROM Person_Types");
+            $stmt->execute();
+            $personTypes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $stmt = $conn->prepare("SELECT id, namecategories FROM Categories");
+            $stmt->execute();
+            $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $stmt = $conn->prepare("SELECT id, title FROM Dish");
+            $stmt->execute();
+            $dishes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch(PDOException $e) {
+            echo "Kết nối cơ sở dữ liệu thất bại: " . $e->getMessage();
+        }
+    ?>
+
 <section>
     <h2>Create New Menu</h2>
     <form action="index.php?act=createmenuform" method="post">
@@ -28,6 +56,7 @@
         <input type="submit" value="Create">
     </form>
 </section>
+
 
 <section>
     <?php
@@ -83,31 +112,3 @@
         ?>
     </table>
 </section>
-<?php
-        
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "project_sem2"; 
-
-        try {
-            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            
-            $stmt = $conn->prepare("SELECT id, person_types FROM Person_Types");
-            $stmt->execute();
-            $personTypes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            $stmt = $conn->prepare("SELECT id, namecategories FROM Categories");
-            $stmt->execute();
-            $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            $stmt = $conn->prepare("SELECT id, title FROM Dish");
-            $stmt->execute();
-            $dishes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch(PDOException $e) {
-            echo "Kết nối cơ sở dữ liệu thất bại: " . $e->getMessage();
-        }
-    ?>
-
