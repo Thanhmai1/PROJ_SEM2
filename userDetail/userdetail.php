@@ -1,5 +1,4 @@
 <?php
-session_start();
 include './../includes/conn.php';
 include './update.php';
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
@@ -74,7 +73,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 <script>
     setTimeout(function () {
         document.getElementById('messageDiv').style.display = 'none';
-    }, 3000); // Ẩn thông báo sau 3 giây 
+    }, 3000);
 </script>
 
 </html>

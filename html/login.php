@@ -7,78 +7,93 @@
     <link rel="stylesheet" href="../css/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" href="../images/quicksnacklogo.png" type="image/x-icon">
+    <link rel="stylesheet" href="./css/eye_password">
 </head>
 
 <body>
     <a href="../index.html"><img style="width: 200px; text-align: center;" src="../images/quicksnacklogo.png"
             alt="Quick Snack Logo"></a>
     <section>
-        <div class="container" id="container">
-        <div id="messageDiv"><?php echo $updateMessage; ?></div>
+        <div class="container" id="container">            
             <div class="form-container sign-up-container">
-                <form action="/login/sign_up.php" method="post">                    
-                        <h1>Sign Up</h1>
-                        <div class="social-container">
-                            <a style="text-decoration: none;" href="https://www.facebook.com/" class="text-white me-4">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="https://www.instagram.com/"><i class="fa-brands fa-square-instagram"
-                                    style="color: #000000;"></i></a>
-                            <a href="https://twitter.com/?lang=vi"><i class="fa-brands fa-square-x-twitter"
-                                    style="color: #000000;"></i></a>
-                        </div>
-                        <span>Sign up with Email</span>
-                        <label class="form-group">
-                            <input type="text" placeholder="Name" id="name" name="name" autocomplete="off"
-                                class="form-control" required oninvalid="this.setCustomValidity('Name is required')"
-                                oninput="setCustomValidity('')" title="Name: enter a valid name. Example: Mary" />
-                        </label>
-                        <label>
-                            <input type="email" class="form-control" autocomplete="off" name="email" id="email"
-                                placeholder="Email" required oninvalid="this.setCustomValidity('Enter a valid email')"
-                                oninput="setCustomValidity('')"
-                                title="Email: the email contains '@'. Example: info@ros-bv.nl" />
-                        </label>
-                        <label>
+                <form action="/login/sign_up.php" method="post">
+                    <h1>Sign Up</h1>
+                    <div class="social-container">
+                        <a style="text-decoration: none;" href="https://www.facebook.com/" class="text-white me-4">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/"><i class="fa-brands fa-square-instagram"
+                                style="color: #000000;"></i></a>
+                        <a href="https://twitter.com/?lang=vi"><i class="fa-brands fa-square-x-twitter"
+                                style="color: #000000;"></i></a>
+                    </div>
+                    <span>Sign up with Email</span>
+                    <label class="form-group">
+                        <input type="text" placeholder="Name" id="name" name="name" autocomplete="off"
+                            class="form-control" required oninvalid="this.setCustomValidity('Name is required')"
+                            oninput="setCustomValidity('')" title="Name: enter a valid name. Example: Mary" />
+
+                    </label>
+                    <label>
+                        <input type="email" class="form-control" autocomplete="off" name="email" id="email"
+                            placeholder="Email" required oninvalid="this.setCustomValidity('Enter a valid email')"
+                            oninput="setCustomValidity('')"
+                            title="Email: the email contains '@'. Example: info@ros-bv.nl" />
+                    </label>
+                    <label class="form-group">
+                        <div class="input-group">
                             <input type="password" placeholder="Password" id="password" autocomplete="off"
                                 name="password" class="form-control" required
                                 oninvalid="this.setCustomValidity('Password is required')"
-                                oninput="setCustomValidity('')" title="Password: enter a valid password" />
-                        </label>
-                        <label>
-                            <input type="password" placeholder="Confirm Password" id="cornfirm_password"
-                                autocomplete="off" name="cornfirm_password" class="form-control" required
-                                oninvalid="this.setCustomValidity('Password is required')"
-                                oninput="setCustomValidity('')" title="Password: enter a valid password" />
-                        </label>    
-                        <button value="submit" type="submit" style="margin-top: 9px">Sign Up</button>
-                    </form>                
+                                oninput="setCustomValidity('')" title="Password: enter a valid password" />                            
+                        </div>
+                    </label>
+                    <label>
+                        <input type="password" placeholder="Confirm Password" id="confirm_password" autocomplete="off"
+                            name="confirm_password" class="form-control" required
+                            oninvalid="this.setCustomValidity('Password is required')" oninput="setCustomValidity('')"
+                            title="Password: enter a valid password" />
+                            <div class="input-group-append">
+                                <a class="toggle-password" type="button">
+                                    <span class="fas fa-eye"></span>
+                                </a>
+                            </div>
+                    </label>
+                    
+                    <button value="submit" type="submit" style="margin-top: 9px">Sign Up</button>
+                </form>
             </div>
             <div class="form-container sign-in-container">
-                <form action="/login/sign_in.php" method="post">                    
-                        <h1>Sign in</h1>
-                        <div class="social-container">
-                            <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"
-                                    style="color: #000000;"></i></a>
-                            <a href="https://www.instagram.com/"><i class="fa-brands fa-square-instagram"
-                                    style="color: #000000;"></i></a>
-                            <a href="https://twitter.com/?lang=vi"><i class="fa-brands fa-square-x-twitter"
-                                    style="color: #000000;"></i></a>
-                        </div>
-                        <span>Sign in with E-Mail Address</span>
-                        <label>
-                            <input type="text" placeholder="Name" name="name" id="name" required
-                                oninvalid="this.setCustomValidity('Name is required')"
-                                oninput="setCustomValidity('')" />
-                        </label>
-                        <label>
-                            <input type="password" placeholder="Password" name="password" id="name" required
+                <form action="../login/sign_in.php" method="post">
+                    <h1>Sign in</h1>
+                    <div class="social-container">
+                        <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"
+                                style="color: #000000;"></i></a>
+                        <a href="https://www.instagram.com/"><i class="fa-brands fa-square-instagram"
+                                style="color: #000000;"></i></a>
+                        <a href="https://twitter.com/?lang=vi"><i class="fa-brands fa-square-x-twitter"
+                                style="color: #000000;"></i></a>
+                    </div>
+                    <span>Sign in with E-Mail Address</span>
+                    <label>
+                        <input type="text" placeholder="Name" name="name" id="name" required
+                            oninvalid="this.setCustomValidity('Name is required')" oninput="setCustomValidity('')" />
+                    </label>
+                    <label class="form-group">
+                        <div class="input-group">
+                            <input type="password" placeholder="Password" name="password" id="password" required
                                 oninvalid="this.setCustomValidity('Password is required')"
                                 oninput="setCustomValidity('')" />
-                        </label>
-                        <a href="#">Forgot your password?</a>
-                        <button type="submit" value="submit">Sign In</button>
-                    </form>                
+                            <div class="input-group-append">
+                                <a class="btn btn-outline-secondary toggle-password" type="button">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </label>
+                    <a href="#">Forgot your password?</a>
+                    <button type="submit" value="submit">Sign In</button>
+                </form>
             </div>
             <div class="overlay-container">
                 <div class="overlay">
@@ -100,10 +115,21 @@
         <a href="../index.php"><button class="Home">Home</button></a>
     </div>
     <script src="../js/login.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.toggle-password').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var passwordInput = this.closest('.input-group').querySelector('input');
+                    if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                        this.innerHTML = '<i class="fa fa-eye-slash"></i>';
+                    } else {
+                        passwordInput.type = 'password';
+                        this.innerHTML = '<i class="fa fa-eye"></i>';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
-<script>
-    setTimeout(function () {
-        document.getElementById('messageDiv').style.display = 'none';
-    }, 3000); // Ẩn thông báo sau 3 giây 
-</script>
 </html>

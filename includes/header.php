@@ -33,13 +33,13 @@ session_start();
                                 class="sr-only"></span></a>
                     </li>
                     <li class="nav-item">
-                        <a style="color: #fff;" class="nav-link" href="./menu.php">Recipe</a>
+                        <a style="color: #fff;" class="nav-link" href="http://localhost:3000/menu.php">Recipe</a>
                     </li>
                     <li class="nav-item">
-                        <a style="color: #fff;" class="nav-link" href="./contact.php">Contact</a>
+                        <a style="color: #fff;" class="nav-link" href="http://localhost:3000/contact.php">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a style="color: #fff;" class="nav-link" href="./about.php">About Us</a>
+                        <a style="color: #fff;" class="nav-link" href="http://localhost:3000/about.php">About Us</a>
                     </li>
                 </ul>
                 <form id="search-box">
@@ -69,7 +69,7 @@ session_start();
                             echo '<a href="#">Send feedback</a>';
                             echo '<a href="/login/logout.php">Logout</a>';
                         } else {
-                            echo '<a href="./html/login.php">Login</a>';
+                            echo '<a href="http://localhost:3000/html/login.php">Login</a>';
                         }
                         ?>
                     </div>
