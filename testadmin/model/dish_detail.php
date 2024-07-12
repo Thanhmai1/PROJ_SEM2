@@ -5,6 +5,13 @@ function getAllDishDetails() {
     $stmt->execute();
     return $stmt->fetchAll();
 }
+// function getAllDishDetails() {
+//     $conn = connectdb();
+//     $sql = "SELECT recipe_id, thumbnail, title, prepare, process, intendedFor, introduction, popularity, aboutatfood, thumbnailhtc, ingredient, howdoit FROM dish_detail";
+//     $stmt = $conn->prepare($sql);
+//     $stmt->execute();
+//     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+// }
 
 function createDishDetail($recipe_id, $thumbnail, $title, $prepare, $process, $intendedFor, $introduction, $popularity, $aboutatfood, $thumbnailhtc, $ingredient, $howdoit) {
     $conn = connectdb();

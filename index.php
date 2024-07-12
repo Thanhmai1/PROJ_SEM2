@@ -28,7 +28,7 @@
   <link href="./css/css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="./css/css/responsive.css" rel="stylesheet" />
-  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/style.css">  
   
 </head>
 

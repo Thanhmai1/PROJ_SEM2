@@ -1,3 +1,19 @@
+
+<section>
+    <h2>Create New Dish</h2>
+    <form action="index.php?act=createdishform" method="post">
+        <label for="category_id">Category ID:</label>
+        <input type="text" name="category_id" id="category_id" required><br>
+
+        <label for="image_url">Image URL:</label><br>
+        <input type="text" id="image_url" name="image_url" required><br><br>
+
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="title" required><br>
+        <input type="submit" value="Create">
+    </form>
+</section>
+
 <section>
     <h2>Dishes</h2>
     <form action="index.php?act=createdishform" method="post">
@@ -33,18 +49,3 @@
 </section>
 
 
-<section>
-    <h2>Create New Dish</h2>
-    <form action="index.php?act=createdishform" method="post">
-        <label for="category_id">Category ID:</label>
-        <input type="text" name="category_id" id="category_id" required><br>
-        <!-- <label for="thumbnail">Thumbnail:</label>
-        <input type="text" name="thumbnail" id="thumbnail" required><br> -->
-        <label for="thumbnail" class="form-label">Thumbnail:</label>
-        <input class="mb-3" class="form-control" type="file" name="thumbnail" id="thumbnail" multiple>
-
-        <label for="title">Title:</label>
-        <input type="text" name="title" id="title" required><br>
-        <input type="submit" value="Create">
-    </form>
-</section>

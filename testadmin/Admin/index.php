@@ -26,11 +26,12 @@ if (isset($_GET["act"])) {
             include "view/person_types/person_types.php";
             break;
         case "createform":
-            if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["name"])) {
-                $name = $_POST['name'];
+            if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["person_types"])) {
+                $name = $_POST['person_types'];
                 $description = $_POST['description'];
-                $BMI = $_POST['BMI'];
-                createform($name, $description, $BMI);
+                $bmi_min = $_POST['bmi_min'];
+                $bmi_max = $_POST['bmi_max'];
+                createform($person_types, $description, $bmi_min, $bmi_max);
                 $kq = getall_dm();
                 include "view/person_types/person_types.php";
             } else {
@@ -46,10 +47,11 @@ if (isset($_GET["act"])) {
             }
             if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["id"])) {
                 $id = $_POST['id'];
-                $name = $_POST['categoriesname'];
+                $person_types = $_POST['person_types'];
                 $description = $_POST['description'];
-                $BMI = $_POST['BMI'];
-                updateform($id, $name, $description, $BMI);
+                $bmi_min = $_POST['bmi_min'];
+                $bmi_max = $_POST['bmi_max'];
+                updateform($id, $person_types, $description, $bmi_min, $bmi_max);
                 $kq = getall_dm();
                 include "view/person_types/person_types.php";
             }
@@ -161,7 +163,7 @@ if (isset($_GET["act"])) {
             }
             if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["recipe_id"])) {
                 $recipe_id = $_POST['recipe_id'];
-                $thumbnail = $_POST['thumbnail'];
+                $thumbnail = isset($_POST['thumbnail']) ? $_POST['thumbnail'] : '';
                 $title = $_POST['title'];
                 $prepare = $_POST['prepare'];
                 $process = $_POST['process'];
@@ -169,7 +171,7 @@ if (isset($_GET["act"])) {
                 $introduction = $_POST['introduction'];
                 $popularity = $_POST['popularity'];
                 $aboutatfood = $_POST['aboutatfood'];
-                $thumbnailhtc = $_POST['thumbnailhtc'];
+                $thumbnailhtc = isset($_POST['thumbnailhtc']) ? $_POST['thumbnailhtc'] : '';
                 $ingredient = $_POST['ingredient'];
                 $howdoit = $_POST['howdoit'];
                 updateDishDetail($recipe_id, $thumbnail, $title, $prepare, $process, $intendedFor, $introduction, $popularity, $aboutatfood, $thumbnailhtc, $ingredient, $howdoit);

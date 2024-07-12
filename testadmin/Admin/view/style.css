@@ -65,7 +65,9 @@ form label {
 }
 
 input[type="text"],
-input[type="number"] {
+input[type="number"],
+input[type="file"],
+textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -75,7 +77,9 @@ input[type="number"] {
 }
 
 input[type="text"]:focus,
-input[type="number"]:focus {
+input[type="number"]:focus,
+input[type="file"]:focus,
+textarea:focus {
     border-color: #007bff;
     outline: none;
 }
@@ -98,14 +102,14 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    font-size: 1rem;
+    font-size: 0.9rem;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 th, td {
-    padding: 12px 15px;
+    padding: 10px 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
@@ -118,7 +122,7 @@ th {
 }
 
 tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #f9f9f9;
 }
 
 tr:hover {
@@ -151,6 +155,8 @@ footer {
     margin-top: auto;
     font-size: 0.9rem;
 }
+
+/* Confirmation Form Styles */
 .confirmation-form {
     margin-top: 20px;
     padding: 10px;
@@ -175,4 +181,97 @@ footer {
     padding: 8px 15px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    header nav {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        margin-top: 10px;
+    }
+
+    section {
+        width: 95%;
+        margin: 10px auto;
+        padding: 15px;
+    }
+
+    table {
+        font-size: 0.8rem;
+    }
+
+    th, td {
+        padding: 8px 10px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="file"],
+    textarea {
+        font-size: 0.9rem;
+    }
+
+    input[type="submit"] {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+}
+.dish-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.dish-detail {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.dish-detail .detail-item {
+    margin-bottom: 10px;
+}
+
+.dish-detail .detail-item strong {
+    color: #007bff;
+}
+
+.dish-detail .actions a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+    margin-right: 10px;
+    transition: color 0.3s ease;
+}
+
+.dish-detail .actions a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.form-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-select:focus {
+    border-color: #007bff;
+    outline: none;
 }
