@@ -3,9 +3,10 @@
     <form action="index.php?act=updatedishform" method="post">
         <label for="category_id">Category ID:</label>
         <input type="text" name="category_id" id="category_id" value="<?=$kq1[0]['category_id']?>" required><br>
-        <label for="thumbnail">Thumbnail:</label>
-        <!-- <input type="text" name="thumbnail" id="thumbnail" value="<?=$kq1[0]['thumbnail']?>" required><br> -->
-        <input class="mb-3" class="form-control" type="file" name="thumbnail" id="thumbnail" value="<?=$kq1[0]['thumbnail']?>" multiple>
+        <!-- <label for="thumbnail">Thumbnail:</label>
+        <input class="mb-3" class="form-control" type="file" name="thumbnail" id="thumbnail" value="<?=$kq1[0]['thumbnail']?>" multiple> -->
+        <label for="thumbnail">Image URL:</label><br>
+        <input type="text" id="image_url" name="thumbnail" value="<?=$kq1[0]['thumbnail']?>" required><br><br>
 
         <label for="title">Title:</label>
         <input type="text" name="title" id="title" value="<?=$kq1[0]['title']?>" required><br>
