@@ -5,8 +5,8 @@
         <label for="category_id">Category ID:</label>
         <input type="text" name="category_id" id="category_id" required><br>
 
-        <label for="image_url">Image URL:</label><br>
-        <input type="text" id="image_url" name="image_url" required><br><br>
+        <label for="thumbnail">Image URL:</label><br>
+        <input type="text" id="image_url" name="thumbnail" required><br><br>
 
         <label for="title">Title:</label>
         <input type="text" name="title" id="title" required><br>

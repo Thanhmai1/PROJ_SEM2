@@ -72,6 +72,21 @@
       margin: 5px 0;
       /* Khoảng cách trên dưới cho đoạn văn */
     }
+
+    .button-container {
+      text-align: right;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border: none;
+      padding: 5px 10px;
+      color: white;
+      border-radius: 4px;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 10px;
+    }
   </style>
 
 </head>
@@ -163,6 +178,9 @@
             echo "</div>";
             echo "<h3>" . htmlspecialchars($imageName, ENT_QUOTES, 'UTF-8') . "</h3>";
             echo "<p><strong>Category ID:</strong> " . htmlspecialchars($category, ENT_QUOTES, 'UTF-8') . "</p>";
+            echo "<div class='button-container'>";
+            echo "<a href='#' class='btn btn-primary'>See more</a>";
+            echo "</div>";
             echo "</div>";
           }
         } else {
