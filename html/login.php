@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <a href="../index.html">
+    <a href="http://localhost:3000/index.php">
         <img class="logo" src="../images/quicksnacklogo.png" alt="Quick Snack Logo">
     </a>
     <section>
@@ -45,9 +45,9 @@
                             <input type="password" placeholder="Password" id="password" autocomplete="off"
                                 name="password" class="form-control" required
                                 oninvalid="this.setCustomValidity('Password is required')"
-                                oninput="setCustomValidity('')" title="Password: enter a valid password" />
+                                oninput="setCustomValidity('')" title="Password: enter a valid password" minlength="8" />
                             <div class="input-group-append">
-                                <a class="toggle-password" type="button">
+                                <a class="toggle-password" type="button" >
                                     <i class="fas fa-eye"></i>
                                 </a>
                             </div>
@@ -57,7 +57,7 @@
                         <div class="input-group">
                             <input type="password" placeholder="Confirm Password" id="confirm_password"
                                 autocomplete="off" name="confirm_password" class="form-control" required
-                                oninvalid="this.setCustomValidity('Password is required')"
+                                oninvalid="this.setCustomValidity('Confirm password is required')"
                                 oninput="setCustomValidity('')" title="Password: enter a valid password" />
                             <div class="input-group-append">
                                 <a class="toggle-password" type="button">
@@ -86,13 +86,13 @@
                     <span>Sign in with E-Mail Address</span>
                     <label>
                         <input type="text" placeholder="Name" name="name" id="name" required
-                            oninvalid="this.setCustomValidity('Name is required')" oninput="setCustomValidity('')" />
+                            oninvalid="this.setCustomValidity('Name is required')" oninput="setCustomValidity('')"  />
                     </label>
                     <label class="form-group">
                         <div class="input-group">
                             <input type="password" placeholder="Password" name="password" id="password" required
                                 oninvalid="this.setCustomValidity('Password is required')"
-                                oninput="setCustomValidity('')" />
+                                oninput="setCustomValidity('')"/>
                             <div class="input-group-append">
                                 <a class="btn btn-outline-secondary toggle-password" type="button">
                                     <i class="fa fa-eye" aria-hidden="true"></i>

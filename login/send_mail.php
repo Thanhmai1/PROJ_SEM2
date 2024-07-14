@@ -1,14 +1,14 @@
-<?php
-require './mail.php';
-$error_message = '';
-$success_message = '';
-$email = "nnhi40747@gmail.com";
-try {
-    $token = bin2hex(random_bytes(3));
-    $mailer = new Mailer();
+<?php 
+function sendVerificationEmail($email, $token)
+{
+    include './mail.php';
+    $error_message = '';
+    $success_message = '';
+    try {
+        $mailer = new Mailer();
 
-    $confirm_link = "http://localhost:3000/login/confirm.php?token=" . $token;
-    $email_body = "
+        $confirm_link = "http://localhost:3000/login/confirm.php?token=" . $token;
+        $email_body = "
            <!DOCTYPE html>
 <html lang='en'>
 <head>
@@ -23,7 +23,6 @@ try {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
-            
             padding: 0;
         }
         .container {
@@ -41,7 +40,6 @@ try {
             padding: 10px 0;
             background-color: #00aaa3;
             color: #ffffff;
-            
             border-radius: 5px 5px 0 0;
         }
         .content {
@@ -73,18 +71,20 @@ try {
     <script src='https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js'></script>
     <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'></script>
 </body>
-</html>
+</html>";
 
-    ";
-    $mail_sent = $mailer->sendMail("Confirm account registration", $email_body, $email);
-    if ($mail_sent) {
-        $success_message = "Sign Up Success! Confirmation email has been sent. Please check your email.";
-    } else {
-        $error_message = "Registration was successful, but there was an error sending the confirmation email. Please contact admin.";
+        $mail_sent = $mailer->sendMail("Confirm account registration", $email_body, $email);
+
+        if ($mail_sent) {
+            echo '<script>alert("Send verification email successfull."); window.location.href = "http://localhost:3000/login/verify_email.php";</script>';
+        } else {
+            echo '<script>alert("Failed to send verification email."); window.location.href = "http://localhost:3000/html/login.php";</script>';
+        }
+
+    } catch (Exception $e) {
+        $error_message = "An error occurred: " . $e->getMessage();
+        echo $error_message;
     }
-    echo $error_message;
-    echo $success_message;
-} catch (Exception $e) {
-    $error_message = "An error occurred: " . $e->getMessage();
 }
+?>
 ?>
