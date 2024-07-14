@@ -1,5 +1,6 @@
 <?php
 $error_message = "";
+$message = "";
 try {
     include '../includes/conn.php';
 
@@ -24,7 +25,7 @@ try {
                 $role_id = $row['role_id'];
                 $person_type_id = $row['person_type_id'];
                 $create_at = $row['created_at'];
-                $update_at = $row['update_at'];
+                $update_at = $row['updated_at'];
                 $stmt_insert =  $conn->prepare("INSERT INTO `user` (`username`, `email`, `password`, `role_id`, `person_type_id`, `created_at`, `update_at`) VALUES (?, ?, ?, ?, ?, ?, ?)");                
                 if ($stmt_insert === false) {
                     die("Prepare failed: " . $conn->error);
@@ -38,7 +39,7 @@ try {
                 $stmt_delete->bind_param("s", $token);
                 $stmt_delete->execute();
 
-                $error_message = "Your account verified and activated successfully!";
+                $message = "Your account verified and activated successfully!";
             } else {
                 $error_message = "Invalid verification code!";
             }
@@ -89,6 +90,10 @@ try {
 
                         if (!empty($error_message)) {
                             echo "<div class='alert alert-danger mt-3'>$error_message</div>";
+
+                        }
+                        if (!empty($message)) {
+                            echo "<div class='alert alert-info mt-3'>$message</div>";
 
                         }
                         ?>

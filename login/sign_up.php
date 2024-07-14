@@ -19,7 +19,7 @@ try {
             exit();
         }
 
-        $stmt = $conn->prepare("SELECT * FROM `users` WHERE `username` = ? OR `email` = ?");
+        $stmt = $conn->prepare("SELECT * FROM `user` WHERE `username` = ? OR `email` = ?");
         if ($stmt === false) {
             die("Prepare failed: " . $conn->error);
         }
