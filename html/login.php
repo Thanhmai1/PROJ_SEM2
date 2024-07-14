@@ -7,72 +7,81 @@
     <link rel="stylesheet" href="../css/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" href="../images/quicksnacklogo.png" type="image/x-icon">
-    <link rel="stylesheet" href="./css/eye_password">
 </head>
 
 <body>
-    <a href="../index.html"><img style="width: 200px; text-align: center;" src="../images/quicksnacklogo.png"
-            alt="Quick Snack Logo"></a>
+    <a href="../index.html">
+        <img class="logo" src="../images/quicksnacklogo.png" alt="Quick Snack Logo">
+    </a>
     <section>
-        <div class="container" id="container">            
+        <div class="container" id="container">
             <div class="form-container sign-up-container">
                 <form action="/login/sign_up.php" method="post">
                     <h1>Sign Up</h1>
                     <div class="social-container">
-                        <a style="text-decoration: none;" href="https://www.facebook.com/" class="text-white me-4">
+                        <a href="https://www.facebook.com/" class="text-white me-4">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="https://www.instagram.com/"><i class="fa-brands fa-square-instagram"
-                                style="color: #000000;"></i></a>
-                        <a href="https://twitter.com/?lang=vi"><i class="fa-brands fa-square-x-twitter"
-                                style="color: #000000;"></i></a>
+                        <a href="https://www.instagram.com/">
+                            <i class="fa-brands fa-square-instagram"></i>
+                        </a>
+                        <a href="https://twitter.com/?lang=vi">
+                            <i class="fa-brands fa-square-x-twitter"></i>
+                        </a>
                     </div>
                     <span>Sign up with Email</span>
                     <label class="form-group">
                         <input type="text" placeholder="Name" id="name" name="name" autocomplete="off"
                             class="form-control" required oninvalid="this.setCustomValidity('Name is required')"
                             oninput="setCustomValidity('')" title="Name: enter a valid name. Example: Mary" />
-
                     </label>
                     <label>
                         <input type="email" class="form-control" autocomplete="off" name="email" id="email"
                             placeholder="Email" required oninvalid="this.setCustomValidity('Enter a valid email')"
-                            oninput="setCustomValidity('')"
-                            title="Email: the email contains '@'. Example: info@ros-bv.nl" />
+                            oninput="setCustomValidity('')" title="Email: the email contains '@'. Example: info@ros-bv.nl" />
                     </label>
                     <label class="form-group">
                         <div class="input-group">
                             <input type="password" placeholder="Password" id="password" autocomplete="off"
                                 name="password" class="form-control" required
                                 oninvalid="this.setCustomValidity('Password is required')"
-                                oninput="setCustomValidity('')" title="Password: enter a valid password" />                            
-                        </div>
-                    </label>
-                    <label>
-                        <input type="password" placeholder="Confirm Password" id="confirm_password" autocomplete="off"
-                            name="confirm_password" class="form-control" required
-                            oninvalid="this.setCustomValidity('Password is required')" oninput="setCustomValidity('')"
-                            title="Password: enter a valid password" />
+                                oninput="setCustomValidity('')" title="Password: enter a valid password" />
                             <div class="input-group-append">
                                 <a class="toggle-password" type="button">
-                                    <span class="fas fa-eye"></span>
+                                    <i class="fas fa-eye"></i>
                                 </a>
                             </div>
+                        </div>
                     </label>
-                    
-                    <button value="submit" type="submit" style="margin-top: 9px">Sign Up</button>
+                    <label class="form-group">
+                        <div class="input-group">
+                            <input type="password" placeholder="Confirm Password" id="confirm_password"
+                                autocomplete="off" name="confirm_password" class="form-control" required
+                                oninvalid="this.setCustomValidity('Password is required')"
+                                oninput="setCustomValidity('')" title="Password: enter a valid password" />
+                            <div class="input-group-append">
+                                <a class="toggle-password" type="button">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </label>
+                    <button value="submit" type="submit" class="submit-btn">Sign Up</button>
                 </form>
             </div>
             <div class="form-container sign-in-container">
                 <form action="../login/sign_in.php" method="post">
                     <h1>Sign in</h1>
                     <div class="social-container">
-                        <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"
-                                style="color: #000000;"></i></a>
-                        <a href="https://www.instagram.com/"><i class="fa-brands fa-square-instagram"
-                                style="color: #000000;"></i></a>
-                        <a href="https://twitter.com/?lang=vi"><i class="fa-brands fa-square-x-twitter"
-                                style="color: #000000;"></i></a>
+                        <a href="https://www.facebook.com/">
+                            <i class="fa-brands fa-facebook"></i>
+                        </a>
+                        <a href="https://www.instagram.com/">
+                            <i class="fa-brands fa-square-instagram"></i>
+                        </a>
+                        <a href="https://twitter.com/?lang=vi">
+                            <i class="fa-brands fa-square-x-twitter"></i>
+                        </a>
                     </div>
                     <span>Sign in with E-Mail Address</span>
                     <label>
@@ -92,7 +101,7 @@
                         </div>
                     </label>
                     <a href="#">Forgot your password?</a>
-                    <button type="submit" value="submit">Sign In</button>
+                    <button type="submit" value="submit" class="submit-btn">Sign In</button>
                 </form>
             </div>
             <div class="overlay-container">
@@ -100,7 +109,7 @@
                     <div class="overlay-panel overlay-left">
                         <h1>Log in</h1>
                         <p>Sign in here if you already have an account</p>
-                        <button class="ghost mt-5" id="signIn">Sign In</button>
+                        <button class="ghost" id="signIn">Sign In</button>
                     </div>
                     <div class="overlay-panel overlay-right">
                         <h1>Create Account!</h1>
@@ -132,4 +141,5 @@
         });
     </script>
 </body>
+
 </html>
