@@ -19,7 +19,7 @@ try {
             exit();
         }
 
-        $stmt = $conn->prepare("SELECT * FROM `pending_user` WHERE `username` = ? OR `email` = ?");
+        $stmt = $conn->prepare("SELECT * FROM `users` WHERE `username` = ? OR `email` = ?");
         if ($stmt === false) {
             die("Prepare failed: " . $conn->error);
         }
@@ -29,7 +29,7 @@ try {
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            echo '<script>alert("Email or Username already exists!"); window.location.href = "http://localhost:3000/html/register.php";</script>';
+            echo '<script>alert("Email or Username already exists!"); window.location.href = "http://localhost:3000/html/login.php";</script>';
             exit();
         } else {
             $hash_password = password_hash($password, PASSWORD_DEFAULT);

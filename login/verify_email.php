@@ -40,7 +40,6 @@ try {
 
                 $error_message = "Your account verified and activated successfully!";
             } else {
-
                 $error_message = "Invalid verification code!";
             }
         }
