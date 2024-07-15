@@ -234,3 +234,43 @@ button.ghost {
 #login {
     display: none;
 }
+
+.password-container {
+    position: relative;
+}
+
+.password-container input {
+    padding-right: 40px;
+}
+.fa-eye{
+    margin-top: 16px;
+    margin: 47px;
+    padding-right: 54px;
+}
+.fa-eye-slash{
+    margin-top: 16px;
+    margin: 47px;
+    padding-right: 54px;    
+}
+.fas{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #6c757d;
+    font-size: 1.2em;
+    transition: color 0.3s;
+}
+.fas2{
+    padding-top: 45px;
+    padding-right: 60px;
+}
+.fas1{
+    padding-top: 156px;
+    padding-right: 60px;
+}
+.password-container .fa-eye:hover,
+.password-container .fa-eye-slash:hover {
+    color: #343a40;
+}

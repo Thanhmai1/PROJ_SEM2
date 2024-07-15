@@ -84,10 +84,13 @@
 <section>
     <h2>Update Dish Detail</h2>
     <form action="index.php?act=updatedishdetailform" method="post" enctype="multipart/form-data">
-        <div class="mb-3">
-            <label for="thumbnail" class="form-label">Thumbnail</label>
+        <!-- <div class="mb-3">
+            <label for="thumbnail" class="form-label">Image URL thumbnail:</label>
             <input class="form-control" type="file" name="thumbnail" id="thumbnail" value="<?= isset($kq1['thumbnail']) ? htmlspecialchars($kq1['thumbnail']) : '' ?>" multiple>
-        </div>
+        </div> -->
+        <label for="thumbnail">Image URL thumbnail:</label><br>
+        <input type="text" id="image_url" name="thumbnail" value="<?= isset($kq1['thumbnail']) ? htmlspecialchars($kq1['thumbnail']) : '' ?>" multiple><br><br>
+
         <label for="title">Title:</label>
         <input type="text" name="title" id="title" value="<?= isset($kq1['title']) ? htmlspecialchars($kq1['title']) : '' ?>" required><br>
         <label for="prepare">Prepare:</label>
@@ -102,10 +105,13 @@
         <textarea class="form-control" name="popularity" id="popularity" rows="12"><?= isset($kq1['popularity']) ? htmlspecialchars($kq1['popularity']) : '' ?></textarea>
         <label for="aboutatfood">About at Food:</label>
         <textarea class="form-control" name="aboutatfood" id="aboutatfood" rows="12"><?= isset($kq1['aboutatfood']) ? htmlspecialchars($kq1['aboutatfood']) : '' ?></textarea>
-        <div class="mb-3">
+        <!-- <div class="mb-3">
             <label for="thumbnailhtc" class="form-label">Thumbnail HTC</label>
             <input class="form-control" type="file" name="thumbnailhtc" id="thumbnailhtc" value="<?= isset($kq1['thumbnailhtc']) ? htmlspecialchars($kq1['thumbnailhtc']) : '' ?>" multiple>
-        </div>
+        </div> -->
+        <label for="thumbnail">Image URL thumbnail HTC:</label><br>
+        <input type="text" id="image_url" name="thumbnail" value="<?= isset($kq1['thumbnailhtc']) ? htmlspecialchars($kq1['thumbnailhtc']) : '' ?>" multiple><br><br>
+
         <label for="ingredient">Ingredient:</label>
         <textarea class="form-control" name="ingredient" id="ingredient" rows="12"><?= isset($kq1['ingredient']) ? htmlspecialchars($kq1['ingredient']) : '' ?></textarea>
         <label for="howdoit">How Do It:</label>

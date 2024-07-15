@@ -2,7 +2,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require './vendor/autoload.php';
+require '../mail/vendor/autoload.php';
 
 class Mailer
 {
@@ -17,7 +17,7 @@ class Mailer
             $this->mail->Host = 'smtp.gmail.com';
             $this->mail->SMTPAuth = true;
             $this->mail->Username = 'thanhmainguyen20120119@gmail.com';
-            $this->mail->Password = 'itdh rkjr eteu fqij';
+            $this->mail->Password = 'ukkh rkcy uwje yvqg';
             $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $this->mail->Port = 587;
             $this->mail->setFrom('thanhmainguyen20120119@gamil.com', 'Quick Snack');

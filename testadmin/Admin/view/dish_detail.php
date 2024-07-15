@@ -46,10 +46,13 @@ try {
             }
             ?>
         </select><br>
-        <div class="mb-3">
+        <!-- <div class="mb-3">
             <label for="thumbnail" class="form-label">Thumbnail</label>
             <input class="form-control" type="file" name="thumbnail" id="thumbnail" multiple>
-        </div>
+        </div> -->
+        <label for="thumbnail">Image URL thumbnail:</label><br>
+        <input type="text" id="image_url" name="thumbnail" required><br><br>
+
         <label for="title">Title:</label>
         <input type="text" name="title" id="title" required><br>
         <label for="prepare">Prepare:</label>
@@ -64,10 +67,13 @@ try {
         <textarea class="form-control" name="popularity" id="popularity" rows="12"></textarea>
         <label for="aboutatfood">About at Food:</label>
         <textarea class="form-control" name="aboutatfood" id="aboutatfood" rows="12"></textarea>
-        <div class="mb-3">
+        <!-- <div class="mb-3">
             <label for="thumbnailhtc" class="form-label">Thumbnail HTC</label>
             <input class="form-control" type="file" name="thumbnailhtc" id="thumbnailhtc" multiple>
-        </div>
+        </div> -->
+        <label for="thumbnailhtc">Image URL thumbnail HTC:</label><br>
+        <input type="text" id="image_url" name="thumbnailhtc" multiple><br><br>
+
         <label for="ingredient">Ingredient:</label>
         <textarea class="form-control" name="ingredient" id="ingredient" rows="12"></textarea>
         <label for="howdoit">How Do It:</label>
