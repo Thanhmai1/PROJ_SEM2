@@ -1,10 +1,10 @@
 
 <?php
-function createMenu($category_id, $person_type_id, $dish_id) {
+function createMenu($person_type_id, $dish_id) {
     $conn = connectdb();
-    $sql = "INSERT INTO menu (category_id, person_type_id, dish_id) VALUES (:category_id, :person_type_id, :dish_id)";
+    $sql = "INSERT INTO menu (person_type_id, dish_id) VALUES (:person_type_id, :dish_id)";
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':category_id', $category_id);
+    // $stmt->bindParam(':category_id', $category_id);
     $stmt->bindParam(':person_type_id', $person_type_id);
     $stmt->bindParam(':dish_id', $dish_id);
     $stmt->execute();
@@ -12,18 +12,18 @@ function createMenu($category_id, $person_type_id, $dish_id) {
 
 function getOneMenu($id) {
     $conn = connectdb();
-    $stmt = $conn->prepare("SELECT id, category_id, person_type_id, dish_id FROM menu WHERE id = :id");
+    $stmt = $conn->prepare("SELECT id, person_type_id, dish_id FROM menu WHERE id = :id");
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
     $kq = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $kq;
 }
 
-function updateMenu($id, $category_id, $person_type_id, $dish_id) {
+function updateMenu($id, $person_type_id, $dish_id) {
     $conn = connectdb();
-    $sql = "UPDATE menu SET category_id = :category_id, person_type_id = :person_type_id, dish_id = :dish_id WHERE id = :id";
+    $sql = "UPDATE menu SET person_type_id = :person_type_id, dish_id = :dish_id WHERE id = :id";
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':category_id', $category_id);
+    // $stmt->bindParam(':category_id', $category_id);
     $stmt->bindParam(':person_type_id', $person_type_id);
     $stmt->bindParam(':dish_id', $dish_id);
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -44,7 +44,7 @@ function deleteMenu($id) {
 
 function getAllMenus() {
     $conn = connectdb();
-    $stmt = $conn->prepare("SELECT id, category_id, person_type_id, dish_id FROM menu");
+    $stmt = $conn->prepare("SELECT id, person_type_id, dish_id FROM menu");
     $stmt->execute();
     $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
     $kq = $stmt->fetchAll();

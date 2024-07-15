@@ -15,9 +15,9 @@
             $stmt->execute();
             $personTypes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            $stmt = $conn->prepare("SELECT id, namecategories FROM Categories");
-            $stmt->execute();
-            $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            // $stmt = $conn->prepare("SELECT id, namecategories FROM Categories");
+            // $stmt->execute();
+            // $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             $stmt = $conn->prepare("SELECT id, title FROM Dish");
             $stmt->execute();
@@ -30,15 +30,14 @@
 <section>
     <h2>Create New Menu</h2>
     <form action="index.php?act=createmenuform" method="post">
-        <label for="category_id">Category:</label>
-        <!-- <input type="text" name="category_id" id="category_id" required><br> -->
-        <select name="category_id" id="category_id" required class="form-select">
+        <!-- <label for="category_id">Category:</label> -->
+        <!-- <select name="category_id" id="category_id" required class="form-select">
             <?php
             foreach ($categories as $category) {
                 echo '<option value="'.$category['id'].'">'.$category['namecategories'].'</option>';
             }
             ?>
-        </select><br>
+        </select><br> -->
         <label for="person_type_id">Person Type:</label>
         <!-- <input type="text" name="person_type_id" id="person_type_id" required><br> -->
         <select name="person_type_id" id="person_type_id" class="form-select" required>
@@ -69,9 +68,9 @@
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
         // Thay đổi câu truy vấn để lấy tên của person_types từ bảng Person_Types và tên món ăn từ bảng Dish
-        $stmt = $conn->prepare("SELECT Menu.id, Categories.namecategories, Person_Types.person_types, Dish.title AS dish_title
+        $stmt = $conn->prepare("SELECT Menu.id, Person_Types.person_types, Dish.title AS dish_title
                                 FROM Menu
-                                JOIN Categories ON Menu.category_id = Categories.id
+                                -- JOIN Categories ON Menu.category_id = Categories.id
                                 JOIN Person_Types ON Menu.person_type_id = Person_Types.id
                                 JOIN Dish ON Menu.dish_id = Dish.id");
         $stmt->execute();
@@ -88,7 +87,6 @@
     <table>
         <tr>
             <th>STT</th>
-            <th>Category</th>
             <th>Person Type</th>
             <th>Dish</th>
             <th>Action</th>
@@ -100,7 +98,6 @@
                     echo '
                         <tr>
                         <td>'.$i.'</td>
-                        <td>'.$dm['namecategories'].'</td>
                         <td>'.$dm['person_types'].'</td>
                         <td>'.$dm['dish_title'].'</td>
                         <td><a href="index.php?act=updatemenuform&id='.$dm['id'].'">Update</a> | <a href="index.php?act=deletemenu&id='.$dm['id'].'">Delete</a></td>

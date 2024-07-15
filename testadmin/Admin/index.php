@@ -193,29 +193,15 @@ if (isset($_GET["act"])) {
             break;
         case 'createmenuform':
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $category_id = $_POST['category_id'];
+                // $category_id = $_POST['category_id'];
                 $person_type_id = $_POST['person_type_id'];
                 $dish_id = $_POST['dish_id'];
-                createMenu($category_id, $person_type_id, $dish_id);
+                createMenu($person_type_id, $dish_id);
                 header("Location: index.php?act=menu");
             } else {
                 include 'view/createmenuform.php';
             }
             break;
-        // case 'updatemenuform':
-        //     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        //         $id = $_POST['id'];
-        //         $category_id = $_POST['category_id'];
-        //         $person_type_id = $_POST['person_type_id'];
-        //         $dish_id = $_POST['dish_id'];
-        //         updateMenu($id, $category_id, $person_type_id, $dish_id);
-        //         header("Location: index.php?act=menu");
-        //     } else {
-        //         $id = $_GET['id'];
-        //         $kq1 = getOneMenu($id);
-        //         include 'view/updatemenuform.php';
-        //     }
-        //     break;
         case 'updatemenuform':
             if (isset($_GET["id"])) {
                 $id = $_GET['id'];
@@ -225,10 +211,10 @@ if (isset($_GET["act"])) {
             }
             if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["id"])) {
                 $id = $_POST['id'];
-                $category_id = $_POST['category_id'];
+                // $category_id = $_POST['category_id'];
                 $person_type_id = $_POST['person_type_id'];
                 $dish_id = $_POST['dish_id'];
-                updateMenu($id, $category_id, $person_type_id, $dish_id);
+                updateMenu($id, $person_type_id, $dish_id);
                 $kq = getAllMenus();
                 include "view/menu.php";
             }

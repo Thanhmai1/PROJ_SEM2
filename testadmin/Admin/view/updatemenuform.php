@@ -16,9 +16,9 @@
         $stmt->execute();
         $personTypes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $stmt = $conn->prepare("SELECT id, namecategories FROM Categories");
-        $stmt->execute();
-        $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        // $stmt = $conn->prepare("SELECT id, namecategories FROM Categories");
+        // $stmt->execute();
+        // $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $stmt = $conn->prepare("SELECT id, title FROM Dish");
         $stmt->execute();
@@ -28,7 +28,7 @@
     }
 ?>
     <form action="index.php?act=updatemenuform" method="post">
-        <label for="category_id">Category:</label>
+        <!-- <label for="category_id">Category:</label>
         <select name="category_id" id="category_id" required class="form-select">
             <?php
             foreach ($categories as $category) {
@@ -36,7 +36,7 @@
                 echo '<option value="'.$category['id'].'" '.$selected.'>'.$category['namecategories'].'</option>';
             }
             ?>
-        </select><br>
+        </select><br> -->
 
         <label for="person_type_id">Person Type:</label>
         <select name="person_type_id" id="person_type_id" required class="form-select">
