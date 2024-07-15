@@ -93,7 +93,8 @@ if (isset($_GET["act"])) {
                 $category_id = $_POST['category_id'];
                 $thumbnail = $_POST['thumbnail'];
                 $title = $_POST['title'];
-                createDish($category_id, $thumbnail, $title);
+                $description = $_POST['description'];
+                createDish($category_id, $thumbnail, $title, $description);
                 $kq = getAllDishes();
                 include "view/dish.php";
             } else {
@@ -112,7 +113,8 @@ if (isset($_GET["act"])) {
                 $category_id = $_POST['category_id'];
                 $thumbnail = $_POST['thumbnail'];
                 $title = $_POST['title'];
-                updateDish($id, $category_id, $thumbnail, $title);
+                $description = $_POST['description'];
+                updateDish($id, $category_id, $thumbnail, $title, $description);
                 $kq = getAllDishes();
                 include "view/dish.php";
             }

@@ -51,6 +51,9 @@ try {
 
         <label for="title">Title:</label>
         <input type="text" name="title" id="title" value="<?=htmlspecialchars($dish['title'])?>" required><br>
+        <label for="title">Description:</label>
+        <input type="text" name="description" id="description" value="<?=htmlspecialchars($dish['description'])?>" required><br>
+
         <input type="hidden" name="id" value="<?=htmlspecialchars($dish['id'])?>">
         <input type="submit" name="update" value="Update">
     </form>
