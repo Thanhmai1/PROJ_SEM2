@@ -3,7 +3,7 @@ $error_message = "";
 $message = "";
 try {
     include '../includes/conn.php';
-
+    
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $token = $_POST["verification_code"];
         if (empty($token)) {

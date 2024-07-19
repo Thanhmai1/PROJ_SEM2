@@ -9,7 +9,7 @@ body {
     color: #333;
 }
 header {
-    background-color: #007bff;
+    background-color: #00aaa3;
     color: white;
     padding: 15px 20px;
     display: flex;
@@ -87,7 +87,7 @@ textarea:focus {
 input[type="submit"] {
     padding: 10px 20px;
     border: none;
-    background: #28a745;
+    background: #00aaa3;
     color: white;
     border-radius: 5px;
     cursor: pointer;
@@ -96,7 +96,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background: #218838;
+    background: #00aaa3;
 }
 table {
     width: 100%;
@@ -115,7 +115,7 @@ th, td {
 }
 
 th {
-    background: #007bff;
+    background: #00aaa3;
     color: white;
     text-transform: uppercase;
     font-weight: 500;
@@ -130,7 +130,7 @@ tr:hover {
 }
 
 td a {
-    color: #007bff;
+    color: #00aaa3;
     text-decoration: none;
     font-weight: 500;
     margin-right: 10px;
@@ -142,12 +142,12 @@ td a:last-child {
 }
 
 td a:hover {
-    color: #0056b3;
+    color: #00aaa3;
     text-decoration: underline;
 }
 
 footer {
-    background-color: #007bff;
+    background-color: #00aaa3;
     color: white;
     text-align: center;
     padding: 15px 20px;
@@ -175,7 +175,7 @@ footer {
 }
 
 .confirmation-form a {
-    background-color: #007bff;
+    background-color: #00aaa3;
     color: #fff;
     text-decoration: none;
     padding: 8px 15px;
@@ -246,11 +246,11 @@ footer {
 }
 
 .dish-detail .detail-item strong {
-    color: #007bff;
+    color: #00aaa3;
 }
 
 .dish-detail .actions a {
-    color: #007bff;
+    color: #00aaa3;
     text-decoration: none;
     font-weight: 500;
     margin-right: 10px;
@@ -258,7 +258,7 @@ footer {
 }
 
 .dish-detail .actions a:hover {
-    color: #0056b3;
+    color: #00aaa3;
     text-decoration: underline;
 }
 
@@ -272,6 +272,17 @@ footer {
 }
 
 .form-select:focus {
-    border-color: #007bff;
+    border-color: #00aaa3;
     outline: none;
+}
+.admin-h1 {
+    text-align: center;
+    font-size: xx-large;
+}
+
+.admin-p {
+    text-align: center;
+    font-size: large;
+    margin: 10px auto;
+    width: 80%;
 }
