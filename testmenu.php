@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="/filter.css">
 
-  <style>
+  <!-- <style>
     .hidden {
       display: none;
     }
@@ -77,15 +77,89 @@
       text-align: right;
     }
 
-    .btn-primary {
-      background-color: #007bff;
-      border: none;
+    .btn-custom {
+      background-color: #21d7d1 !important;
+      border: none !important;
       padding: 5px 10px;
-      color: white;
+      color: white !important;
       border-radius: 4px;
       text-decoration: none;
       display: inline-block;
       margin-top: 10px;
+    }
+
+    .btn-custom:hover {
+      background-color: #1ab8b3 !important;
+    }
+  </style> -->
+
+  <style>
+    .recipe-card {
+      width: 300px;
+      height: 400px;
+      margin: 10px;
+      display: inline-block;
+      vertical-align: top;
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      opacity: 1;
+      transform: scale(1);
+      transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+      will-change: opacity, transform;
+      backface-visibility: hidden;
+    }
+
+    .recipe-card.hidden {
+      opacity: 0;
+      transform: scale(0.8);
+      pointer-events: none;
+    }
+
+    .image-container {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 10px;
+    }
+
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .recipe-card h3 {
+      margin: 10px 0;
+    }
+
+    .recipe-card p {
+      margin: 5px 0;
+    }
+
+    .button-container {
+      text-align: right;
+    }
+
+    .btn-custom {
+      background-color: #21d7d1 !important;
+      border: none !important;
+      padding: 5px 10px;
+      color: white !important;
+      border-radius: 4px;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .btn-custom:hover {
+      background-color: #1ab8b3 !important;
+    }
+
+    .recipe-card {
+      transition: all 0.3s ease-in-out;
     }
   </style>
 
@@ -104,11 +178,37 @@
 
       <ul class="filters_menu">
         <li class="active" data-filter="*">All</li>
-        <li data-filter=".healthy">Healthy</li>
-        <li data-filter=".kid">For Kid</li>
-        <li data-filter=".smoothy">Smoothy</li>
-        <li data-filter=".filling">Quick Filling</li>
+        <li data-filter=".Healthy">Healthy</li>
+        <li data-filter=".Fat-Food">Fat Food</li>
+        <li data-filter=".Smoothy">Smoothy</li>
+        <li data-filter=".Quick-Filling">Quick Filling</li>
       </ul>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          var filterButtons = document.querySelectorAll('.filters_menu li');
+          var recipeCards = document.querySelectorAll('.recipe-card');
+
+          filterButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+              var filter = this.getAttribute('data-filter');
+
+              filterButtons.forEach(function (btn) {
+                btn.classList.remove('active');
+              });
+              this.classList.add('active');
+
+              recipeCards.forEach(function (card) {
+                if (filter === '*' || card.classList.contains(filter.substring(1))) {
+                  card.style.display = 'inline-block';
+                } else {
+                  card.style.display = 'none';
+                }
+              });
+            });
+          });
+        });
+      </script>
 
       <div id="BMI">
         <div class="bmi-calculator">
@@ -148,48 +248,105 @@
             var bmiRounded = bmi.toFixed(2);
 
             document.getElementById('result').innerText = "Your BMI is " + bmiRounded;
+
+            // Fetch dishes based on BMI
+            fetch('get_dishes_by_bmi.php', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+              },
+              body: 'bmi=' + bmiRounded
+            })
+              .then(response => response.json())
+              .then(data => {
+                updateDishes(data);
+              })
+              .catch((error) => {
+                console.error('Error:', error);
+              });
+
           } else {
-            document.getElementById('result').innerText = "Please input your height and weight valid!";
+            document.getElementById('result').innerText = "Please enter valid values for height and weight!";
           }
+        }
+
+        function updateDishes(dishes) {
+          var container = document.querySelector('.recipes-container');
+          container.innerHTML = ''; // Clear current content
+
+          if (dishes.length === 0) {
+            container.innerHTML = '<p>No dishes found for this BMI</p>';
+            return;
+          }
+
+          dishes.forEach(dish => {
+            var categoryClass = dish.category.replace(' ', '-');
+            var dishHtml = `
+                <div class='recipe-card ${categoryClass}'>
+                    <div class='image-container'>
+                        <img src='${dish.thumbnail}' alt='${dish.title}'>
+                    </div>
+                    <h3>${dish.title}</h3>
+                    <p><strong>Category:</strong> ${dish.category}</p>
+                    <p><strong>For BMI:</strong> ${dish.bmi_category}</p>
+                    <p><strong>Description:</strong> ${dish.description}</p>
+                    <div class='button-container'>
+                        <a href='#' class='btn btn-primary'>See More</a>
+                    </div>
+                </div>
+            `;
+            container.innerHTML += dishHtml;
+          });
         }
       </script>
 
       <div class="recipes-container">
         <?php
-        include './cndbqunganh.php';
+        if (!isset($_POST['bmi'])) {
+          include './cndbqunganh.php';
 
-        $sql = "SELECT * FROM Dish"; // Truy vấn dữ liệu từ bảng Dish
-        $result = $conn->query($sql);
+          $sql = "SELECT d.*, c.namecategories, pt.person_types as bmi_category 
+                FROM Dish d 
+                JOIN Categories c ON d.category_id = c.id
+                JOIN Menu m ON d.id = m.dish_id
+                JOIN Person_Types pt ON m.person_type_id = pt.id";
+          $result = $conn->query($sql);
 
-        if ($result->num_rows > 0) {
-          while ($row = $result->fetch_assoc()) {
-            $imageUrl = $row["thumbnail"];
-            $imageName = $row["title"];
-            $category = $row["category_id"];
+          if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+              $imageUrl = $row["thumbnail"];
+              $imageName = $row["title"];
+              $category = $row["namecategories"];
+              $bmiCategory = $row["bmi_category"];
+              $description = $row["description"];
 
-            // Kiểm tra nếu URL ảnh không hợp lệ
-            if (filter_var($imageUrl, FILTER_VALIDATE_URL) === FALSE) {
-              $imageUrl = "path/to/default-image.jpg"; // Đặt đường dẫn tới ảnh mặc định nếu URL không hợp lệ
+              if (filter_var($imageUrl, FILTER_VALIDATE_URL) === FALSE) {
+                $imageUrl = "path/to/default-image.jpg";
+              }
+
+              $categoryClass = str_replace(' ', '-', $category);
+              echo "<div class='recipe-card $categoryClass'>";
+              echo "<div class='image-container'>";
+              echo "<img src='" . htmlspecialchars($imageUrl, ENT_QUOTES, 'UTF-8') . "' alt='" . htmlspecialchars($imageName, ENT_QUOTES, 'UTF-8') . "'>";
+              echo "</div>";
+              echo "<h3>" . htmlspecialchars($imageName, ENT_QUOTES, 'UTF-8') . "</h3>";
+              echo "<p><strong>Category:</strong> " . htmlspecialchars($category, ENT_QUOTES, 'UTF-8') . "</p>";
+              echo "<p><strong>For BMI:</strong> " . htmlspecialchars($bmiCategory, ENT_QUOTES, 'UTF-8') . "</p>";
+              echo "<p><strong>Description:</strong> " . htmlspecialchars($description, ENT_QUOTES, 'UTF-8') . "</p>";
+              echo "<div class='button-container'>";
+              echo "<a href='#' class='btn btn-primary'>See More</a>";
+              echo "</div>";
+              echo "</div>";
             }
-
-            echo "<div class='recipe-card'>";
-            echo "<div class='image-container'>";
-            echo "<img src='" . htmlspecialchars($imageUrl, ENT_QUOTES, 'UTF-8') . "' alt='" . htmlspecialchars($imageName, ENT_QUOTES, 'UTF-8') . "'>";
-            echo "</div>";
-            echo "<h3>" . htmlspecialchars($imageName, ENT_QUOTES, 'UTF-8') . "</h3>";
-            echo "<p><strong>Category ID:</strong> " . htmlspecialchars($category, ENT_QUOTES, 'UTF-8') . "</p>";
-            echo "<div class='button-container'>";
-            echo "<a href='#' class='btn btn-primary'>See more</a>";
-            echo "</div>";
-            echo "</div>";
+          } else {
+            echo "No dishes found.";
           }
-        } else {
-          echo "No dishes found.";
-        }
 
-        $conn->close();
+          $conn->close();
+        }
         ?>
       </div>
+
 
       <div class="btn-box">
         <a href="#" id="viewMoreBtn">
