@@ -24,7 +24,7 @@
                 </div>
                 <div>
                         <i class="fas fa-envelope"></i>
-                        <p><a style="text-decoration: none;" href="mailto:thanhmainguyen20120119@gmail.com">quicksnack@gmail.com</a></p>
+                        <p><a style="text-decoration: none;" href="mailto:thanhmainguyen20120119@gmail.com">thanhmainguyen20120119@gmail.com</a></p>
                 </div>
                 <div>
                         <i class="fas fa-globe"></i>

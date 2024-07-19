@@ -1,5 +1,5 @@
 <?php
-// session_start();
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +54,7 @@
                                 d="M5.121 17.804A4.992 4.992 0 0112 20a4.992 4.992 0 016.879-2.196M12 14a5 5 0 100-10 5 5 0 000 10z" />
                         </svg>
                         <?php
-                        if (isset($_SESSION['username'])) {
+                        if (isset($_SESSION['loggedin'])) {
                             $username = $_SESSION['username'];
                             echo $username;
                         } else {
@@ -64,7 +64,7 @@
                     </div>
                     <div class="dropdown-content">
                         <?php
-                        if (isset($_SESSION['username'])) {
+                        if (isset($_SESSION['loggedin'])) {
                             echo '<a  href="/userDetail/userdetail.php">My Account</a>';
                             echo '<a href="#">Send feedback</a>';
                             echo '<a href="/login/logout.php">Logout</a>';
