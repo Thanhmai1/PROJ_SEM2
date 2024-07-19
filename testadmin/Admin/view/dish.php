@@ -38,6 +38,8 @@ try {
 
         <label for="title">Title:</label>
         <input type="text" name="title" id="title" required><br>
+        <label for="description">description:</label>
+        <input type="text" name="description" id="description" required><br>
         <input type="submit" value="Create">
     </form>
 </section>
@@ -54,6 +56,7 @@ try {
             <th>Category</th>
             <th>Thumbnail</th>
             <th>Title</th>
+            <th>description</th>
             <th>Action</th>
         </tr>
         <?php
@@ -73,6 +76,7 @@ try {
                         <td>' . htmlspecialchars($category_name) . '</td>
                         <td>' . htmlspecialchars($dish['thumbnail']) . '</td>
                         <td>' . htmlspecialchars($dish['title']) . '</td>
+                        <td>' . htmlspecialchars($dish['description']) . '</td>
                         <td>
                             <a href="index.php?act=updatedishform&id=' . $dish['id'] . '">Update</a> | 
                             <a href="index.php?act=deletedish&id=' . $dish['id'] . '">Delete</a>

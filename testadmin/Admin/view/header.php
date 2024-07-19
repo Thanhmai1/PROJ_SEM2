@@ -15,7 +15,7 @@
             <a href="index.php?act=menu">Menu</a>
             <a href="index.php?act=dish">Dish</a>
             <a href="index.php?act=dish_detail">Dish Detail</a>
-            <a href="index.php?act=admin_user">User</a>
+            <a href="index.php?act=users">User</a>
         </nav>
     </header>
 </body>
