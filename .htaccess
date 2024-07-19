@@ -1,0 +1,7 @@
+RewriteEngine On
+RewriteBase /
+
+
+
+# Redirect for individual recipe pages
+RewriteRule ^recipe/(\d+)$ recipe.php?id=$1 [L,QSA]
