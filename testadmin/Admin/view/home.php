@@ -9,7 +9,8 @@
 <body>
     <section class="admin-section">
         <h1 class="admin-h1">Welcome to admin</h1><br>
-        <p class="admin-p">Manage your site content and settings here</p>        
+        <p class="admin-p">Manage your site content and settings here</p>      
+        <div class="logout"><?php echo '<a href="/login/logout.php">Logout</a>';?></div>
     </section>    
 </body>
 </html>

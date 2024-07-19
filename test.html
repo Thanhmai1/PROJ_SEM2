@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #00aaa3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #008f8a;
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #00aaa3;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 250px;
+    transition: opacity 0.3s ease;
+}
+
+.notification-show {
+    display: flex;
+    opacity: 1;
+}
+
+.notification-message {
+    flex-grow: 1;
+}
+
+.notification-close {
+    cursor: pointer;
+    margin-left: 15px;
+    font-size: 1.2rem;
+}
+
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification Example</title>
+    <link rel="stylesheet" href="style.css">    
+</head>
+<body>
+    <button onclick="showNotification('This is a notification message!')">Show Notification</button>
+
+    <div id="notification" class="notification">
+        <span class="notification-message"></span>
+        <span class="notification-close" onclick="hideNotification()">&times;</span>
+    </div>
+
+    <script>function showNotification(message) {
+        const notification = document.getElementById('notification');
+        const notificationMessage = document.querySelector('.notification-message');
+        notificationMessage.textContent = message;
+        notification.classList.add('notification-show');
+    
+        setTimeout(() => {
+            notification.classList.remove('notification-show');
+        }, 2000); 
+    }
+    
+    function hideNotification() {
+        const notification = document.getElementById('notification');
+        notification.classList.remove('notification-show');
+    }
+    </script>
+</body>
+</html>

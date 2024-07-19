@@ -22,9 +22,9 @@ function getOneUser($id){
 function updateUser($id, $username, $email, $role_id, $person_type_id, $password = null){
     $conn = connectdb();
     if ($password) {
-        $sql = "UPDATE user SET username = :username, email = :email, role_id = :role_id, person_type_id = :person_type_id, password = :password, update_at = NOW() WHERE id = :id";
+        $sql = "UPDATE user SET username = :username, email = :email, role_id = :role_id, person_type_id = :person_type_id, password = :password, updated_at = NOW() WHERE id = :id";
     } else {
-        $sql = "UPDATE user SET username = :username, email = :email, role_id = :role_id, person_type_id = :person_type_id, update_at = NOW() WHERE id = :id";
+        $sql = "UPDATE user SET username = :username, email = :email, role_id = :role_id, person_type_id = :person_type_id, updated_at = NOW() WHERE id = :id";
     }
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':username', $username);

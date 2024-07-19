@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Log in</title>
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" href="../images/quicksnacklogo.png" type="image/x-icon">
 </head>
+
 <body>
     <a href="http://localhost:3000/index.php">
         <img class="logo" src="../images/quicksnacklogo.png" alt="Quick Snack Logo">
@@ -39,17 +41,20 @@
                     <label>
                         <div class="input-group">
                             <input type="password" placeholder="Password" id="password" autocomplete="off"
-                                name="password" class="form-control" required minlength="8" title="Enter a valid password">
+                                name="password" class="form-control" required minlength="8"
+                                title="Enter a valid password">                            
                             <i class="fas fa-eye fas2" onclick="togglePassword('password', this)"></i>
                         </div>
                     </label>
                     <label>
                         <div class="input-group">
                             <input type="password" placeholder="Confirm Password" id="confirm_password"
-                                autocomplete="off" name="confirm_password" class="form-control" required title="Confirm your password">
-                            <i class="fas fa-eye fas1" onclick="togglePassword('confirm_password', this)"></i>
+                                autocomplete="off" name="confirm_password" class="form-control" required
+                                title="Confirm your password">
+                                <i class="fas fa-eye fas1" onclick="togglePassword('confirm_password', this)"></i>
                         </div>
                     </label>
+
                     <button type="submit" class="submit-btn">Sign Up</button>
                 </form>
             </div>
@@ -73,7 +78,8 @@
                     </label>
                     <label>
                         <div class="input-group">
-                            <input type="password" placeholder="Password" name="password" id="signin_password" required title="Enter your password">
+                            <input type="password" placeholder="Password" name="password" id="signin_password" required
+                                title="Enter your password">
                             <i class="fas fa-eye" onclick="togglePassword('signin_password', this)"></i>
                         </div>
                     </label>
@@ -104,11 +110,18 @@
     <script>
         function togglePassword(fieldId, icon) {
             const field = document.getElementById(fieldId);
-            const type = field.getAttribute('type') === 'password' ? 'text' : 'password';
-            field.setAttribute('type', type);
+            const type2 = field.getAttribute('type') === 'password' ? 'text': 'password';
+            field.setAttribute('type', type1);
+            icon.classList.toggle('fa-eye');
+            icon.classList.toggle('fa-eye-slash');
+            const type1 = field.getAttribute('type') === 'confirm_password' ? 'text': 'password';
+            
+            field.setAttribute('type', type1);
             icon.classList.toggle('fa-eye');
             icon.classList.toggle('fa-eye-slash');
         }
+
     </script>
 </body>
+
 </html>
