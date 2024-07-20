@@ -11,7 +11,7 @@ body {
 .contact-form {
   flex: 1;
   padding: 20px;
-  background-color: #e9ecef;  
+  background-color: #fcfcfc;  
 }
 
 .contact-form p {
@@ -30,9 +30,8 @@ body {
 }
 
 .contact-form .form-group.half-width {
-  flex: 0 0 48%; /* Adjusting for spacing between elements */
+  flex: 0 0 48%;
 }
-
 .contact-form button {
   background-color: #00aaa3;
   color: white;

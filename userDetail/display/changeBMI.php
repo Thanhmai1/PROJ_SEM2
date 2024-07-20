@@ -1,3 +1,18 @@
+<?php 
+include '../../includes/conn.php';
+session_start();
+$username = $_SESSION['username'];
+$ps = $conn->prepare("SELECT `bmi` FROM user WHERE `username`=?");
+$ps->bind_param("s", $username);
+$ps->execute();
+$result = $ps->get_result();
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $bmi = $row["bmi"];
+} else {
+    $bmi = "Error retrieving BMI";
+}
+?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -83,7 +98,7 @@
     </style>
 </head>
 <body>
-    <?php session_start(); include './header-userdetail.php'; ?>
+    <?php include './header-userdetail.php'; ?>
     <div class="container mt-5">
         <?php if (isset($_SESSION["updateErrorMessage"]) && $_SESSION["updateErrorMessage"]): ?>
         <div id="messageDiv" class="alert alert-danger" role="alert">
@@ -107,12 +122,12 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="weight">Weight (in kilograms)</label>
-                    <input type="text" class="form-control" id="weight" name="weight" value="<?php echo htmlspecialchars($_SESSION['weight'] ?? ''); ?> "required>
+                    <input type="text" class="form-control" id="weight" name="weight" value="<?php echo htmlspecialchars($_SESSION['weight'] ?? ''); ?>" required>
                     <div id="weightError" class="text-danger mt-2 error-message"></div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="bmi">BMI</label>
-                    <input type="text" class="form-control" id="bmi" name="bmi" value="<?php echo htmlspecialchars($_SESSION['bmi'] ?? ''); ?>" disabled>
+                    <input type="text" class="form-control" id="bmi" name="bmi" value="<?php echo htmlspecialchars($bmi); ?>" disabled>
                 </div>
                 <button type="submit" value="submit" name="updateBMI" class="btn btn-primary">Update BMI</button>
             </form>

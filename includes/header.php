@@ -65,8 +65,8 @@ session_start();
                     <div class="dropdown-content">
                         <?php
                         if (isset($_SESSION['loggedin'])) {
-                            echo '<a  href="/userDetail/display/userdetail.php">My Account</a>';
-                            echo '<a href="#">Send feedback</a>';
+                            echo '<a  href="http://localhost:3000/userDetail/display/userdetail.php">My Account</a>';
+                            echo '<a href="http://localhost:3000/contact.php">Send feedback</a>';
                             echo '<a href="/login/logout.php">Logout</a>';
                         } else {
                             echo '<a href="http://localhost:3000/html/login.php">Login</a>';

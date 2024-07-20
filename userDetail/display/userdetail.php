@@ -116,7 +116,7 @@ if ($row = $result->fetch_assoc()) {
         <?php include './header-userdetail.php'; ?>       
 
         <div class="form-section">
-            <h2>User Detail</h2>
+            <h2>Your account</h2>
             <form action="updateEmail.php" method="post">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
