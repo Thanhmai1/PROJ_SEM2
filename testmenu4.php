@@ -20,6 +20,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="./css/css/style.css">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="/filter.css">
@@ -167,6 +168,31 @@
 <?php include './includes/header.php'; ?>
 
 <body>
+    <?php
+    include './cndbqunganh.php';
+
+    $bmi = $_POST['bmi'];
+
+    $sql = "SELECT d.*, c.namecategories, pt.person_types as bmi_category 
+        FROM Dish d 
+        JOIN Categories c ON d.category_id = c.id
+        JOIN Menu m ON d.id = m.dish_id
+        JOIN Person_Types pt ON m.person_type_id = pt.id
+        WHERE (? IS NULL OR pt.bmi_min IS NULL OR ? >= pt.bmi_min)
+          AND (? IS NULL OR pt.bmi_max IS NULL OR ? <= pt.bmi_max)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("dddd", $bmi, $bmi, $bmi, $bmi);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $dishes = [];
+    while ($row = $result->fetch_assoc()) {
+        $dishes[] = $row;
+    }
+
+    echo json_encode($dishes);
+    ?>
+
     <!-- food section -->
     <section class="food_section layout_padding">
         <div class="container">
@@ -177,13 +203,12 @@
             </div>
 
             <ul class="filters_menu">
-                <li class="active" data-filter="*">All</li>
+                <li class="active" data-filter="*">Tất cả</li>
                 <li data-filter=".Healthy">Healthy</li>
                 <li data-filter=".Fat-Food">Fat Food</li>
                 <li data-filter=".Smoothy">Smoothy</li>
                 <li data-filter=".Quick-Filling">Quick Filling</li>
             </ul>
-
 
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
@@ -211,8 +236,6 @@
                 });
             </script>
 
-
-
             <div id="BMI">
                 <div class="bmi-calculator">
                     <h2><?php
@@ -222,15 +245,15 @@
                     } else {
                         echo "";
                     }
-                    ?> BMI is</h2>
+                    ?> BMI là</h2>
                     <div class="input-container">
                         <div>
                             <label for="height">Height (cm):</label>
-                            <input type="number" id="height" placeholder="Input Your Height">
+                            <input type="number" id="height" placeholder="Enter Your Height">
                         </div>
                         <div>
                             <label for="weight">Weight (kg):</label>
-                            <input type="number" id="weight" placeholder="Input Your Weight">
+                            <input type="number" id="weight" placeholder="Enter Your Weight">
                         </div>
                     </div>
                     <div class="button-container">
@@ -250,7 +273,7 @@
                         var bmi = weight / (heightInMeters * heightInMeters);
                         var bmiRounded = bmi.toFixed(2);
 
-                        document.getElementById('result').innerText = "BMI của bạn là " + bmiRounded;
+                        document.getElementById('result').innerText = "Your BMI is " + bmiRounded;
 
                         // Lấy các món ăn dựa trên BMI
                         fetch('get_dishes_by_bmi.php', {
@@ -265,89 +288,97 @@
                                 updateDishes(data);
                             })
                             .catch((error) => {
-                                console.error('Lỗi:', error);
+                                console.error('Error:', error);
                             });
 
                     } else {
-                        document.getElementById('result').innerText = "Vui lòng nhập giá trị hợp lệ cho chiều cao và cân nặng!";
+                        document.getElementById('result').innerText = "Please enter valid your height and your weight";
                     }
                 }
 
+
                 function updateDishes(dishes) {
                     var container = document.querySelector('.recipes-container');
-                    container.innerHTML = ''; // Xóa nội dung hiện tại
+                    container.innerHTML = ''; // Clear current content
 
                     if (dishes.length === 0) {
-                        container.innerHTML = '<p>No dishes found for this BMI item</p>';
+                        container.innerHTML = '<p>Không tìm thấy món ăn nào cho BMI này</p>';
                         return;
                     }
 
                     dishes.forEach(dish => {
                         var dishHtml = `
-        <div class='recipe-card'>
-        <div class='image-container'>
-            <img src='${dish.thumbnail}' alt='${dish.title}'>
-        </div>
-        <h3>${dish.title}</h3>
-        <p><strong>For BMI:</strong> ${dish.category_name}</p>
-        <div class='button-container'>
-            <a href='#' class='btn btn-primary'>See More</a>
-        </div>
-        </div>
-    `;
+            <div class='recipe-card ${dish.namecategories.replace(/ /g, '-')}'>
+                <div class='image-container'>
+                    <img src='${dish.thumbnail}' alt='${dish.title}'>
+                </div>
+                <h3>${dish.title}</h3>
+                <p><strong>Danh mục:</strong> ${dish.namecategories}</p>
+                <p><strong>Dành cho BMI:</strong> ${dish.bmi_category}</p>
+                <p><strong>Mô tả:</strong> ${dish.description}</p>
+                <div class='button-container'>
+                    <a href='#' class='btn btn-primary'>Xem thêm</a>
+                </div>
+            </div>
+        `;
                         container.innerHTML += dishHtml;
                     });
                 }
+
             </script>
+
+
 
 
             <div class="recipes-container">
                 <?php
-                if (!isset($_POST['bmi'])) {
-                    include './cndbqunganh.php';
+                include './cndbqunganh.php';
 
-                    $sql = "SELECT d.*, c.namecategories, pt.person_types as bmi_category 
-            FROM Dish d 
-            JOIN Categories c ON d.category_id = c.id
-            JOIN Menu m ON d.id = m.dish_id
-            JOIN Person_Types pt ON m.person_type_id = pt.id";
-                    $result = $conn->query($sql);
+                $sql = "SELECT d.*, c.namecategories, pt.person_types as bmi_category 
+        FROM Dish d 
+        JOIN Categories c ON d.category_id = c.id
+        JOIN Menu m ON d.id = m.dish_id
+        JOIN Person_Types pt ON m.person_type_id = pt.id";
+                $result = $conn->query($sql);
 
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            $imageUrl = $row["thumbnail"];
-                            $imageName = $row["title"];
-                            $category = $row["namecategories"];
-                            $bmiCategory = $row["bmi_category"];
-                            $description = $row["description"];
-
-                            if (filter_var($imageUrl, FILTER_VALIDATE_URL) === FALSE) {
-                                $imageUrl = "path/to/default-image.jpg";
-                            }
-
-                            $categoryClass = str_replace(' ', '-', $category);
-                            echo "<div class='recipe-card $categoryClass'>";
-                            echo "<div class='image-container'>";
-                            echo "<img src='" . htmlspecialchars($imageUrl, ENT_QUOTES, 'UTF-8') . "' alt='" . htmlspecialchars($imageName, ENT_QUOTES, 'UTF-8') . "'>";
-                            echo "</div>";
-                            echo "<h3>" . htmlspecialchars($imageName, ENT_QUOTES, 'UTF-8') . "</h3>";
-                            echo "<p><strong>Danh mục:</strong> " . htmlspecialchars($category, ENT_QUOTES, 'UTF-8') . "</p>";
-                            echo "<p><strong>For BMI:</strong> " . htmlspecialchars($bmiCategory, ENT_QUOTES, 'UTF-8') . "</p>";
-                            echo "<p><strong>Description:</strong> " . htmlspecialchars($description, ENT_QUOTES, 'UTF-8') . "</p>";
-                            echo "<div class='button-container'>";
-                            echo "<a href='#' class='btn btn-primary'>See More</a>";
-                            echo "</div>";
-                            echo "</div>";
+                if ($result->num_rows > 0) {
+                    echo "<div class='recipes-container'>";
+                    while ($row = $result->fetch_assoc()) {
+                        $imageUrl = $row["thumbnail"];
+                        $imageName = $row["title"];
+                        $category = $row["namecategories"];
+                        $bmiCategory = $row["bmi_category"];
+                        $description = $row["description"];
+                        $recipeId = $row["id"];  // Lấy recipe_id
+                
+                        if (filter_var($imageUrl, FILTER_VALIDATE_URL) === FALSE) {
+                            $imageUrl = "path/to/default-image.jpg";
                         }
-                    } else {
-                        echo "Không tìm thấy món ăn nào.";
-                    }
 
-                    $conn->close();
+                        $categoryClass = str_replace(' ', '-', $category);
+                        echo "<div class='recipe-card $categoryClass'>";
+                        echo "<div class='image-container'>";
+                        echo "<img src='" . htmlspecialchars($imageUrl, ENT_QUOTES, 'UTF-8') . "' alt='" . htmlspecialchars($imageName, ENT_QUOTES, 'UTF-8') . "'>";
+                        echo "</div>";
+                        echo "<h3>" . htmlspecialchars($imageName, ENT_QUOTES, 'UTF-8') . "</h3>";
+                        echo "<p><strong>Danh mục:</strong> " . htmlspecialchars($category, ENT_QUOTES, 'UTF-8') . "</p>";
+                        echo "<p><strong>Dành cho BMI:</strong> " . htmlspecialchars($bmiCategory, ENT_QUOTES, 'UTF-8') . "</p>";
+                        echo "<p><strong>Mô tả:</strong> " . htmlspecialchars($description, ENT_QUOTES, 'UTF-8') . "</p>";
+                        echo "<div class='button-container'>";
+                        echo "<a href='dish_detail.php?recipe_id=" . htmlspecialchars($recipeId, ENT_QUOTES, 'UTF-8') . "' class='btn btn-primary'>Xem thêm</a>";
+                        echo "</div>";
+                        echo "</div>";
+                    }
+                    echo "</div>";
+                } else {
+                    echo "Không tìm thấy món ăn nào.";
                 }
+
+                $conn->close();
                 ?>
 
             </div>
+
 
             <div class="btn-box">
                 <a href="#" id="viewMoreBtn">

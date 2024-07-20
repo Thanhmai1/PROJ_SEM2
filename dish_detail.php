@@ -1,4 +1,5 @@
 <?php
+/*
 // Kết nối đến cơ sở dữ liệu
 $host = 'localhost';
 $db = 'project_sem2';
@@ -30,11 +31,41 @@ try {
 } catch (\PDOException $e) {
     throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
+*/
+
+
+include './cndbqunganh.php'; // Kết nối đến cơ sở dữ liệu
+
+if (isset($_GET['recipe_id'])) {
+    $recipe_id = intval($_GET['recipe_id']);
+
+    $sql = "SELECT * FROM Dish_Detail WHERE recipe_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $recipe_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+    } else {
+        echo "There are no dishes with valid recipe_id.";
+        exit();
+    }
+
+    $stmt->close();
+    $conn->close();
+} else {
+    echo "There is no valid recipe_id.";
+    exit();
+}
+
+
 ?>
 
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>Quick Snack Recipe Details</title>
@@ -42,15 +73,17 @@ try {
     <link rel="icon" href="../images/quicksnacklogo.png" type="images/x-icon">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEQngsV7Zt27NXF@a@ApmYm81iuXoPkF0JwJ8ERdkLPM0" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEQngsV7Zt27NXF@a@ApmYm81iuXoPkF0JwJ8ERdkLPM0" crossorigin="anonymous">
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Nunito:600,700" rel="stylesheet"> 
-    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Nunito:600,700" rel="stylesheet">
+
     <!-- CSS Libraries -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -60,41 +93,45 @@ try {
     <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/css/style.css">
 </head>
+<?php include './includes/header.php'; ?>
 
 <body>
-    <div class="sticky">
+    <!-- <div class="sticky">
         <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #00aaa3">
-            <a style="color: #fff;" class="navbar-brand" href="../index.html"><i style="font-family: 'Dancing Script', cursive;">Quick Snack</i></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
+            <a style="color: #fff;" class="navbar-brand" href="../index.html"><i
+                    style="font-family: 'Dancing Script', cursive;">Quick Snack</i></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
-          
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <a style="color: #fff;" class="nav-link" href="../index.html">Home <span class="sr-only"></span></a>
-                </li>
-                <li class="nav-item">
-                  <a style="color: #fff;" class="nav-link" href="../menu.html">Recipe</a>
-                </li>
-                <li class="nav-item">
-                  <a style="color: #fff;" class="nav-link" href="../html/contact.html">Contact</a>
-                </li>
-                <li class="nav-item">
-                  <a style="color: #fff;" class="nav-link" href="../html/about.html">About Us</a>
-                </li>
-                <li class="nav-item">
-                  <a style="color: #fff;" class="nav-link" href="../html/login.html">Login</a>
-                </li>
-              </ul>
-              <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-              </form>
-          </div>
-          </nav>
-        </div>
-            <hr>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a style="color: #fff;" class="nav-link" href="../index.html">Home <span
+                                class="sr-only"></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="color: #fff;" class="nav-link" href="../menu.html">Recipe</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="color: #fff;" class="nav-link" href="../html/contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="color: #fff;" class="nav-link" href="../html/about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="color: #fff;" class="nav-link" href="../html/login.html">Login</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+    </div> -->
+    <hr>
 
 
     <!-- Single Post Start-->
@@ -103,40 +140,42 @@ try {
             <div class="row">
                 <div class="col-lg-8">
                     <div class="single-content">
-                        <img src="<?php echo $row['thumbnail']; ?>" />
+                        <img src="<?php echo htmlspecialchars($row['thumbnail'], ENT_QUOTES, 'UTF-8'); ?>"
+                            alt="Thumbnail" />
                         <div class="ready">
                             <span>
                                 <b>Prepare</b>
                                 <br>
-                                <?php echo $row['prepare']; ?>
+                                <?php echo htmlspecialchars($row['prepare'], ENT_QUOTES, 'UTF-8'); ?>
                             </span>
                             <span class="span-2">
                                 <b>Process</b>
                                 <br>
-                                <?php echo $row['process']; ?>
+                                <?php echo htmlspecialchars($row['process'], ENT_QUOTES, 'UTF-8'); ?>
                             </span>
                             <span class="span-3">
                                 <b>Intended For</b>
                                 <br>
-                                <?php echo $row['intendedFor']; ?>
+                                <?php echo htmlspecialchars($row['intendedFor'], ENT_QUOTES, 'UTF-8'); ?>
                             </span>
                         </div>
                         <br>
-                        <h2 style="text-align: center;"><?php echo $row['title']; ?></h2>
+                        <h2 style="text-align: center;">
+                            <?php echo htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8'); ?></h2>
                         <br>
                         <h3>| About at a Glance</h3>
                         <br>
                         <p>
-                            <?php echo $row['introduction']; ?>
+                            <?php echo nl2br(htmlspecialchars($row['introduction'], ENT_QUOTES, 'UTF-8')); ?>
                         </p>
                         <p>
                             <u><b>Popularity</b></u>:
-                            <ul>
+                        <ul>
                             <?php
                             if (isset($row["popularity"])) {
                                 $popularityItems = explode("\n", $row["popularity"]);
                                 foreach ($popularityItems as $item) {
-                                    echo "<li>" . htmlspecialchars($item) . "</li>";
+                                    echo "<li>" . htmlspecialchars($item, ENT_QUOTES, 'UTF-8') . "</li>";
                                 }
                             } else {
                                 echo "<li>No popularity information available.</li>";
@@ -144,7 +183,7 @@ try {
                             ?>
                         </ul>
                         </p>
-                        
+
                         <h3>| Recipe and How To Cook</h3>
                         <br>
                         <h4>1. About at a Glance Recipe</h4>
@@ -153,7 +192,7 @@ try {
                             if (isset($row["aboutatfood"])) {
                                 $aboutAtFoodItems = explode("\n", $row["aboutatfood"]);
                                 foreach ($aboutAtFoodItems as $item) {
-                                    echo "<li>" . htmlspecialchars($item) . "</li>";
+                                    echo "<li>" . htmlspecialchars($item, ENT_QUOTES, 'UTF-8') . "</li>";
                                 }
                             } else {
                                 echo "<li>No about-at-food information available.</li>";
@@ -162,14 +201,15 @@ try {
                         </ul>
                         <h4>2. How To Cook</h4>
                         <h5>_ Cooking Ingredients Include:</h5>
-                        <img src="<?php echo $row['thumbnailhtc']; ?>" alt="">
+                        <img src="<?php echo htmlspecialchars($row['thumbnailhtc'], ENT_QUOTES, 'UTF-8'); ?>"
+                            alt="Ingredients Thumbnail">
                         <div class="container-ingredients">
                             <ul>
                                 <?php
                                 if (isset($row["ingredient"])) {
                                     $ingredientItems = explode("\n", $row["ingredient"]);
                                     foreach ($ingredientItems as $item) {
-                                        echo "<li>" . htmlspecialchars($item) . "</li>";
+                                        echo "<li>" . htmlspecialchars($item, ENT_QUOTES, 'UTF-8') . "</li>";
                                     }
                                 } else {
                                     echo "<li>No ingredient information available.</li>";
@@ -182,7 +222,7 @@ try {
                         if (isset($row["howdoit"])) {
                             $howDoItItems = explode("\n", $row["howdoit"]);
                             foreach ($howDoItItems as $index => $item) {
-                                echo "<ol start=\"" . ($index + 1) . "\"><li>" . htmlspecialchars($item) . "</li></ol>";
+                                echo "<ol start=\"" . ($index + 1) . "\"><li>" . htmlspecialchars($item, ENT_QUOTES, 'UTF-8') . "</li></ol>";
                             }
                         } else {
                             echo "<ol><li>No how-to information available.</li></ol>";
@@ -201,6 +241,7 @@ try {
         </div>
     </div>
 
+
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
@@ -209,7 +250,7 @@ try {
     <script src="lib/tempusdominus/js/moment.min.js"></script>
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-    
+
     <!-- Contact Javascript File -->
     <script src="mail/jqBootstrapValidation.min.js"></script>
     <script src="mail/contact.js"></script>
@@ -217,4 +258,5 @@ try {
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 </body>
+
 </html>
