@@ -20,15 +20,15 @@
                 </div>
                 <div>
                         <i class="fas fa-phone"></i>
-                        <p><a style="text-decoration: none;" href="tel:+1235235598">+ 1235 2355 98</a></p>
+                        <p><a style="text-decoration: none; color:#333;" href="tel:+1235235598">+ 1235 2355 98</a></p>
                 </div>
                 <div>
                         <i class="fas fa-envelope"></i>
-                        <p><a style="text-decoration: none;" href="mailto:thanhmainguyen20120119@gmail.com">thanhmainguyen20120119@gmail.com</a></p>
+                        <p><a style="text-decoration: none;color:#333;" href="mailto:thanhmainguyen20120119@gmail.com">thanhmainguyen20120119@gmail.com</a></p>
                 </div>
                 <div>
                         <i class="fas fa-globe"></i>
-                        <p><a style="text-decoration: none;" href="http://localhost:3000/index.php">quicksnack.com</a></p>
+                        <p><a style="text-decoration: none;color:#333;" href="http://localhost:3000/index.php">quicksnack.com</a></p>
                 </div>
         </div>
 
