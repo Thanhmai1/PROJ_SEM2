@@ -42,7 +42,7 @@
                     $hash_password_db = $row['password'];
                     if (password_verify($password, $hash_password_db)) {
                         $_SESSION['loggedin'] = true;
-                        $_SESSION['username'] = $row['username'];
+                        $_SESSION['username'] = $row['username'];                        
                         $_SESSION['role_id'] = $row['role_id'];
 
                         if ($row['role_id'] == 1) {

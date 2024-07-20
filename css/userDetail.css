@@ -6,7 +6,8 @@ body {
 }
 
 .container {
-    width: auto;
+    width: 80%;
+    max-width: 1200px;
     margin: 50px auto;
     padding: 20px;
     background-color: #ffffff;
@@ -29,18 +30,20 @@ h2 {
 }
 
 .btn-primary {
-    width: auto;
-    
-    margin: 1px;
-    float: right;
+    margin: 10px 0;
     background-color: #00aaa3;
     border-color: #00aaa3;
-    transition: background-color 0.3s ease;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
 }
 
 .btn-primary:hover {
-    border-color: #00faf2;
     background-color: #0c7c78;
+    border-color: #00faf2;
 }
 
 a {
@@ -49,9 +52,10 @@ a {
 }
 
 .form-section {
-    width: 50%;
-    float: left;
-    padding: 40px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 .form-section h2 {
@@ -65,12 +69,7 @@ a {
 .password-container input {
     padding-right: 40px;
 }
-.fa-eye{
-    margin-top: 16px;
-}
-.fa-eye-slash{
-    margin-top: 16px;
-}
+
 .fa-eye,
 .fa-eye-slash {
     position: absolute;

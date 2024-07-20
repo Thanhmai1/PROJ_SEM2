@@ -10,7 +10,7 @@ try {
         $password = $_POST["password"];
         $confirm_password = $_POST["confirm_password"];
         $role_id = 2;
-        $person_type_id = 1;
+        $person_type_id = NULL;
         $create_at = date("Y-m-d H:i:s");
         $update_at = date("Y-m-d H:i:s");
         $status = FALSE;
