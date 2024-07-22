@@ -52,12 +52,39 @@ if (isset($_GET['recipe_id'])) {
         exit();
     }
 
+    // Recent Post
+    $sql_recent = "SELECT * FROM Dish ORDER BY id DESC LIMIT 5";
+    $result_recent = $conn->query($sql_recent);
+
+    if ($result_recent && $result_recent->num_rows > 0) {
+        $recent_posts = $result_recent->fetch_all(MYSQLI_ASSOC);
+    } else {
+        $recent_posts = [];
+    }
+
+    // Categories
+    $sql_categories = "
+    SELECT c.id, c.namecategories, COUNT(d.id) AS dish_count
+    FROM Categories c
+    LEFT JOIN Dish d ON c.id = d.category_id
+    GROUP BY c.id, c.namecategories
+";
+    $result_categories = $conn->query($sql_categories);
+
+    if ($result_categories && $result_categories->num_rows > 0) {
+        $categories = $result_categories->fetch_all(MYSQLI_ASSOC);
+    } else {
+        $categories = [];
+    }
+
     $stmt->close();
     $conn->close();
 } else {
     echo "There is no valid recipe_id.";
     exit();
 }
+
+
 
 
 ?>
@@ -161,7 +188,8 @@ if (isset($_GET['recipe_id'])) {
                         </div>
                         <br>
                         <h2 style="text-align: center;">
-                            <?php echo htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8'); ?></h2>
+                            <?php echo htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8'); ?>
+                        </h2>
                         <br>
                         <h3>| About at a Glance</h3>
                         <br>
@@ -235,6 +263,84 @@ if (isset($_GET['recipe_id'])) {
                     </div>
                     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
                         © 2024 Copyright: QuickSnack
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="sidebar">
+                        <div class="sidebar-widget">
+                            <h2 class="widget-title">Recent Post</h2>
+                            <div class="recent-post">
+                                <?php if (!empty($recent_posts)): ?>
+                                    <?php foreach ($recent_posts as $post): ?>
+                                        <div class="post-item">
+                                            <div class="post-img">
+                                                <a href="./recipe.php?recipe_id=<?php echo $post['id']; ?>">
+                                                    <img src="<?php echo htmlspecialchars($post['thumbnail'], ENT_QUOTES, 'UTF-8'); ?>"
+                                                        alt="Thumbnail">
+                                                </a>
+                                            </div>
+                                            <div class="post-text">
+                                                <a href="./recipe.php?recipe_id=<?php echo $post['id']; ?>">
+                                                    <?php echo htmlspecialchars($post['title'], ENT_QUOTES, 'UTF-8'); ?>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <p>No recent posts available.</p>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-widget">
+                            <div class="image-widget">
+                                <a href="#"><img
+                                        src="https://www.huongnghiepaau.com/wp-content/uploads/2016/10/sinh-to-viet-quat-vua-dep-mat-vua-ngon.jpg"
+                                        alt="Blueberry Smoothie"></a>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-widget">
+                            <h2 class="widget-title">Categories</h2>
+                            <div class="category-widget">
+                                <ul>
+                                    <?php if (!empty($categories)): ?>
+                                        <?php foreach ($categories as $category): ?>
+                                            <li>
+                                                <a href="./testmenu2/?category_id=<?php echo urlencode($category['id']); ?>">
+                                                    <?php echo htmlspecialchars($category['namecategories'], ENT_QUOTES, 'UTF-8'); ?>
+                                                </a>
+                                                <span>(<?php echo htmlspecialchars($category['dish_count'], ENT_QUOTES, 'UTF-8'); ?>)</span>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <li>No categories available.</li>
+                                    <?php endif; ?>
+                                </ul>
+                            </div>
+                        </div>
+
+
+
+                        <div class="sidebar-widget">
+                            <div class="image-widget">
+                                <a href="#"><img
+                                        src="https://www.avsforum.com/attachments/transformers-rise-of-the-beasts-header-jpeg.3513474/"
+                                        alt="Image"></a>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-widget">
+                            <h2 class="widget-title">QuickSnack</h2>
+                            <div class="text-widget">
+                                <p>
+                                    Welcome to Quick Snack, your go-to online library for a culinary journey like no
+                                    other! If you're a passionate home chef or someone eager to explore the art of
+                                    cooking, this website is your one-stop destination for a plethora of mouthwatering
+                                    recipes and cooking inspiration.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
