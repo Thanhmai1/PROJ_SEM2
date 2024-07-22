@@ -42,12 +42,12 @@ $conn->close();
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="filter.css">
 </head>
-<?php include './includes/header.php'; ?>
+
 
 <body>
-
+    <?php include './includes/header.php'; ?>
     <!-- food section -->
-
+    
     <section class="food_section layout_padding">
         <div class="container">
             <div class="heading_container heading_center">
@@ -96,72 +96,7 @@ $conn->close();
     <!-- end food section -->
 
     <!-- footer section -->
-    <footer class="text-center text-white" style="background-color: #00aaa3">
-        <div class="container">
-            <section class="mt-5">
-                <div class="row text-center d-flex justify-content-center pt-5">
-                    <div class="col-md-2">
-                        <h6 class="text-uppercase font-weight-bold">
-                            <a href="./html/contact.html" class="text-white">Contact</a>
-                        </h6>
-                    </div>
-                    <div class="col-md-2">
-                        <h6 class="text-uppercase font-weight-bold">
-                            <a href="./html/about.html" class="text-white">About Us</a>
-                        </h6>
-                    </div>
-                    <div class="col-md-2">
-                        <h6 class="text-uppercase font-weight-bold">
-                            <a href="/menu.php" class="text-white">Recipes</a>
-                        </h6>
-                    </div>
-                </div>
-            </section>
-
-            <hr class="my-5" />
-
-            <section class="mb-5">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-lg-8">
-                        <p>
-                            Welcome to Quick Snack, your go-to online library for a culinary journey like no other! If
-                            you're a
-                            passionate home chef or someone eager to explore the art of cooking, this website is your
-                            one-stop
-                            destination for a plethora of mouthwatering recipes and cooking inspiration.
-                        </p>
-                    </div>
-                </div>
-            </section>
-            <section class="text-center mb-5">
-                <a style="text-decoration: none;" href="https://www.facebook.com/lamphandsome" class="text-white me-4">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a style="text-decoration: none;" href="https://twitter.com/?lang=vi" class="text-white me-4">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a style="text-decoration: none;" href="https://www.google.com.vn/?hl=vi" class="text-white me-4">
-                    <i class="fab fa-google"></i>
-                </a>
-                <a style="text-decoration: none;" href="https://www.instagram.com/__ph.vmlam/" class="text-white me-4">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a style="text-decoration: none;" href="https://www.linkedin.com/" class="text-white me-4">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a style="text-decoration: none;" href="https://github.com/xUankip/Project" class="text-white me-4">
-                    <i class="fab fa-github"></i>
-                </a>
-            </section>
-        </div>
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-            <div class="footer-info">
-                <p>
-                    &copy; <span id="displayYear"></span> All Rights Reserved By QuickSnack
-                </p>
-            </div>
-        </div>
-    </footer>
+   <?php include './includes/footer.php'; ?>
     <!-- footer section -->
 
     <!-- jQery -->
@@ -180,9 +115,7 @@ $conn->close();
     <!-- nice select -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
     <!-- custom js -->
-    <script src="./js/js/custom.js"></script>
-    <!-- Google Map -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
+    <script src="./js/js/custom.js"></script>    
     </script>
 </body>
 
