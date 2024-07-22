@@ -165,7 +165,7 @@
     </style>
 
 </head>
-<?php include './includes/header.php'; ?>
+
 
 <body>
     <!-- food section -->
