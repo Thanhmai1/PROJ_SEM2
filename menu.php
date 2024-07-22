@@ -1,3 +1,9 @@
+<?php
+// Kiểm tra xem phiên đã được khởi động chưa
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -97,7 +103,6 @@
     <style>
         .recipe-card {
             width: 300px;
-            height: auto;
             margin: 10px;
             display: inline-block;
             vertical-align: top;
@@ -110,6 +115,11 @@
             transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
             will-change: opacity, transform;
             backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: auto;
+            /* Ensures all cards are of equal height */
         }
 
         .recipe-card.hidden {
@@ -140,10 +150,6 @@
             margin: 5px 0;
         }
 
-        .button-container {
-            text-align: right;
-        }
-
         .btn-custom {
             background-color: #21d7d1 !important;
             border: none !important;
@@ -152,15 +158,26 @@
             border-radius: 4px;
             text-decoration: none;
             display: inline-block;
-            margin-top: 10px;
         }
 
         .btn-custom:hover {
             background-color: #1ab8b3 !important;
         }
 
-        .recipe-card {
-            transition: all 0.3s ease-in-out;
+        .button-container {
+            text-align: right;
+        }
+
+        .button-container2 {
+            margin-top: auto;
+            
+            text-align: left;
+            
+            
+        }
+
+        .btn-primary{
+            background-color: #1ab8b3;
         }
     </style>
 
@@ -178,7 +195,7 @@
             </div>
 
             <ul class="filters_menu">
-                <li class="active" data-filter="*">Tất cả</li>
+                <li class="active" data-filter="*">All</li>
                 <li data-filter=".Healthy">Healthy</li>
                 <li data-filter=".Fat-Food">Fat Food</li>
                 <li data-filter=".Smoothy">Smoothy</li>
@@ -190,6 +207,9 @@
                     var filterButtons = document.querySelectorAll('.filters_menu li');
                     var recipeCards = document.querySelectorAll('.recipe-card');
 
+                    // Hiển thị tất cả món ăn khi trang được tải
+                    showAllDishes();
+
                     filterButtons.forEach(function (button) {
                         button.addEventListener('click', function () {
                             var filter = this.getAttribute('data-filter');
@@ -199,15 +219,103 @@
                             });
                             this.classList.add('active');
 
-                            recipeCards.forEach(function (card) {
-                                if (filter === '*' || card.classList.contains(filter.substring(1))) {
-                                    card.style.display = 'inline-block';
-                                } else {
-                                    card.style.display = 'none';
-                                }
-                            });
+                            filterDishes(filter);
                         });
                     });
+
+                    function showAllDishes() {
+                        recipeCards.forEach(function (card) {
+                            card.style.display = 'inline-block';
+                        });
+                    }
+
+                    function filterDishes(filter) {
+                        recipeCards.forEach(function (card) {
+                            if (filter === '*') {
+                                card.style.display = 'inline-block';
+                            } else if (card.classList.contains(filter.substring(1))) {
+                                card.style.display = 'inline-block';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        });
+                    }
+
+                    // Thêm hàm để xử lý kết quả BMI
+                    window.updateDishes = function (dishes) {
+                        var container = document.querySelector('.recipes-container');
+                        container.innerHTML = ''; // Xóa nội dung hiện tại
+
+                        if (dishes.length === 0) {
+                            container.innerHTML = '<p>Không tìm thấy món ăn nào cho BMI này</p>';
+                            return;
+                        }
+
+                        var maxDescriptionLength = 100; // Đặt độ dài tối đa cho mô tả
+
+                        dishes.forEach(dish => {
+                            var truncatedDescription = dish.description;
+                            if (truncatedDescription.length > maxDescriptionLength) {
+                                truncatedDescription = truncatedDescription.substring(0, maxDescriptionLength) + '...';
+                            }
+
+                            var dishHtml = `
+            <div class='recipe-card ${dish.category_class}'>
+                <div class='image-container'>
+                    <img src='${dish.thumbnail}' alt='${dish.title}'>
+                </div>
+                <h3>${dish.title}</h3>
+                <p><strong>Danh mục:</strong> ${dish.category_name}</p>
+                <p><strong>Dành cho BMI:</strong> ${dish.bmi_category}</p>
+                <p><strong>Mô tả:</strong> ${truncatedDescription}</p>
+                <div class='button-container2'>
+                    <a href='#' class='btn btn-primary btn-custom'>Xem thêm</a>
+                </div>
+            </div>
+        `;
+                            container.innerHTML += dishHtml;
+                        });
+
+                        // Cập nhật lại danh sách món ăn và áp dụng bộ lọc hiện tại
+                        var recipeCards = document.querySelectorAll('.recipe-card');
+                        var activeFilter = document.querySelector('.filters_menu li.active');
+                        if (activeFilter) {
+                            filterDishes(activeFilter.getAttribute('data-filter'));
+                        } else {
+                            showAllDishes();
+                        }
+                    };
+
+
+                    // Hàm hiển thị món ăn với giới hạn
+                    function showLimitedDishes(limit) {
+                        var count = 0;
+                        recipeCards.forEach(function (card) {
+                            if (count < limit) {
+                                card.style.display = 'inline-block';
+                            } else {
+                                card.classList.add('hidden');
+                            }
+                            count++;
+                        });
+                    }
+
+                    // Xử lý nút View More
+                    var viewMoreBtn = document.getElementById('viewMoreBtn');
+                    viewMoreBtn.addEventListener('click', function (event) {
+                        event.preventDefault();
+                        var hiddenCards = document.querySelectorAll('.recipe-card.hidden');
+                        for (var i = 0; i < 6 && i < hiddenCards.length; i++) {
+                            hiddenCards[i].style.display = 'inline-block';
+                            hiddenCards[i].classList.remove('hidden');
+                        }
+                        if (document.querySelectorAll('.recipe-card.hidden').length === 0) {
+                            viewMoreBtn.style.display = 'none';
+                        }
+                    });
+
+                    // Hiển thị giới hạn 6 món ăn khi trang tải lần đầu
+                    showLimitedDishes(6);
                 });
             </script>
 
@@ -282,26 +390,61 @@
 
                     dishes.forEach(dish => {
                         var dishHtml = `
-                <div class='recipe-card ${dish.category_class}'>
-                    <div class='image-container'>
-                        <img src='${dish.thumbnail}' alt='${dish.title}'>
-                    </div>
-                    <h3>${dish.title}</h3>
-                    <p><strong>Danh mục:</strong> ${dish.category_name}</p>
-                    <p><strong>Dành cho BMI:</strong> ${dish.bmi_category}</p>
-                    <p><strong>Mô tả:</strong> ${dish.description}</p>
-                    <div class='button-container'>
-                        <a href='#' class='btn btn-primary'>Xem thêm</a>
-                    </div>
-                </div>
-            `;
+                        <div class='recipe-card ${dish.category_class}' style="display: none;">
+                            <div class='image-container'>
+                                <img src='${dish.thumbnail}' alt='${dish.title}'>
+                            </div>
+                            <h3>${dish.title}</h3>
+                            <p><strong>Danh mục:</strong> ${dish.category_name}</p>
+                            <p><strong>Dành cho BMI:</strong> ${dish.bmi_category}</p>
+                            <p><strong>Mô tả:</strong> ${dish.description}</p>
+                            <div class='button-container2'>
+                                <a href='#' class='btn btn-primary'>Xem thêm</a>
+                            </div>
+                        </div>
+                    `;
                         container.innerHTML += dishHtml;
                     });
+
+                    // Hiển thị tất cả các món ăn ban đầu
+                    showAllDishes();
                 }
+
+                // Thêm hàm mới để hiển thị tất cả các món ăn
+                function showAllDishes() {
+                    var allDishes = document.querySelectorAll('.recipe-card');
+                    allDishes.forEach(dish => {
+                        dish.style.display = 'inline-block';
+                    });
+                }
+
+                // Sửa đổi hàm lọc danh mục
+                document.addEventListener('DOMContentLoaded', function () {
+                    var filterButtons = document.querySelectorAll('.filters_menu li');
+
+                    filterButtons.forEach(function (button) {
+                        button.addEventListener('click', function () {
+                            var filter = this.getAttribute('data-filter');
+
+                            filterButtons.forEach(function (btn) {
+                                btn.classList.remove('active');
+                            });
+                            this.classList.add('active');
+
+                            var recipeCards = document.querySelectorAll('.recipe-card');
+                            recipeCards.forEach(function (card) {
+                                if (filter === '*') {
+                                    card.style.display = 'inline-block';
+                                } else if (card.classList.contains(filter.substring(1))) {
+                                    card.style.display = 'inline-block';
+                                } else {
+                                    card.style.display = 'none';
+                                }
+                            });
+                        });
+                    });
+                });
             </script>
-
-
-
 
             <div class="recipes-container">
                 <?php
@@ -309,10 +452,10 @@
                     include './cndbqunganh.php';
 
                     $sql = "SELECT d.*, c.namecategories, pt.person_types as bmi_category 
-                FROM Dish d 
-                JOIN Categories c ON d.category_id = c.id
-                JOIN Menu m ON d.id = m.dish_id
-                JOIN Person_Types pt ON m.person_type_id = pt.id";
+                        FROM Dish d 
+                        JOIN Categories c ON d.category_id = c.id
+                        JOIN Menu m ON d.id = m.dish_id
+                        JOIN Person_Types pt ON m.person_type_id = pt.id";
                     $result = $conn->query($sql);
 
                     if ($result->num_rows > 0) {
@@ -323,14 +466,15 @@
                             $category = $row["namecategories"];
                             $bmiCategory = $row["bmi_category"];
                             $description = $row["description"];
-                            $recipeId = $row["id"];  // Lấy recipe_id
-                
+                            $recipeId = $row["id"];
+
                             if (filter_var($imageUrl, FILTER_VALIDATE_URL) === FALSE) {
                                 $imageUrl = "path/to/default-image.jpg";
                             }
 
                             $categoryClass = str_replace(' ', '-', $category);
                             echo "<div class='recipe-card $categoryClass'>";
+
                             echo "<div class='image-container'>";
                             echo "<img src='" . htmlspecialchars($imageUrl, ENT_QUOTES, 'UTF-8') . "' alt='" . htmlspecialchars($imageName, ENT_QUOTES, 'UTF-8') . "'>";
                             echo "</div>";
@@ -338,21 +482,20 @@
                             echo "<p><strong>Category:</strong> " . htmlspecialchars($category, ENT_QUOTES, 'UTF-8') . "</p>";
                             echo "<p><strong>For BMI:</strong> " . htmlspecialchars($bmiCategory, ENT_QUOTES, 'UTF-8') . "</p>";
                             echo "<p><strong>Description:</strong> " . htmlspecialchars($description, ENT_QUOTES, 'UTF-8') . "</p>";
-                            echo "<div class='button-container'>";
-                            echo "<a href='./info_dish/dish_detail.php?recipe_id=" . htmlspecialchars($recipeId, ENT_QUOTES, 'UTF-8') . "' class='btn btn-primary'>See more</a>";
+                            echo "<div class='button-container2'>";
+                            echo "<a href='dish_detail.php?recipe_id=" . htmlspecialchars($recipeId, ENT_QUOTES, 'UTF-8') . "' class='btn btn-primary'>See More</a>";
                             echo "</div>";
-                            echo "</div>";
+                            echo "</div>"; // Đóng thẻ recipe-card
                         }
-                        echo "</div>";
+                        echo "</div>"; // Đóng thẻ recipes-container
                     } else {
-                        echo "No food found.";
+                        echo "Không tìm thấy món ăn nào.";
                     }
 
                     $conn->close();
                 }
                 ?>
             </div>
-
 
             <div class="btn-box">
                 <a href="#" id="viewMoreBtn">
@@ -362,75 +505,9 @@
         </div>
     </section>
 
-    <!-- end food section -->
 
-    <!-- footer section -->
-    <footer class="text-center text-white" style="background-color: #00aaa3">
-        <div class="container">
-            <section class="mt-5">
-                <div class="row text-center d-flex justify-content-center pt-5">
-                    <div class="col-md-2">
-                        <h6 class="text-uppercase font-weight-bold">
-                            <a href="./html/contact.html" class="text-white">Contact</a>
-                        </h6>
-                    </div>
-                    <div class="col-md-2">
-                        <h6 class="text-uppercase font-weight-bold">
-                            <a href="./html/about.html" class="text-white">About Us</a>
-                        </h6>
-                    </div>
-                    <div class="col-md-2">
-                        <h6 class="text-uppercase font-weight-bold">
-                            <a href="/menu.php" class="text-white">Recipes</a>
-                        </h6>
-                    </div>
-                </div>
-            </section>
+    <?php include './includes/footer.php'; ?>
 
-            <hr class="my-5" />
-
-            <section class="mb-5">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-lg-8">
-                        <p>
-                            Welcome to Quick Snack, your go-to online library for a culinary journey like no other! If
-                            you're a
-                            passionate home chef or someone eager to explore the art of cooking, this website is your
-                            one-stop
-                            destination for a plethora of mouthwatering recipes and cooking inspiration.
-                        </p>
-                    </div>
-                </div>
-            </section>
-            <section class="text-center mb-5">
-                <a style="text-decoration: none;" href="https://www.facebook.com/lamphandsome" class="text-white me-4">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a style="text-decoration: none;" href="https://twitter.com/?lang=vi" class="text-white me-4">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a style="text-decoration: none;" href="https://www.google.com.vn/?hl=vi" class="text-white me-4">
-                    <i class="fab fa-google"></i>
-                </a>
-                <a style="text-decoration: none;" href="https://www.instagram.com/__ph.vmlam/" class="text-white me-4">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a style="text-decoration: none;" href="https://www.linkedin.com/" class="text-white me-4">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a style="text-decoration: none;" href="https://github.com/xUankip/Project" class="text-white me-4">
-                    <i class="fab fa-github"></i>
-                </a>
-            </section>
-        </div>
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-            <div class="footer-info">
-                <p>
-                    &copy; <span id="displayYear"></span> All Rights Reserved By QuickSnack
-                </p>
-            </div>
-        </div>
-    </footer>
     <!-- footer section -->
 
     <!-- jQery -->

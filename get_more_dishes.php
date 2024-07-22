@@ -1,16 +1,17 @@
 <?php
 include './cndbqunganh.php';
 
-$bmi = $_POST['bmi'];
+$offset = $_POST['offset'];
+$limit = 5;
 
-$sql = "SELECT d.*, c.namecategories AS category_name, pt.person_types AS bmi_category 
+$sql = "SELECT d.*, c.namecategories, pt.person_types as bmi_category 
         FROM Dish d 
         JOIN Categories c ON d.category_id = c.id
         JOIN Menu m ON d.id = m.dish_id
         JOIN Person_Types pt ON m.person_type_id = pt.id
-        WHERE ? BETWEEN pt.bmi_min AND pt.bmi_max";
+        LIMIT ?, ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("d", $bmi);
+$stmt->bind_param("ii", $offset, $limit);
 $stmt->execute();
 $result = $stmt->get_result();
 

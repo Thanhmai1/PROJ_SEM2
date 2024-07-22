@@ -20,7 +20,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-        
+
     <link rel="stylesheet" href="./css/css/style.css">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="/filter.css">
@@ -162,6 +162,14 @@
         .recipe-card {
             transition: all 0.3s ease-in-out;
         }
+
+        .button-container2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            /* Tùy chọn: Thêm khoảng cách phía trên nếu cần */
+        }
     </style>
 
 </head>
@@ -178,258 +186,201 @@
             </div>
 
             <ul class="filters_menu">
-    <li class="active" data-filter="*">Tất cả</li>
-    <li data-filter=".Healthy">Healthy</li>
-    <li data-filter=".Fat-Food">Fat Food</li>
-    <li data-filter=".Smoothy">Smoothy</li>
-    <li data-filter=".Quick-Filling">Quick Filling</li>
-</ul>
+                <li class="active" data-filter="*">Tất cả</li>
+                <li data-filter=".Healthy">Healthy</li>
+                <li data-filter=".Fat-Food">Fat Food</li>
+                <li data-filter=".Smoothy">Smoothy</li>
+                <li data-filter=".Quick-Filling">Quick Filling</li>
+            </ul>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var filterButtons = document.querySelectorAll('.filters_menu li');
-        var recipeCards = document.querySelectorAll('.recipe-card');
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var filterButtons = document.querySelectorAll('.filters_menu li');
+                    var recipeCards = document.querySelectorAll('.recipe-card');
 
-        filterButtons.forEach(function (button) {
-            button.addEventListener('click', function () {
-                var filter = this.getAttribute('data-filter');
+                    filterButtons.forEach(function (button) {
+                        button.addEventListener('click', function () {
+                            var filter = this.getAttribute('data-filter');
 
-                filterButtons.forEach(function (btn) {
-                    btn.classList.remove('active');
+                            filterButtons.forEach(function (btn) {
+                                btn.classList.remove('active');
+                            });
+                            this.classList.add('active');
+
+                            recipeCards.forEach(function (card) {
+                                if (filter === '*' || card.classList.contains(filter.substring(1))) {
+                                    card.style.display = 'inline-block';
+                                } else {
+                                    card.style.display = 'none';
+                                }
+                            });
+                        });
+                    });
                 });
-                this.classList.add('active');
+            </script>
 
-                recipeCards.forEach(function (card) {
-                    if (filter === '*' || card.classList.contains(filter.substring(1))) {
-                        card.style.display = 'inline-block';
+            <div id="BMI">
+                <div class="bmi-calculator">
+                    <h2><?php
+                    if (isset($_SESSION['username'])) {
+                        $username = $_SESSION['username'];
+                        echo $username;
                     } else {
-                        card.style.display = 'none';
+                        echo "";
                     }
-                });
-            });
-        });
-    });
-</script>
-
-<div id="BMI">
-    <div class="bmi-calculator">
-        <h2><?php
-        if (isset($_SESSION['username'])) {
-            $username = $_SESSION['username'];
-            echo $username;
-        } else {
-            echo "";
-        }
-        ?> BMI là</h2>
-        <div class="input-container">
-            <div>
-                <label for="height">Height (cm):</label>
-                <input type="number" id="height" placeholder="Enter Your Height">
+                    ?> BMI là</h2>
+                    <div class="input-container">
+                        <div>
+                            <label for="height">Height (cm):</label>
+                            <input type="number" id="height" placeholder="Enter Your Height">
+                        </div>
+                        <div>
+                            <label for="weight">Weight (kg):</label>
+                            <input type="number" id="weight" placeholder="Enter Your Weight">
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <button onclick="calculateBMI()">Calculate</button>
+                        <div class="result" id="result"></div>
+                    </div>
+                </div>
             </div>
-            <div>
-                <label for="weight">Weight (kg):</label>
-                <input type="number" id="weight" placeholder="Enter Your Weight">
-            </div>
-        </div>
-        <div class="button-container">
-            <button onclick="calculateBMI()">Calculate</button>
-            <div class="result" id="result"></div>
-        </div>
-    </div>
-</div>
 
-<script>
-    function calculateBMI() {
-        var height = document.getElementById('height').value;
-        var weight = document.getElementById('weight').value;
+            <script>
+                function calculateBMI() {
+                    var height = document.getElementById('height').value;
+                    var weight = document.getElementById('weight').value;
 
-        if (height > 0 && weight > 0) {
-            var heightInMeters = height / 100;
-            var bmi = weight / (heightInMeters * heightInMeters);
-            var bmiRounded = bmi.toFixed(2);
+                    if (height > 0 && weight > 0) {
+                        var heightInMeters = height / 100;
+                        var bmi = weight / (heightInMeters * heightInMeters);
+                        var bmiRounded = bmi.toFixed(2);
 
-            document.getElementById('result').innerText = "Your BMI is " + bmiRounded;
+                        document.getElementById('result').innerText = "Your BMI is " + bmiRounded;
 
-            // Lấy các món ăn dựa trên BMI
-            fetch('get_dishes_by_bmi.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'bmi=' + bmiRounded
-            })
-            .then(response => response.json())
-            .then(data => {
-                updateDishes(data);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+                        // Lấy các món ăn dựa trên BMI
+                        fetch('get_dishes_by_bmi.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: 'bmi=' + bmiRounded
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                updateDishes(data);
+                            })
+                            .catch((error) => {
+                                console.error('Error:', error);
+                            });
 
-        } else {
-            document.getElementById('result').innerText = "Please enter valid your height and your weight";
-        }
-    }
+                    } else {
+                        document.getElementById('result').innerText = "Please enter valid your height and your weight";
+                    }
+                }
 
-    function updateDishes(dishes) {
-        var container = document.querySelector('.recipes-container');
-        container.innerHTML = ''; // Xóa nội dung hiện tại
+                function updateDishes(dishes) {
+                    var container = document.querySelector('.recipes-container');
+                    container.innerHTML = ''; // Xóa nội dung hiện tại
 
-        if (dishes.length === 0) {
-            container.innerHTML = '<p>Không tìm thấy món ăn nào cho BMI này</p>';
-            return;
-        }
+                    if (dishes.length === 0) {
+                        container.innerHTML = '<p>Không tìm thấy món ăn nào cho BMI này</p>';
+                        return;
+                    }
 
-        dishes.forEach(dish => {
-            var dishHtml = `
+                    dishes.forEach(dish => {
+                        var dishHtml = `
                 <div class='recipe-card ${dish.category_class}'>
                     <div class='image-container'>
                         <img src='${dish.thumbnail}' alt='${dish.title}'>
                     </div>
                     <h3>${dish.title}</h3>
-                    <p><strong>Danh mục:</strong> ${dish.category_name}</p>
-                    <p><strong>Dành cho BMI:</strong> ${dish.bmi_category}</p>
-                    <p><strong>Mô tả:</strong> ${dish.description}</p>
+                    <p><strong>Category:</strong> ${dish.category_name}</p>
+                    <p><strong>For BMI:</strong> ${dish.bmi_category}</p>
+                    <p><strong>Description:</strong> ${dish.description}</p>
                     <div class='button-container'>
-                        <a href='#' class='btn btn-primary'>Xem thêm</a>
+                        <a href='#' class='btn btn-primary'>See More</a>
                     </div>
                 </div>
             `;
-            container.innerHTML += dishHtml;
-        });
-    }
-</script>
-
-
-
+                        container.innerHTML += dishHtml;
+                    });
+                }
+            </script>
 
             <div class="recipes-container">
-            <?php
-if (!isset($_POST['bmi'])) {
-    include './cndbqunganh.php';
+                <?php
+                include './cndbqunganh.php';
 
-    $sql = "SELECT d.*, c.namecategories, pt.person_types as bmi_category 
+                $sql = "SELECT d.*, c.namecategories, pt.person_types as bmi_category 
             FROM Dish d 
             JOIN Categories c ON d.category_id = c.id
             JOIN Menu m ON d.id = m.dish_id
             JOIN Person_Types pt ON m.person_type_id = pt.id";
-    $result = $conn->query($sql);
+                $result = $conn->query($sql);
 
-    if ($result->num_rows > 0) {
-        echo "<div class='recipes-container'>";
-        while ($row = $result->fetch_assoc()) {
-            $imageUrl = $row["thumbnail"];
-            $imageName = $row["title"];
-            $category = $row["namecategories"];
-            $bmiCategory = $row["bmi_category"];
-            $description = $row["description"];
+                if ($result->num_rows > 0) {
+                    $count = 0;
+                    while ($row = $result->fetch_assoc()) {
+                        $imageUrl = $row["thumbnail"];
+                        $imageName = $row["title"];
+                        $category = $row["namecategories"];
+                        $bmiCategory = $row["bmi_category"];
+                        $description = $row["description"];
 
-            if (filter_var($imageUrl, FILTER_VALIDATE_URL) === FALSE) {
-                $imageUrl = "path/to/default-image.jpg";
-            }
+                        if (filter_var($imageUrl, FILTER_VALIDATE_URL) === FALSE) {
+                            $imageUrl = "path/to/default-image.jpg";
+                        }
 
-            $categoryClass = str_replace(' ', '-', $category);
-            echo "<div class='recipe-card $categoryClass'>";
-            echo "<div class='image-container'>";
-            echo "<img src='" . htmlspecialchars($imageUrl, ENT_QUOTES, 'UTF-8') . "' alt='" . htmlspecialchars($imageName, ENT_QUOTES, 'UTF-8') . "'>";
-            echo "</div>";
-            echo "<h3>" . htmlspecialchars($imageName, ENT_QUOTES, 'UTF-8') . "</h3>";
-            echo "<p><strong>Danh mục:</strong> " . htmlspecialchars($category, ENT_QUOTES, 'UTF-8') . "</p>";
-            echo "<p><strong>Dành cho BMI:</strong> " . htmlspecialchars($bmiCategory, ENT_QUOTES, 'UTF-8') . "</p>";
-            echo "<p><strong>Mô tả:</strong> " . htmlspecialchars($description, ENT_QUOTES, 'UTF-8') . "</p>";
-            echo "<div class='button-container'>";
-            echo "<a href='#' class='btn btn-primary'>Xem thêm</a>";
-            echo "</div>";
-            echo "</div>";
-        }
-        echo "</div>";
-    } else {
-        echo "Không tìm thấy món ăn nào.";
-    }
+                        $categoryClass = str_replace(' ', '-', $category);
+                        $hiddenClass = $count >= 6 ? 'hidden' : '';
+                        echo "<div class='recipe-card $categoryClass $hiddenClass'>";
+                        echo "<div class='image-container'>";
+                        echo "<img src='" . htmlspecialchars($imageUrl, ENT_QUOTES, 'UTF-8') . "' alt='" . htmlspecialchars($imageName, ENT_QUOTES, 'UTF-8') . "'>";
+                        echo "</div>";
+                        echo "<h3>" . htmlspecialchars($imageName, ENT_QUOTES, 'UTF-8') . "</h3>";
+                        echo "<p><strong>Category:</strong> " . htmlspecialchars($category, ENT_QUOTES, 'UTF-8') . "</p>";
+                        echo "<p><strong>For BMI:</strong> " . htmlspecialchars($bmiCategory, ENT_QUOTES, 'UTF-8') . "</p>";
+                        echo "<p><strong>Description:</strong> " . htmlspecialchars($description, ENT_QUOTES, 'UTF-8') . "</p>";
+                        echo "<div class='button-container'>";
+                        echo "<a href='#' class='btn btn-primary'>View More</a>";
+                        echo "</div>";
+                        echo "</div>";
+                        $count++;
+                    }
+                } else {
+                    echo "Không tìm thấy món ăn nào.";
+                }
 
-    $conn->close();
-}
-?>
-
+                $conn->close();
+                ?>
             </div>
 
-            <div class="btn-box">
-                <a href="#" id="viewMoreBtn">
-                    View More
-                </a>
+            <div class="button-container2 text-center">
+                <button id="view-more-btn" class="btn-custom">View More</button>
             </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const viewMoreBtn = document.getElementById('view-more-btn');
+                    viewMoreBtn.addEventListener('click', function () {
+                        const hiddenCards = document.querySelectorAll('.recipe-card.hidden');
+                        for (let i = 0; i < 6 && i < hiddenCards.length; i++) {
+                            hiddenCards[i].classList.remove('hidden');
+                        }
+                        if (hiddenCards.length <= 6) {
+                            viewMoreBtn.style.display = 'none';
+                        }
+                    });
+                });
+            </script>
         </div>
     </section>
 
     <!-- end food section -->
 
     <!-- footer section -->
-    <footer class="text-center text-white" style="background-color: #00aaa3">
-        <div class="container">
-            <section class="mt-5">
-                <div class="row text-center d-flex justify-content-center pt-5">
-                    <div class="col-md-2">
-                        <h6 class="text-uppercase font-weight-bold">
-                            <a href="./html/contact.html" class="text-white">Contact</a>
-                        </h6>
-                    </div>
-                    <div class="col-md-2">
-                        <h6 class="text-uppercase font-weight-bold">
-                            <a href="./html/about.html" class="text-white">About Us</a>
-                        </h6>
-                    </div>
-                    <div class="col-md-2">
-                        <h6 class="text-uppercase font-weight-bold">
-                            <a href="/menu.php" class="text-white">Recipes</a>
-                        </h6>
-                    </div>
-                </div>
-            </section>
-
-            <hr class="my-5" />
-
-            <section class="mb-5">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-lg-8">
-                        <p>
-                            Welcome to Quick Snack, your go-to online library for a culinary journey like no other! If
-                            you're a
-                            passionate home chef or someone eager to explore the art of cooking, this website is your
-                            one-stop
-                            destination for a plethora of mouthwatering recipes and cooking inspiration.
-                        </p>
-                    </div>
-                </div>
-            </section>
-            <section class="text-center mb-5">
-                <a style="text-decoration: none;" href="https://www.facebook.com/lamphandsome" class="text-white me-4">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a style="text-decoration: none;" href="https://twitter.com/?lang=vi" class="text-white me-4">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a style="text-decoration: none;" href="https://www.google.com.vn/?hl=vi" class="text-white me-4">
-                    <i class="fab fa-google"></i>
-                </a>
-                <a style="text-decoration: none;" href="https://www.instagram.com/__ph.vmlam/" class="text-white me-4">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a style="text-decoration: none;" href="https://www.linkedin.com/" class="text-white me-4">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a style="text-decoration: none;" href="https://github.com/xUankip/Project" class="text-white me-4">
-                    <i class="fab fa-github"></i>
-                </a>
-            </section>
-        </div>
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-            <div class="footer-info">
-                <p>
-                    &copy; <span id="displayYear"></span> All Rights Reserved By QuickSnack
-                </p>
-            </div>
-        </div>
-    </footer>
+    <?php include './includes/footer.php'; ?>
     <!-- footer section -->
 
     <!-- jQery -->
