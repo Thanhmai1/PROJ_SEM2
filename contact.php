@@ -1,3 +1,47 @@
+<?php
+session_start();
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $subject = $_POST['subject'];
+    $message = $_POST['message'];
+    $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+
+    // Kết nối đến cơ sở dữ liệu
+    $conn = new mysqli("localhost", "root", "", "your_database_name");
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Lưu thông tin liên hệ vào cơ sở dữ liệu
+    $sql = "INSERT INTO Contact (user_id, name, email, subject, message) VALUES (?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("issss", $user_id, $name, $email, $subject, $message);
+    $stmt->execute();
+
+    // Gửi email
+    $to = "thanhmainguyen20120119@gmail.com";
+    $headers = "From: " . $email . "\r\n" .
+               "Reply-To: " . $email . "\r\n" .
+               "X-Mailer: PHP/" . phpversion();
+    $mail_subject = "Contact Form Submission: " . $subject;
+    $mail_body = "Name: " . $name . "\n" .
+                 "Email: " . $email . "\n" .
+                 "Message:\n" . $message;
+
+    if (mail($to, $mail_subject, $mail_body, $headers)) {
+        echo "Message sent successfully!";
+    } else {
+        echo "Failed to send message.";
+    }
+
+    $stmt->close();
+    $conn->close();
+} else {
+    header("Location: contact.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,14 +68,11 @@
                         </div>
                         <div>
                                 <i class="fas fa-envelope"></i>
-                                <p><a style="text-decoration: none;color:#333;"
-                                                href="mailto:thanhmainguyen20120119@gmail.com">thanhmainguyen20120119@gmail.com</a>
-                                </p>
+                                <p><a style="text-decoration: none;color:#333;" href="mailto:thanhmainguyen20120119@gmail.com">thanhmainguyen20120119@gmail.com</a></p>
                         </div>
                         <div>
                                 <i class="fas fa-globe"></i>
-                                <p><a style="text-decoration: none;color:#333;"
-                                                href="http://localhost:3000/index.php">quicksnack.com</a></p>
+                                <p><a style="text-decoration: none;color:#333;" href="http://localhost:3000/index.php">quicksnack.com</a></p>
                         </div>
                 </div>
 
@@ -46,8 +87,7 @@
                                                 </div>
                                                 <div class="form-group half-width">
                                                         <label for="email">Email Address:</label>
-                                                        <input type="email" id="email" name="email" class="form-control"
-                                                                required>
+                                                        <input type="email" id="email" name="email" class="form-control" required>
                                                 </div>
                                         </div>
                                         <div class="form-group">
@@ -56,21 +96,18 @@
                                         </div>
                                         <div class="form-group">
                                                 <label for="message">Message:</label>
-                                                <textarea id="message" name="message" class="form-control" rows="5"
-                                                        required></textarea>
+                                                <textarea id="message" name="message" class="form-control" rows="5" required></textarea>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Send Message</button>
                                 </form>
                         </div>
 
                         <div class="contact-details">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2122.9329453976306!2d105.78082135639623!3d21.02865078376905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab4cd376479b%3A0xbc2e0bb9db373ed2!2zOGEgVMO0biBUaOG6pXQgVGh1eeG6v3QsIE3hu7kgxJDDrG5oLCBD4bqndSBHaeG6pXksIEjDoCBO4buZaSAxMDAwMDAsIFZpZXRuYW0!5e0!3m2!1sen!2s!4v1708056544050!5m2!1sen!2s"
-                                        allowfullscreen="" loading="lazy"></iframe>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2122.9329453976306!2d105.78082135639623!3d21.02865078376905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab4cd376479b%3A0xbc2e0bb9db373ed2!2zOGEgVMO0biBUaOG6pXQgVGh1eeG6v3QsIE3hu7kgxJDDrG5oLCBD4bqndSBHaeG6pXksIEjDoCBO4buZaSAxMDAwMDAsIFZpZXRuYW0!5e0!3m2!1sen!2s!4v1708056544050!5m2!1sen!2s" allowfullscreen="" loading="lazy"></iframe>
                         </div>
                 </div>
 
-        <?php } else {
-                ?>
+        <?php } else { ?>
                 <div class="container contact-info">
                         <div>
                                 <i class="fas fa-map-marker-alt"></i>
@@ -82,14 +119,11 @@
                         </div>
                         <div>
                                 <i class="fas fa-envelope"></i>
-                                <p><a style="text-decoration: none;color:#333;"
-                                                href="mailto:thanhmainguyen20120119@gmail.com">thanhmainguyen20120119@gmail.com</a>
-                                </p>
+                                <p><a style="text-decoration: none;color:#333;" href="mailto:thanhmainguyen20120119@gmail.com">thanhmainguyen20120119@gmail.com</a></p>
                         </div>
                         <div>
                                 <i class="fas fa-globe"></i>
-                                <p><a style="text-decoration: none;color:#333;"
-                                                href="http://localhost:3000/index.php">quicksnack.com</a></p>
+                                <p><a style="text-decoration: none;color:#333;" href="http://localhost:3000/index.php">quicksnack.com</a></p>
                         </div>
                 </div>
 
@@ -104,8 +138,7 @@
                                                 </div>
                                                 <div class="form-group half-width">
                                                         <label for="email">Email Address:</label>
-                                                        <input type="email" id="email" name="email" class="form-control"
-                                                        disabled>
+                                                        <input type="email" id="email" name="email" class="form-control" disabled>
                                                 </div>
                                         </div>
                                         <div class="form-group">
@@ -114,16 +147,14 @@
                                         </div>
                                         <div class="form-group">
                                                 <label for="message">Message:</label>
-                                                <textarea id="message" name="message" class="form-control" rows="5"
-                                                        disabled></textarea>
+                                                <textarea id="message" name="message" class="form-control" rows="5" disabled></textarea>
                                         </div>
                                         <?php echo "<a href='http://localhost:3000/html/login.php' style='text-decoration:none;'><h6 style='color:red;'>Please login to send feedback!</h6></a>"; ?>
                                 </form>
                         </div>
 
                         <div class="contact-details">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2122.9329453976306!2d105.78082135639623!3d21.02865078376905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab4cd376479b%3A0xbc2e0bb9db373ed2!2zOGEgVMO0biBUaOG6pXQgVGh1eeG6v3QsIE3hu7kgxJDDrG5oLCBD4bqndSBHaeG6pXksIEjDoCBO4buZaSAxMDAwMDAsIFZpZXRuYW0!5e0!3m2!1sen!2s!4v1708056544050!5m2!1sen!2s"
-                                        allowfullscreen="" loading="lazy"></iframe>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2122.9329453976306!2d105.78082135639623!3d21.02865078376905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab4cd376479b%3A0xbc2e0bb9db373ed2!2zOGEgVMO0biBUaOG6pXQgVGh1eeG6v3QsIE3hu7kgxJDDrG5oLCBD4bqndSBHaeG6pXksIEjDoCBO4buZaSAxMDAwMDAsIFZpZXRuYW0!5e0!3m2!1sen!2s!4v1708056544050!5m2!1sen!2s" allowfullscreen="" loading="lazy"></iframe>
                         </div>
                 </div>
         <?php }
