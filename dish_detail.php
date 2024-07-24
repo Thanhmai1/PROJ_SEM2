@@ -274,13 +274,13 @@ if (isset($_GET['recipe_id'])) {
                                     <?php foreach ($recent_posts as $post): ?>
                                         <div class="post-item">
                                             <div class="post-img">
-                                                <a href="./recipe.php?recipe_id=<?php echo $post['id']; ?>">
+                                                <a href="./dish_detail.php?recipe_id=<?php echo $post['id']; ?>">
                                                     <img src="<?php echo htmlspecialchars($post['thumbnail'], ENT_QUOTES, 'UTF-8'); ?>"
                                                         alt="Thumbnail">
                                                 </a>
                                             </div>
                                             <div class="post-text">
-                                                <a href="./recipe.php?recipe_id=<?php echo $post['id']; ?>">
+                                                <a href="./dish_detail.php?recipe_id=<?php echo $post['id']; ?>">
                                                     <?php echo htmlspecialchars($post['title'], ENT_QUOTES, 'UTF-8'); ?>
                                                 </a>
                                             </div>
@@ -295,7 +295,7 @@ if (isset($_GET['recipe_id'])) {
                         <div class="sidebar-widget">
                             <div class="image-widget">
                                 <a href="#"><img
-                                        src="https://www.huongnghiepaau.com/wp-content/uploads/2016/10/sinh-to-viet-quat-vua-dep-mat-vua-ngon.jpg"
+                                        src="https://vietgiao.edu.vn/wp-content/uploads/2021/04/nghe-dau-bep-hien-nay-2.png"
                                         alt="Blueberry Smoothie"></a>
                             </div>
                         </div>
@@ -325,7 +325,7 @@ if (isset($_GET['recipe_id'])) {
                         <div class="sidebar-widget">
                             <div class="image-widget">
                                 <a href="#"><img
-                                        src="https://www.avsforum.com/attachments/transformers-rise-of-the-beasts-header-jpeg.3513474/"
+                                        src="https://nghebep.com/wp-content/uploads/2018/07/clare-smyth.jpg"
                                         alt="Image"></a>
                             </div>
                         </div>
@@ -348,6 +348,7 @@ if (isset($_GET['recipe_id'])) {
     </div>
 
 
+    <?php include'./includes/footer.php'; ?>
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>

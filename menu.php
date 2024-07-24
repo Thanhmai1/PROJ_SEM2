@@ -29,77 +29,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
     <link rel="stylesheet" href="./css/css/style.css">
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="/filter.css">
-
-    <!-- <style>
-    .hidden {
-      display: none;
-    }
-
-    .recipe-card {
-      width: 300px;
-      /* Điều chỉnh kích thước theo nhu cầu */
-      margin: 10px;
-      display: inline-block;
-      vertical-align: top;
-      /* Đảm bảo các thẻ đứng thẳng hàng */
-      box-sizing: border-box;
-      border: 1px solid #ddd;
-      /* Thêm đường viền để dễ thấy */
-      border-radius: 8px;
-      /* Thêm bo tròn góc */
-      padding: 15px;
-      /* Thêm khoảng cách bên trong */
-    }
-
-    .image-container {
-      width: 100%;
-      height: 200px;
-      /* Điều chỉnh chiều cao theo nhu cầu */
-      overflow: hidden;
-      border-bottom: 1px solid #ddd;
-      /* Thêm đường viền dưới để tách biệt hình ảnh */
-      margin-bottom: 10px;
-      /* Khoảng cách giữa hình ảnh và nội dung */
-    }
-
-    .image-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      /* Đảm bảo hình ảnh không bị méo */
-    }
-
-    .recipe-card h3 {
-      margin: 10px 0;
-      /* Khoảng cách trên dưới cho tiêu đề */
-    }
-
-    .recipe-card p {
-      margin: 5px 0;
-      /* Khoảng cách trên dưới cho đoạn văn */
-    }
-
-    .button-container {
-      text-align: right;
-    }
-
-    .btn-custom {
-      background-color: #21d7d1 !important;
-      border: none !important;
-      padding: 5px 10px;
-      color: white !important;
-      border-radius: 4px;
-      text-decoration: none;
-      display: inline-block;
-      margin-top: 10px;
-    }
-
-    .btn-custom:hover {
-      background-color: #1ab8b3 !important;
-    }
-  </style> -->
-
+    <link rel="stylesheet" href="./filter.css">
     <style>
         .recipe-card {
             width: 300px;
@@ -170,14 +100,42 @@ if (session_status() == PHP_SESSION_NONE) {
 
         .button-container2 {
             margin-top: auto;
-            
+
             text-align: left;
-            
-            
+
+
         }
 
-        .btn-primary{
+        .btn-primary {
             background-color: #1ab8b3;
+        }
+
+        /* Điều chỉnh vị trí nút */
+        .btn-box {
+            text-align: center;
+            /* Căn giữa nút theo chiều ngang */
+            margin-top: 20px;
+            /* Thêm khoảng cách phía trên nút */
+        }
+
+        /* Đảm bảo nút hiển thị ngay sau các món ăn */
+        .btn-box a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #fbc86b;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .btn-box a:hover {
+            background-color: #e5b557;
+        }
+
+        /* Ẩn thẻ mà không ảnh hưởng đến bố cục */
+        .recipe-card.hidden {
+            visibility: hidden;
+            position: absolute;
         }
     </style>
 
@@ -206,9 +164,11 @@ if (session_status() == PHP_SESSION_NONE) {
                 document.addEventListener('DOMContentLoaded', function () {
                     var filterButtons = document.querySelectorAll('.filters_menu li');
                     var recipeCards = document.querySelectorAll('.recipe-card');
+                    var viewMoreBtn = document.getElementById('viewMoreBtn');
 
-                    // Hiển thị tất cả món ăn khi trang được tải
-                    showAllDishes();
+                    // Hiển thị giới hạn món ăn ban đầu
+                    var currentFilter = '*';
+                    showLimitedDishes(currentFilter, 6);
 
                     filterButtons.forEach(function (button) {
                         button.addEventListener('click', function () {
@@ -219,124 +179,189 @@ if (session_status() == PHP_SESSION_NONE) {
                             });
                             this.classList.add('active');
 
-                            filterDishes(filter);
+                            currentFilter = filter;
+                            showLimitedDishes(filter, 6);
                         });
                     });
 
-                    function showAllDishes() {
+                    function showLimitedDishes(filter, limit) {
+                        var count = 0;
                         recipeCards.forEach(function (card) {
-                            card.style.display = 'inline-block';
+                            if (filter === '*' || card.classList.contains(filter.substring(1))) {
+                                if (count < limit) {
+                                    card.style.display = 'inline-block';
+                                    card.classList.remove('hidden');
+                                } else {
+                                    card.style.display = 'none';
+                                    card.classList.add('hidden');
+                                }
+                                count++;
+                            } else {
+                                card.style.display = 'none';
+                                card.classList.add('hidden');
+                            }
                         });
+
+                        // Hiển thị nút "View More" nếu có thẻ bị ẩn
+                        if (document.querySelectorAll('.recipe-card.hidden').length > 0) {
+                            viewMoreBtn.style.display = 'inline-block';
+                        } else {
+                            viewMoreBtn.style.display = 'none';
+                        }
                     }
 
                     function filterDishes(filter) {
-                        recipeCards.forEach(function (card) {
-                            if (filter === '*') {
-                                card.style.display = 'inline-block';
-                            } else if (card.classList.contains(filter.substring(1))) {
-                                card.style.display = 'inline-block';
-                            } else {
-                                card.style.display = 'none';
-                            }
-                        });
-                    }
-
-                    // Thêm hàm để xử lý kết quả BMI
-                    window.updateDishes = function (dishes) {
-                        var container = document.querySelector('.recipes-container');
-                        container.innerHTML = ''; // Xóa nội dung hiện tại
-
-                        if (dishes.length === 0) {
-                            container.innerHTML = '<p>Không tìm thấy món ăn nào cho BMI này</p>';
-                            return;
-                        }
-
-                        var maxDescriptionLength = 100; // Đặt độ dài tối đa cho mô tả
-
-                        dishes.forEach(dish => {
-                            var truncatedDescription = dish.description;
-                            if (truncatedDescription.length > maxDescriptionLength) {
-                                truncatedDescription = truncatedDescription.substring(0, maxDescriptionLength) + '...';
-                            }
-
-                            var dishHtml = `
-            <div class='recipe-card ${dish.category_class}'>
-                <div class='image-container'>
-                    <img src='${dish.thumbnail}' alt='${dish.title}'>
-                </div>
-                <h3>${dish.title}</h3>
-                <p><strong>Danh mục:</strong> ${dish.category_name}</p>
-                <p><strong>Dành cho BMI:</strong> ${dish.bmi_category}</p>
-                <p><strong>Mô tả:</strong> ${truncatedDescription}</p>
-                <div class='button-container2'>
-                    <a href='#' class='btn btn-primary btn-custom'>Xem thêm</a>
-                </div>
-            </div>
-        `;
-                            container.innerHTML += dishHtml;
-                        });
-
-                        // Cập nhật lại danh sách món ăn và áp dụng bộ lọc hiện tại
-                        var recipeCards = document.querySelectorAll('.recipe-card');
-                        var activeFilter = document.querySelector('.filters_menu li.active');
-                        if (activeFilter) {
-                            filterDishes(activeFilter.getAttribute('data-filter'));
-                        } else {
-                            showAllDishes();
-                        }
-                    };
-
-
-                    // Hàm hiển thị món ăn với giới hạn
-                    function showLimitedDishes(limit) {
                         var count = 0;
                         recipeCards.forEach(function (card) {
-                            if (count < limit) {
+                            if (filter === '*' || card.classList.contains(filter.substring(1))) {
                                 card.style.display = 'inline-block';
+                                card.classList.remove('hidden');
+                                count++;
                             } else {
+                                card.style.display = 'none';
                                 card.classList.add('hidden');
                             }
-                            count++;
                         });
+
+                        // Hiển thị nút "View More" nếu có thẻ bị ẩn
+                        if (count > 6) {
+                            viewMoreBtn.style.display = 'inline-block';
+                        } else {
+                            viewMoreBtn.style.display = 'none';
+                        }
                     }
 
-                    // Xử lý nút View More
-                    var viewMoreBtn = document.getElementById('viewMoreBtn');
                     viewMoreBtn.addEventListener('click', function (event) {
                         event.preventDefault();
                         var hiddenCards = document.querySelectorAll('.recipe-card.hidden');
-                        for (var i = 0; i < 6 && i < hiddenCards.length; i++) {
-                            hiddenCards[i].style.display = 'inline-block';
-                            hiddenCards[i].classList.remove('hidden');
-                        }
+                        var count = 0;
+
+                        hiddenCards.forEach(function (card) {
+                            if (currentFilter === '*' || card.classList.contains(currentFilter.substring(1))) {
+                                if (count < 6) {
+                                    card.style.display = 'inline-block';
+                                    card.classList.remove('hidden');
+                                    count++;
+                                }
+                            }
+                        });
+
                         if (document.querySelectorAll('.recipe-card.hidden').length === 0) {
                             viewMoreBtn.style.display = 'none';
                         }
                     });
 
-                    // Hiển thị giới hạn 6 món ăn khi trang tải lần đầu
-                    showLimitedDishes(6);
+                    // Thêm sự kiện lắng nghe cho việc nhập lại chiều cao và cân nặng
+                    var heightInput = document.getElementById('height');
+                    var weightInput = document.getElementById('weight');
+
+                    heightInput.addEventListener('input', resetDishes);
+                    weightInput.addEventListener('input', resetDishes);
+
+                    function resetDishes() {
+                        if (heightInput.value === '' || weightInput.value === '') {
+                            // Hiển thị lại tất cả các món ăn
+                            showAllDishes();
+                        }
+                    }
+
+                    function showAllDishes() {
+                        var allDishes = document.querySelectorAll('.recipe-card');
+                        allDishes.forEach(dish => {
+                            dish.style.display = 'inline-block';
+                        });
+                        // Cập nhật lại trạng thái nút "View More"
+                        showLimitedDishes(currentFilter, 6);
+                    }
                 });
+
+                function calculateBMI() {
+                    var height = document.getElementById('height').value;
+                    var weight = document.getElementById('weight').value;
+
+                    if (height > 0 && weight > 0) {
+                        var heightInMeters = height / 100;
+                        var bmi = weight / (heightInMeters * heightInMeters);
+                        var bmiRounded = bmi.toFixed(2);
+
+                        document.getElementById('result').innerText = "Your BMI is " + bmiRounded;
+
+                        // Lấy các món ăn dựa trên BMI
+                        fetch('get_dishes_by_bmi.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: 'bmi=' + bmiRounded
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                updateDishes(data);
+                            })
+                            .catch((error) => {
+                                console.error('Error:', error);
+                            });
+                    } else {
+                        document.getElementById('result').innerText = "Please enter valid your weight and height";
+                    }
+                }
+
+                function updateDishes(dishes) {
+                    var container = document.querySelector('.recipes-container');
+                    container.innerHTML = ''; // Xóa nội dung hiện tại
+
+                    if (dishes.length === 0) {
+                        container.innerHTML = '<p>Không tìm thấy món ăn nào cho BMI này</p>';
+                        return;
+                    }
+
+                    dishes.forEach(dish => {
+                        var dishHtml = `
+            <div class='recipe-card ${dish.category_class}' style="display: none;">
+                <div class='image-container'>
+                    <img src='${dish.thumbnail}' alt='${dish.title}'>
+                </div>
+                <h3>${dish.title}</h3>
+                <p><strong>Category:</strong> ${dish.category_name}</p>
+                <p><strong>For BMI:</strong> ${dish.bmi_category}</p>
+                <p><strong>Description:</strong> ${dish.description}</p>
+                <div class='button-container2'>
+                    <a href='#' class='btn btn-primary'>See More</a>
+                </div>
+            </div>
+        `;
+                        container.innerHTML += dishHtml;
+                    });
+
+                    // Hiển thị tất cả các món ăn ban đầu
+                    showAllDishes();
+                }
+
+                // Thêm hàm mới để hiển thị tất cả các món ăn
+                function showAllDishes() {
+                    var allDishes = document.querySelectorAll('.recipe-card');
+                    allDishes.forEach(dish => {
+                        dish.style.display = 'inline-block';
+                    });
+                }
+
+
+
+
+
             </script>
 
             <div id="BMI">
                 <div class="bmi-calculator">
-                    <h2><?php
-                    if (isset($_SESSION['username'])) {
-                        $username = $_SESSION['username'];
-                        echo $username;
-                    } else {
-                        echo "";
-                    }
-                    ?> BMI là</h2>
+                    <h2><?php echo isset($_SESSION['username']) ? $_SESSION['username'] : ''; ?> BMI </h2>
                     <div class="input-container">
                         <div>
                             <label for="height">Height (cm):</label>
-                            <input type="number" id="height" placeholder="Enter Your Height">
+                            <input type="number" id="height" placeholder="Enter yoủ height...">
                         </div>
                         <div>
                             <label for="weight">Weight (kg):</label>
-                            <input type="number" id="weight" placeholder="Enter Your Weight">
+                            <input type="number" id="weight" placeholder="Enter your weight...">
                         </div>
                     </div>
                     <div class="button-container">
@@ -345,6 +370,7 @@ if (session_status() == PHP_SESSION_NONE) {
                     </div>
                 </div>
             </div>
+
 
             <script>
                 function calculateBMI() {
@@ -395,11 +421,11 @@ if (session_status() == PHP_SESSION_NONE) {
                                 <img src='${dish.thumbnail}' alt='${dish.title}'>
                             </div>
                             <h3>${dish.title}</h3>
-                            <p><strong>Danh mục:</strong> ${dish.category_name}</p>
-                            <p><strong>Dành cho BMI:</strong> ${dish.bmi_category}</p>
-                            <p><strong>Mô tả:</strong> ${dish.description}</p>
+                            <p><strong>Category:</strong> ${dish.category_name}</p>
+                            <p><strong>For BMI:</strong> ${dish.bmi_category}</p>
+                            <p><strong>Description:</strong> ${dish.description}</p>
                             <div class='button-container2'>
-                                <a href='#' class='btn btn-primary'>Xem thêm</a>
+                                <a href='#' class='btn btn-primary'>See More</a>
                             </div>
                         </div>
                     `;

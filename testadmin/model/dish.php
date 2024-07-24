@@ -1,6 +1,6 @@
-
 <?php
-function createDish($category_id, $thumbnail, $title, $description) {
+function createDish($category_id, $thumbnail, $title, $description)
+{
     $conn = connectdb();
     $sql = "INSERT INTO dish (category_id, thumbnail, title, description) VALUES (:category_id, :thumbnail, :title, :description)";
     $stmt = $conn->prepare($sql);
@@ -12,7 +12,8 @@ function createDish($category_id, $thumbnail, $title, $description) {
     $stmt->execute();
 }
 
-function getOneDish($id) {
+function getOneDish($id)
+{
     $conn = connectdb();
     $stmt = $conn->prepare("SELECT id, category_id, thumbnail, title, description FROM dish WHERE id = :id");
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -21,7 +22,8 @@ function getOneDish($id) {
     return $kq;
 }
 
-function updateDish($id, $category_id, $thumbnail, $title, $description) {
+function updateDish($id, $category_id, $thumbnail, $title, $description)
+{
     $conn = connectdb();
     $sql = "UPDATE dish SET category_id = :category_id, thumbnail = :thumbnail, title = :title, description = :description WHERE id = :id";
     $stmt = $conn->prepare($sql);
@@ -33,19 +35,21 @@ function updateDish($id, $category_id, $thumbnail, $title, $description) {
     $stmt->execute();
 }
 
-function deleteDish($id) {
+function deleteDish($id)
+{
     $conn = connectdb();
     try {
         $sql = "DELETE FROM dish WHERE id = :id";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
-    } catch(PDOException $e) {
+    } catch (PDOException $e) {
         echo "Error deleting record: " . $e->getMessage();
     }
 }
 
-function getAllDishes() {
+function getAllDishes()
+{
     $conn = connectdb();
     $stmt = $conn->prepare("SELECT id, category_id, thumbnail, title, description FROM dish");
     $stmt->execute();

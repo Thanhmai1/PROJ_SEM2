@@ -1,16 +1,17 @@
+/* General Styles */
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Lato', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    color: #333;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    color: #333;
 }
 
 header {
-    background-color: #00aaa3;
+    background-color: #00796b;
     color: white;
     padding: 15px 20px;
     display: flex;
@@ -24,34 +25,34 @@ header {
 
 header h2 {
     margin: 0;
-    font-size: 1.5rem;
-    font-weight: 500;
+    font-size: 1.8rem;
+    font-weight: 600;
 }
 
 header nav {
     display: flex;
-    gap: 15px;
+    gap: 20px;
 }
 
 header nav a {
     color: white;
     text-decoration: none;
     font-weight: 500;
-    padding: 5px 10px;
+    padding: 8px 12px;
     border-radius: 5px;
     transition: background-color 0.3s ease;
 }
 
 header nav a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.3);
 }
 
 section {
     width: 80%;
     margin: 20px auto;
-    padding: 20px;
+    padding: 25px;
     background: #fff;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     flex-grow: 1;
 }
@@ -64,15 +65,15 @@ form {
 }
 
 form label {
-    font-weight: 500;
+    font-weight: 600;
 }
 
 input[type="text"],
 input[type="number"],
 input[type="file"],
 textarea {
-    width: 100%;
-    padding: 10px;
+    /* width: 100%; */
+    padding: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1rem;
@@ -83,14 +84,14 @@ input[type="text"]:focus,
 input[type="number"]:focus,
 input[type="file"]:focus,
 textarea:focus {
-    border-color: #00aaa3;
+    border-color: #00796b;
     outline: none;
 }
 
 input[type="submit"] {
-    padding: 10px 20px;
+    padding: 12px 20px;
     border: none;
-    background: #00aaa3;
+    background: #00796b;
     color: white;
     border-radius: 5px;
     cursor: pointer;
@@ -99,7 +100,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #008f8a;
+    background-color: #004d40;
 }
 
 table {
@@ -109,20 +110,20 @@ table {
     font-size: 0.9rem;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
 th, td {
-    padding: 10px 12px;
+    padding: 12px 15px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
 
 th {
-    background: #00aaa3;
+    background: #00796b;
     color: white;
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 tr:nth-child(even) {
@@ -130,11 +131,11 @@ tr:nth-child(even) {
 }
 
 tr:hover {
-    background-color: #e1e5ea;
+    background-color: #e0f2f1;
 }
 
 td a {
-    color: #00aaa3;
+    color: #00796b;
     text-decoration: none;
     font-weight: 500;
     margin-right: 10px;
@@ -146,12 +147,12 @@ td a:last-child {
 }
 
 td a:hover {
-    color: #007bff;
+    color: #004d40;
     text-decoration: underline;
 }
 
 footer {
-    background-color: #00aaa3;
+    background-color: #00796b;
     color: white;
     text-align: center;
     padding: 15px 20px;
@@ -163,9 +164,9 @@ footer {
 /* Confirmation Form Styles */
 .confirmation-form {
     margin-top: 20px;
-    padding: 10px;
+    padding: 15px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: #f9f9f9;
 }
 
@@ -173,26 +174,23 @@ footer {
     background-color: #dc3545;
     color: #fff;
     border: none;
-    padding: 8px 15px;
+    padding: 10px 20px;
     cursor: pointer;
     margin-right: 10px;
+    border-radius: 5px;
 }
 
 .confirmation-form a {
-    background-color: #00aaa3;
+    background-color: #00796b;
     color: #fff;
     text-decoration: none;
-    padding: 8px 15px;
+    padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    body {
-        flex-direction: column;
-    }
-
     header {
         flex-direction: column;
         align-items: flex-start;
@@ -251,11 +249,11 @@ footer {
 }
 
 .dish-detail .detail-item strong {
-    color: #00aaa3;
+    color: #00796b;
 }
 
 .dish-detail .actions a {
-    color: #00aaa3;
+    color: #00796b;
     text-decoration: none;
     font-weight: 500;
     margin-right: 10px;
@@ -263,13 +261,13 @@ footer {
 }
 
 .dish-detail .actions a:hover {
-    color: #008f8a;
+    color: #004d40;
     text-decoration: underline;
 }
 
 .form-select {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1rem;
@@ -277,24 +275,26 @@ footer {
 }
 
 .form-select:focus {
-    border-color: #00aaa3;
+    border-color: #00796b;
     outline: none;
 }
 
 .admin-h1 {
     text-align: center;
-    font-size: xx-large;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 20px 0;
 }
 
 .admin-p {
     text-align: center;
-    font-size: large;
+    font-size: 1.2rem;
     margin: 10px auto;
     width: 80%;
 }
 
 .logout {
-    float: right;    
+    float: right;
     background-color: #dc3545;
     color: white;
     padding: 10px 20px;

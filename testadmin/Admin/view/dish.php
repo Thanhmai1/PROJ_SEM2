@@ -3,7 +3,7 @@ try {
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "project_sem2"; 
+    $dbname = "project_sem2";
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -17,7 +17,7 @@ try {
     $stmt->execute();
     $dishes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-} catch(PDOException $e) {
+} catch (PDOException $e) {
     echo "Kết nối cơ sở dữ liệu thất bại: " . $e->getMessage();
 }
 ?>
@@ -28,7 +28,7 @@ try {
         <select name="category_id" id="category_id" class="form-select" required>
             <?php
             foreach ($categories as $category) {
-                echo '<option value="'.$category['id'].'">'.$category['namecategories'].'</option>';
+                echo '<option value="' . $category['id'] . '">' . $category['namecategories'] . '</option>';
             }
             ?>
         </select><br>
@@ -45,7 +45,7 @@ try {
 </section>
 
 <section>
-<h2>Dishes</h2>
+    <h2>Dishes</h2>
     <form action="index.php?act=createdishform" method="post">
         <input type="submit" name="add" value="Add Dish">
     </form>
@@ -89,5 +89,3 @@ try {
         ?>
     </table>
 </section>
-
-

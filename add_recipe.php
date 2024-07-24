@@ -1,5 +1,5 @@
 <?php
-include './cndbqunganh.php'; // Kết nối cơ sở dữ liệu
+include './func/cndbqunganh.php'; // Kết nối cơ sở dữ liệu
 
 // Kiểm tra xem biểu mẫu có được gửi đi hay không
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -102,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h2>Recipes</h2>
     <div class="recipes-container">
         <?php
-        include './cndbqunganh.php';
+        include './func/cndbqunganh.php';
 
         $sql = "SELECT name, description, image_url, category FROM recipes";
         $result = $conn->query($sql);

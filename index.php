@@ -146,7 +146,7 @@
         <div class="col-lg-6">
           <div class="about-content">
             <div class="section-header">
-              <p>About Us</p>
+              <!-- <p>About Us</p> -->
               <h2 style="color: #fbc86b;">Established since 2024</h2>
             </div>
             <div class="about-text">
@@ -172,7 +172,7 @@
       <div class="row">
         <div class="col-lg-6">
           <div class="section-header">
-            <p>Why Choose Us</p>
+            <!-- <p>Why Choose Us</p> -->
             <h2 style="color: #fbc86b;">Our Key Features</h2>
           </div>
           <div class="feature-text">
@@ -347,7 +347,7 @@
     <div class="team">
       <div class="container">
         <div class="section-header text-center">
-          <p>Our Team</p>
+          <!-- <p>Our Team</p> -->
           <h2 style="color: #fbc86b;">Our Member</h2>
         </div>
         <div class="row">
@@ -355,7 +355,7 @@
             <div class="team-item">
               <div class="team-img">
                 <img style="height: 360px;"
-                  src="https://scontent.fhan15-1.fna.fbcdn.net/v/t39.30808-6/440940438_3699357710381887_788808893563441260_n.jpg?stp=cp6_dst-jpg&_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeGOI5jVP4uGDy6fm23pM5b9sYQpPF_b1uSxhCk8X9vW5G5WEoS19g48dCJNvetqm5E2S7Xnrk8_V_E5HRdtgZSQ&_nc_ohc=c17dCeyNBPgQ7kNvgEd7Rfv&_nc_ht=scontent.fhan15-1.fna&oh=00_AYBh4OjSzB16MqipiHZp6uLbk624Nu3cdQNlpHizJtYt4w&oe=6669C7FC"
+                  src=""
                   alt="Image">
                 <div class="team-social">
                   <a href=""><i class="fab fa-twitter"></i></a>
@@ -365,7 +365,7 @@
                 </div>
               </div>
               <div class="team-text">
-                <h2>Pham Dung</h2>
+                <h2></h2>
                 <p>Team Member</p>
               </div>
             </div>
@@ -431,7 +431,7 @@
     <div class="testimonial">
       <div class="container">
         <div class="section-header text-center">
-          <h2 style="color: #fbc86b;">Feedback</h2>
+          <h2 style="color: #fbc86b;">Master Chef</h2>
         </div>
         <div class="owl-carousel testimonials-carousel owl-loaded owl-drag">
           <div class="owl-stage-outer">
